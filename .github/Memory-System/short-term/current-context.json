@@ -2,21 +2,19 @@
   "$schema": "../schemas/current-context.schema.json",
   "meta": {
     "created": "2026-02-25T00:00:00Z",
-    "updated": "2026-02-28T15:14:00Z",
+    "updated": "2026-02-28T17:45:00Z",
     "version": "1.0.0",
-    "session_id": "session-017"
+    "session_id": "session-019"
   },
   "context": {
     "active_branch": "main",
-    "current_task": "RLMgw Tilde Expansion Fixed ✅",
-    "active_agents": ["orchestrator", "debug-specialist", "go-specialist", "memory-specialist"],
+    "current_task": "Config Updated for LFM2-24B-A2B (Optimized for Agentic Tool Use) ✅",
+    "active_agents": ["orchestrator", "data-specialist", "memory-specialist"],
     "recent_files": [
-      "pkg/providers/rlm_provider.go",
-      "build/picoclaw-darwin-arm64",
       "config/config.json",
       ".github/Memory-System/short-term/recent-decisions.json",
       ".github/Memory-System/short-term/current-context.json"
     ],
-    "conversation_summary": "Following Enhanced Agent System protocol (Orchestrator → Debug Specialist → Go Specialist → Memory Specialist). After configuring python_path (temp-026), user reported 'fork/exec ~/Documents/GitHub/rlmgw/.venv/bin/python3: no such file or directory'. Root cause: RLM provider code didn't expand tilde (~) in python_path before passing to exec.Command. Code already expanded ~ for rlmgw_path and workspace_root but not python_path. Solution: (1) Added tilde expansion logic to pkg/providers/rlm_provider.go lines 97-103, matching pattern used for other paths; (2) Ran tests - all passing; (3) Built binary v0.1.2-247-g3e40be1; (4) Backed up old binary and installed new one; (5) Verified fix: RLMgw subprocess starts successfully, server ready on port 8010. Result: picoclaw agent now works from fresh terminal with explicit python_path using ~. Code change implements standard path expansion. Zero regressions - tests pass, all functionality verified. Accurate and truthful - all commands confirmed successful."
+    "conversation_summary": "Following Enhanced Agent System protocol (Orchestrator → Debug Specialist → Memory Specialist). Previous fixes (temp-027 SystemParts, temp-028 model name and null fields) resolved RLMgw integration issues. Root cause identified (temp-029): Model 'openai/gpt-oss-20b' LACKS function calling capability. Solution path: Initially chose Hermes 3 8B (temp-030), but user discovered LFM2-24B-A2B which is superior for this use case. LFM2 advantages: (1) Explicitly designed to 'excel at agentic tool use'; (2) 32k context matches config max_tokens: 32000; (3) 24B MoE with 2B active params = efficient inference; (4) Optimized for local RAG pipelines (perfect for research workflow + Obsidian vaults); (5) On-device deployment focus. Config updated (temp-031): All three model references changed to 'lfm2-24b-a2b'. User will install LFM2 in LM Studio, load model, restart picoclaw agent. Next: Test tool execution with LFM2's agentic capabilities. Config ready ✅."
   }
 }

@@ -670,3 +670,155 @@ func BenchmarkRLMProvider_ParseResponse(b *testing.B) {
 		}
 	}
 }
+
+// --- stripSystemParts Tests ---
+
+func TestStripSystemParts(t *testing.T) {
+	tests := []struct {
+		name     string
+		messages []Message
+		want     []rlmMessage
+	}{
+		{
+			name: "simple message without SystemParts",
+			messages: []Message{
+				{
+					Role:    "user",
+					Content: "Hello",
+				},
+			},
+			want: []rlmMessage{
+				{
+					Role:    "user",
+					Content: "Hello",
+				},
+			},
+		},
+		{
+			name: "message with SystemParts should be stripped",
+			messages: []Message{
+				{
+					Role:    "system",
+					Content: "You are a helpful assistant",
+					SystemParts: []ContentBlock{
+						{Type: "text", Text: "Cache this"},
+					},
+				},
+				{
+					Role:    "user",
+					Content: "Hello",
+				},
+			},
+			want: []rlmMessage{
+				{
+					Role:    "system",
+					Content: "You are a helpful assistant",
+					// SystemParts field should not exist in output
+				},
+				{
+					Role:    "user",
+					Content: "Hello",
+				},
+			},
+		},
+		{
+			name: "message with tool calls",
+			messages: []Message{
+				{
+					Role:    "assistant",
+					Content: "",
+					ToolCalls: []ToolCall{
+						{
+							ID:   "call_123",
+							Type: "function",
+							Function: &FunctionCall{
+								Name:      "get_weather",
+								Arguments: `{"city":"SF"}`,
+							},
+						},
+					},
+				},
+				{
+					Role:       "tool",
+					Content:    "Sunny, 72F",
+					ToolCallID: "call_123",
+				},
+			},
+			want: []rlmMessage{
+				{
+					Role:    "assistant",
+					Content: "",
+					ToolCalls: []ToolCall{
+						{
+							ID:   "call_123",
+							Type: "function",
+							Function: &FunctionCall{
+								Name:      "get_weather",
+								Arguments: `{"city":"SF"}`,
+							},
+						},
+					},
+				},
+				{
+					Role:       "tool",
+					Content:    "Sunny, 72F",
+					ToolCallID: "call_123",
+				},
+			},
+		},
+		{
+			name: "message with reasoning content",
+			messages: []Message{
+				{
+					Role:             "assistant",
+					Content:          "The answer is 42",
+					ReasoningContent: "Let me think...",
+				},
+			},
+			want: []rlmMessage{
+				{
+					Role:             "assistant",
+					Content:          "The answer is 42",
+					ReasoningContent: "Let me think...",
+				},
+			},
+		},
+	}
+
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			got := stripSystemParts(tt.messages)
+
+			if len(got) != len(tt.want) {
+				t.Fatalf("stripSystemParts() length = %d, want %d", len(got), len(tt.want))
+			}
+
+			for i := range got {
+				if got[i].Role != tt.want[i].Role {
+					t.Errorf("message[%d].Role = %q, want %q", i, got[i].Role, tt.want[i].Role)
+				}
+				if got[i].Content != tt.want[i].Content {
+					t.Errorf("message[%d].Content = %q, want %q", i, got[i].Content, tt.want[i].Content)
+				}
+				if got[i].ReasoningContent != tt.want[i].ReasoningContent {
+					t.Errorf("message[%d].ReasoningContent = %q, want %q", i, got[i].ReasoningContent, tt.want[i].ReasoningContent)
+				}
+				if got[i].ToolCallID != tt.want[i].ToolCallID {
+					t.Errorf("message[%d].ToolCallID = %q, want %q", i, got[i].ToolCallID, tt.want[i].ToolCallID)
+				}
+				if len(got[i].ToolCalls) != len(tt.want[i].ToolCalls) {
+					t.Errorf("message[%d].ToolCalls length = %d, want %d", i, len(got[i].ToolCalls), len(tt.want[i].ToolCalls))
+				}
+			}
+
+			// Verify SystemParts field doesn't exist in serialized JSON
+			jsonData, err := json.Marshal(got)
+			if err != nil {
+				t.Fatalf("failed to marshal result: %v", err)
+			}
+			if strings.Contains(string(jsonData), "system_parts") {
+				t.Errorf("stripSystemParts() result contains 'system_parts' field in JSON: %s", string(jsonData))
+			}
+		})
+	}
+}

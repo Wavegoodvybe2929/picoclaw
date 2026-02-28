@@ -233,9 +233,10 @@ func (p *RLMProvider) Chat(
 	}
 
 	// Build OpenAI-compatible request
+	// Strip internal fields (SystemParts) that RLMgw doesn't understand
 	requestBody := map[string]any{
 		"model":    model,
-		"messages": messages,
+		"messages": stripSystemParts(messages),
 	}
 
 	if len(tools) > 0 {
@@ -352,6 +353,36 @@ func (p *RLMProvider) parseResponse(body []byte) (*LLMResponse, error) {
 		FinishReason: choice.FinishReason,
 		Usage:        apiResponse.Usage,
 	}, nil
+}
+
+// rlmMessage is the wire-format message for RLMgw API.
+// It mirrors Message but omits SystemParts, which is an internal field
+// used by cache-aware adapters like Anthropic. RLMgw expects standard
+// OpenAI-compatible message format without this field.
+type rlmMessage struct {
+	Role             string     `json:"role"`
+	Content          string     `json:"content"`
+	ReasoningContent string     `json:"reasoning_content,omitempty"`
+	ToolCalls        []ToolCall `json:"tool_calls,omitempty"`
+	ToolCallID       string     `json:"tool_call_id,omitempty"`
+}
+
+// stripSystemParts converts []Message to []rlmMessage, dropping the
+// SystemParts field so it doesn't cause validation errors in RLMgw.
+// RLMgw expects system_parts to be a string (if present), but picoclaw's
+// internal Message type uses []ContentBlock for cache-aware adapters.
+func stripSystemParts(messages []Message) []rlmMessage {
+	out := make([]rlmMessage, len(messages))
+	for i, m := range messages {
+		out[i] = rlmMessage{
+			Role:             m.Role,
+			Content:          m.Content,
+			ReasoningContent: m.ReasoningContent,
+			ToolCalls:        m.ToolCalls,
+			ToolCallID:       m.ToolCallID,
+		}
+	}
+	return out
 }
 
 // GetDefaultModel returns the configured upstream model.
