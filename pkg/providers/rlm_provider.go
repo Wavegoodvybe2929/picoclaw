@@ -95,6 +95,15 @@ func (p *RLMProvider) startServer() error {
 		}
 	}
 
+	// Expand ~ in python path
+	if strings.HasPrefix(pythonPath, "~/") {
+		homeDir, err := os.UserHomeDir()
+		if err != nil {
+			return fmt.Errorf("could not determine home directory: %w", err)
+		}
+		pythonPath = filepath.Join(homeDir, pythonPath[2:])
+	}
+
 	// Find rlmgw installation path
 	rlmgwPath := p.config.RLMGWPath
 	if rlmgwPath == "" {
