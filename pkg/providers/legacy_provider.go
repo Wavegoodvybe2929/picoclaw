@@ -16,6 +16,23 @@ import (
 // The old providers config is automatically converted to model_list during config loading.
 // Returns the provider, the model ID to use, and any error.
 func CreateProvider(cfg *config.Config) (LLMProvider, string, error) {
+	// Check for RLM provider first (requires full config access)
+	if cfg.Agents.Defaults.Provider == "rlm" {
+		if !cfg.Providers.RLM.Enabled {
+			return nil, "", fmt.Errorf("RLM provider is not enabled in configuration")
+		}
+		provider, err := NewRLMProvider(cfg.Providers.RLM)
+		if err != nil {
+			return nil, "", fmt.Errorf("failed to create RLM provider: %w", err)
+		}
+		// Return the upstream model as the modelID
+		modelID := cfg.Providers.RLM.UpstreamModel
+		if modelID == "" {
+			modelID = cfg.Agents.Defaults.GetModelName()
+		}
+		return provider, modelID, nil
+	}
+
 	model := cfg.Agents.Defaults.GetModelName()
 
 	// Ensure model_list is populated (should be done by LoadConfig, but handle edge cases)

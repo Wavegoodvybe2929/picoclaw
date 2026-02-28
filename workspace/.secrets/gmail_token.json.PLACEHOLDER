@@ -1,0 +1,22 @@
+{
+  "_comment": "This is a PLACEHOLDER file. Replace this with your actual Gmail OAuth token.",
+  "_instructions": [
+    "1. Go to Google Cloud Console: https://console.cloud.google.com",
+    "2. Create a new project or select existing",
+    "3. Enable Gmail API",
+    "4. Create OAuth 2.0 credentials (Desktop app)",
+    "5. Download credentials JSON",
+    "6. Run OAuth flow to generate token with Gmail readonly scope",
+    "7. Save the generated token as: .secrets/gmail_token.json",
+    "8. Set permissions: chmod 600 .secrets/gmail_token.json",
+    "9. Delete this PLACEHOLDER file"
+  ],
+  "_expected_format": {
+    "token": "YOUR_ACCESS_TOKEN",
+    "refresh_token": "YOUR_REFRESH_TOKEN",
+    "token_uri": "https://oauth2.googleapis.com/token",
+    "client_id": "YOUR_CLIENT_ID.apps.googleusercontent.com",
+    "client_secret": "YOUR_CLIENT_SECRET",
+    "scopes": ["https://www.googleapis.com/auth/gmail.readonly"]
+  }
+}

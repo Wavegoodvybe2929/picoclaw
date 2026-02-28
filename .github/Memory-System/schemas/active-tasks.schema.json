@@ -1,0 +1,45 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "active-tasks.schema.json",
+  "title": "Active Tasks Schema",
+  "description": "Schema for tracking active development tasks",
+  "type": "object",
+  "required": ["meta", "tasks"],
+  "properties": {
+    "meta": {
+      "type": "object",
+      "required": ["version", "updated"],
+      "properties": {
+        "version": {"type": "string"},
+        "updated": {"type": "string", "format": "date-time"}
+      }
+    },
+    "tasks": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "title", "status", "assigned_agent", "priority", "created"],
+        "properties": {
+          "id": {"type": "string", "pattern": "^task-\\d+$"},
+          "title": {"type": "string"},
+          "status": {
+            "type": "string",
+            "enum": ["pending", "in-progress", "blocked", "completed", "cancelled"]
+          },
+          "assigned_agent": {"type": "string"},
+          "priority": {
+            "type": "string",
+            "enum": ["low", "medium", "high", "critical"]
+          },
+          "created": {"type": "string", "format": "date-time"},
+          "updated": {"type": "string", "format": "date-time"},
+          "dependencies": {
+            "type": "array",
+            "items": {"type": "string"}
+          },
+          "notes": {"type": "string"}
+        }
+      }
+    }
+  }
+}

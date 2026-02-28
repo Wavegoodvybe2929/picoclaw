@@ -73,6 +73,8 @@
 
 🤖 **AI-Bootstrapped**: Autonomous Go-native implementation — 95% Agent-generated core with human-in-the-loop refinement.
 
+🔌 **Workspace Integration**: Automate scripts at lifecycle points, inject custom context, and use workspace tools instead of built-ins. See [Workspace Integration Guide](docs/WORKSPACE_INTEGRATION.md) for details.
+
 |                               | OpenClaw      | NanoBot                  | **PicoClaw**                              |
 | ----------------------------- | ------------- | ------------------------ | ----------------------------------------- |
 | **Language**                  | TypeScript    | Python                   | **Go**                                    |
@@ -215,7 +217,19 @@ docker compose --profile gateway up -d
 picoclaw onboard
 ```
 
-**2. Configure** (`~/.picoclaw/config.json`)
+> **✨ What's New**: Memory hooks are now **enabled by default**! Your agent will automatically store and recall conversation context.
+
+**2. Verify Setup**
+
+```bash
+# Check that workspace and memory system are ready
+picoclaw workspace status
+
+# Verify configuration
+picoclaw status
+```
+
+**3. Configure** (`~/.picoclaw/config.json`)
 
 ```json
 {
@@ -263,14 +277,14 @@ picoclaw onboard
 
 > **New**: The `model_list` configuration format allows zero-code provider addition. See [Model Configuration](#model-configuration-model_list) for details.
 
-**3. Get API Keys**
+**4. Get API Keys**
 
 * **LLM Provider**: [OpenRouter](https://openrouter.ai/keys) · [Zhipu](https://open.bigmodel.cn/usercenter/proj-mgmt/apikeys) · [Anthropic](https://console.anthropic.com) · [OpenAI](https://platform.openai.com) · [Gemini](https://aistudio.google.com/api-keys)
 * **Web Search** (optional): [Tavily](https://tavily.com) - Optimized for AI Agents (1000 requests/month) · [Brave Search](https://brave.com/search/api) - Free tier available (2000 requests/month)
 
-> **Note**: See `config.example.json` for a complete configuration template.
+> **Note**: See `config.example.json` for a complete configuration template. For OAuth authentication (Antigravity provider), use `picoclaw auth login --provider antigravity`.
 
-**4. Chat**
+**5. Chat**
 
 ```bash
 picoclaw agent -m "What is 2+2?"
@@ -776,6 +790,83 @@ The subagent has access to tools (message, web_search, etc.) and can communicate
 * `PICOCLAW_HEARTBEAT_ENABLED=false` to disable
 * `PICOCLAW_HEARTBEAT_INTERVAL=60` to change interval
 
+### Loop Hooks & Profiles
+
+> **🔄 Workspace Integration**: Execute custom scripts at key lifecycle points in the agent loop. Memory system hooks are **enabled by default** after `picoclaw onboard`.
+
+Loop hooks allow you to run workspace scripts automatically at specific points:
+- **before_llm**: Before sending messages to the LLM (e.g., recall memory context)
+- **after_response**: After the agent responds (e.g., store conversation in memory)
+- **on_tool_call**: When any tool is called (e.g., log tool usage)
+- **on_error**: When an error occurs (e.g., send notifications)
+- **request_input**: Request user input interactively (e.g., confirmations)
+
+#### Loop Profiles (Recommended)
+
+**Named profiles** let you define reusable hook configurations and activate them per agent:
+
+```json
+{
+  "agents": {
+    "defaults": {
+      "loop_profiles": {
+        "memory_enabled": {
+          "before_llm": [
+            {
+              "name": "memory_recall",
+              "command": "./bin/memory_recall --query '{user_message}' --format markdown",
+              "enabled": true,
+              "inject_as": "context"
+            }
+          ],
+          "after_response": [
+            {
+              "name": "memory_write_user",
+              "command": "./bin/memory_write --role user --content '{user_message}'",
+              "enabled": true
+            },
+            {
+              "name": "memory_write_assistant",
+              "command": "./bin/memory_write --role assistant --content '{assistant_message}'",
+              "enabled": true
+            }
+          ]
+        },
+        "debug_mode": {
+          "on_tool_call": [
+            {
+              "name": "log_tool",
+              "command": "./bin/log_tool --name '{tool_name}' --args '{tool_args}'",
+              "enabled": true
+            }
+          ]
+        }
+      }
+    },
+    "list": [
+      {
+        "id": "production",
+        "loop_profile": "memory_enabled"
+      },
+      {
+        "id": "debug",
+        "loop_profile": "debug_mode"
+      }
+    ]
+  }
+}
+```
+
+**Template Variables:**
+- `{user_message}` - Current user message
+- `{assistant_message}` - Agent's response
+- `{tool_name}` - Name of tool being called
+- `{tool_args}` - Tool arguments (JSON)
+- `{session_key}` - Current session key
+- `{channel}` / `{chat_id}` - Channel info
+
+> **📚 Full Guide**: See [docs/WORKSPACE_INTEGRATION.md](docs/WORKSPACE_INTEGRATION.md) for complete documentation, examples, and best practices.
+
 ### Providers
 
 > [!NOTE]
@@ -792,6 +883,7 @@ The subagent has access to tools (message, web_search, etc.) and can communicate
 | `qwen`                     | LLM (Qwen direct)                       | [dashscope.console.aliyun.com](https://dashscope.console.aliyun.com) |
 | `groq`                     | LLM + **Voice transcription** (Whisper) | [console.groq.com](https://console.groq.com)                         |
 | `cerebras`                 | LLM (Cerebras direct)                   | [cerebras.ai](https://cerebras.ai)                                   |
+| `rlm`                      | **RLM Gateway** (large context handling)| See [RLM Integration Guide](docs/completed/RLM_INTEGRATION.md)       |
 
 ### Model Configuration (model_list)
 
@@ -907,6 +999,25 @@ This design also enables **multi-agent support** with flexible provider selectio
   "model": "ollama/llama3"
 }
 ```
+
+**Antigravity (OAuth)**
+
+```json
+{
+  "model_name": "gemini-flash",
+  "model": "antigravity/gemini-3-flash",
+  "auth_method": "oauth"
+}
+```
+
+Then authenticate:
+```bash
+picoclaw auth login --provider antigravity
+# Follow OAuth flow in browser
+# Check status: picoclaw auth status
+```
+
+> **📚 Full OAuth Guide**: See [docs/ANTIGRAVITY_AUTH.md](docs/ANTIGRAVITY_AUTH.md) for detailed Antigravity OAuth setup and troubleshooting.
 
 **Custom Proxy/API**
 
@@ -1107,15 +1218,109 @@ picoclaw agent -m "Hello"
 
 ## CLI Reference
 
-| Command                   | Description                   |
-| ------------------------- | ----------------------------- |
-| `picoclaw onboard`        | Initialize config & workspace |
-| `picoclaw agent -m "..."` | Chat with the agent           |
-| `picoclaw agent`          | Interactive chat mode         |
-| `picoclaw gateway`        | Start the gateway             |
-| `picoclaw status`         | Show status                   |
-| `picoclaw cron list`      | List all scheduled jobs       |
-| `picoclaw cron add ...`   | Add a scheduled job           |
+| Command                       | Description                                    |
+| ----------------------------- | ---------------------------------------------- |
+| `picoclaw onboard`            | Initialize config & workspace                  |
+| `picoclaw agent -m "..."`     | Chat with the agent                            |
+| `picoclaw agent`              | Interactive chat mode                          |
+| `picoclaw gateway`            | Start the gateway (for chat channels)          |
+| `picoclaw status`             | Show status & configuration                    |
+| `picoclaw auth login`         | Login via OAuth or paste token                 |
+| `picoclaw auth status`        | Show authentication status                     |
+| `picoclaw auth models`        | List available models for authenticated provider |
+| `picoclaw workspace status`   | Show workspace status                          |
+| `picoclaw workspace verify`   | Verify workspace setup                         |
+| `picoclaw workspace tools`    | List available workspace tools                 |
+| `picoclaw workspace memory`   | Show memory system status                      |
+| `picoclaw skills list`        | List installed skills                          |
+| `picoclaw skills install`     | Install skill from GitHub                      |
+| `picoclaw skills list-builtin`| List available builtin skills                  |
+| `picoclaw skills search`      | Search available skills                        |
+| `picoclaw cron list`          | List all scheduled jobs                        |
+| `picoclaw cron add ...`       | Add a scheduled job                            |
+
+### Workspace Commands
+
+The `workspace` command group helps manage and verify your PicoClaw workspace:
+
+```bash
+# Check workspace status (runs verify_setup script)
+picoclaw workspace status
+
+# Verify workspace setup and directory structure
+picoclaw workspace verify
+
+# List all available workspace tools (scans bin/ directory)
+picoclaw workspace tools
+
+# Show memory system status (runs memory_status script)
+picoclaw workspace memory
+```
+
+**Purpose**: These commands interact with your workspace tools and scripts, providing visibility into custom integrations, memory system, and workspace health.
+
+> **📚 Full Guide**: See [docs/WORKSPACE_INTEGRATION.md](docs/WORKSPACE_INTEGRATION.md) for creating custom workspace tools and hooks.
+
+### Authentication Commands
+
+The `auth` command group manages OAuth and token-based authentication:
+
+```bash
+# Login with OAuth flow (opens browser)
+picoclaw auth login --provider antigravity
+
+# Paste API token directly
+picoclaw auth login --provider anthropic --token sk-ant-...
+
+# Check authentication status
+picoclaw auth status
+
+# List available models for authenticated provider
+picoclaw auth models --provider antigravity
+
+# Logout (remove stored credentials)
+picoclaw auth logout --provider antigravity
+```
+
+**Supported Methods**:
+- **OAuth**: Google Cloud (Antigravity provider) - browser-based authentication
+- **Token**: Paste API keys directly for quick setup
+
+Credentials are stored securely in `~/.picoclaw/auth.json` with automatic token refresh.
+
+> **📚 OAuth Setup**: See [docs/ANTIGRAVITY_AUTH.md](docs/ANTIGRAVITY_AUTH.md) for detailed OAuth configuration.
+
+### Skills Management
+
+PicoClaw supports composable skills that extend agent capabilities:
+
+```bash
+# List installed skills
+picoclaw skills list
+
+# Search for available skills
+picoclaw skills search calendar
+
+# Install skill from GitHub
+picoclaw skills install username/repo-name
+
+# List built-in skills
+picoclaw skills list-builtin
+
+# Install all built-in skills
+picoclaw skills install-builtin
+
+# Show skill details
+picoclaw skills show skill-name
+
+# Remove skill
+picoclaw skills remove skill-name
+```
+
+**Skills** are self-contained packages (tools + prompts + docs) that can be:
+- **Installed** from GitHub repos or built-in registry
+- **Activated** per workspace or per agent
+- **Composed** to create complex behaviors
 
 ### Scheduled Tasks / Reminders
 

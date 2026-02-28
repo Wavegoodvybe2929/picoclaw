@@ -560,3 +560,67 @@ func TestConvertProvidersToModelList_LegacyModelWithProtocolPrefix(t *testing.T)
 		t.Errorf("Model = %q, want %q (should not duplicate prefix)", result[0].Model, "openrouter/auto")
 	}
 }
+
+// TestMigrationWithGetModelConfig_EndToEnd tests the full scenario of migrating
+// a legacy config and then looking up the model via GetModelConfig.
+// This is a regression test for the bug where model "openai/gpt-oss-20b" was not found
+// after migration because ModelName was set to "openai" but GetModelConfig looked for
+// "openai/gpt-oss-20b".
+func TestMigrationWithGetModelConfig_EndToEnd(t *testing.T) {
+	// Simulate user's config with legacy format
+	cfg := &Config{
+		Agents: AgentsConfig{
+			Defaults: AgentDefaults{
+				Provider: "openai",
+				Model:    "openai/gpt-oss-20b", // User's custom model
+			},
+		},
+		Providers: ProvidersConfig{
+			OpenAI: OpenAIProviderConfig{
+				ProviderConfig: ProviderConfig{
+					APIKey:  "lm-studio",
+					APIBase: "http://localhost:1234/v1",
+				},
+			},
+		},
+	}
+
+	// Step 1: Migrate providers to model_list
+	cfg.ModelList = ConvertProvidersToModelList(cfg)
+
+	if len(cfg.ModelList) == 0 {
+		t.Fatal("Migration produced empty model_list")
+	}
+
+	// Step 2: Verify the migrated model config has correct fields
+	migrated := cfg.ModelList[0]
+	if migrated.ModelName != "openai/gpt-oss-20b" {
+		t.Errorf("ModelName = %q, want %q (must match GetModelName() return value)",
+			migrated.ModelName, "openai/gpt-oss-20b")
+	}
+	if migrated.Model != "openai/gpt-oss-20b" {
+		t.Errorf("Model = %q, want %q", migrated.Model, "openai/gpt-oss-20b")
+	}
+	if migrated.APIKey != "lm-studio" {
+		t.Errorf("APIKey = %q, want %q", migrated.APIKey, "lm-studio")
+	}
+	if migrated.APIBase != "http://localhost:1234/v1" {
+		t.Errorf("APIBase = %q, want %q", migrated.APIBase, "http://localhost:1234/v1")
+	}
+
+	// Step 3: Verify GetModelConfig can find the model
+	// This is what CreateProvider does - it calls GetModelName() and then GetModelConfig()
+	modelName := cfg.Agents.Defaults.GetModelName() // Returns "openai/gpt-oss-20b"
+	modelCfg, err := cfg.GetModelConfig(modelName)
+	if err != nil {
+		t.Fatalf("GetModelConfig(%q) failed: %v (this is the bug we're fixing)", modelName, err)
+	}
+
+	// Step 4: Verify the retrieved config is correct
+	if modelCfg.ModelName != "openai/gpt-oss-20b" {
+		t.Errorf("Retrieved ModelName = %q, want %q", modelCfg.ModelName, "openai/gpt-oss-20b")
+	}
+	if modelCfg.APIBase != "http://localhost:1234/v1" {
+		t.Errorf("Retrieved APIBase = %q, want %q", modelCfg.APIBase, "http://localhost:1234/v1")
+	}
+}

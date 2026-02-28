@@ -31,6 +31,7 @@ type AgentInstance struct {
 	Subagents      *config.SubagentsConfig
 	SkillsFilter   []string
 	Candidates     []providers.FallbackCandidate
+	LoopHooks      config.LoopHooks // Resolved loop hooks for this agent
 }
 
 // NewAgentInstance creates an agent instance from config.
@@ -94,6 +95,13 @@ func NewAgentInstance(
 	}
 	candidates := providers.ResolveCandidates(modelCfg, defaults.Provider)
 
+	// Resolve loop hooks based on agent's profile
+	loopProfile := ""
+	if agentCfg != nil {
+		loopProfile = agentCfg.LoopProfile
+	}
+	loopHooks := defaults.ResolveLoopHooks(loopProfile)
+
 	return &AgentInstance{
 		ID:             agentID,
 		Name:           agentName,
@@ -111,6 +119,7 @@ func NewAgentInstance(
 		Subagents:      subagents,
 		SkillsFilter:   skillsFilter,
 		Candidates:     candidates,
+		LoopHooks:      loopHooks,
 	}
 }
 

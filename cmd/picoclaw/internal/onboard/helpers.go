@@ -24,7 +24,10 @@ func onboard() {
 		}
 	}
 
+	// Create config with memory hooks enabled by default
 	cfg := config.DefaultConfig()
+	cfg.Agents.Defaults.LoopHooks = config.DefaultMemoryHooks()
+
 	if err := config.SaveConfig(configPath, cfg); err != nil {
 		fmt.Printf("Error saving config: %v\n", err)
 		os.Exit(1)
@@ -34,7 +37,13 @@ func onboard() {
 	createWorkspaceTemplates(workspace)
 
 	fmt.Printf("%s picoclaw is ready!\n", internal.Logo)
-	fmt.Println("\nNext steps:")
+	fmt.Println("\n✓ Configuration created:", configPath)
+	fmt.Println("✓ Memory hooks enabled by default")
+	fmt.Println("  - memory_recall: Recalls relevant context before each LLM call")
+	fmt.Println("  - memory_write: Stores conversations after each response")
+	fmt.Println("  - memory_sync: Syncs memory to searchable index")
+	fmt.Println("")
+	fmt.Println("Next steps:")
 	fmt.Println("  1. Add your API key to", configPath)
 	fmt.Println("")
 	fmt.Println("     Recommended:")
@@ -44,6 +53,8 @@ func onboard() {
 	fmt.Println("     See README.md for 17+ supported providers.")
 	fmt.Println("")
 	fmt.Println("  2. Chat: picoclaw agent -m \"Hello!\"")
+	fmt.Println("")
+	fmt.Println("Tip: Edit", configPath, "to customize loop hooks")
 }
 
 func createWorkspaceTemplates(workspace string) {

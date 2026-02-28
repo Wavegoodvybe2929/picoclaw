@@ -1,0 +1,52 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "patterns.schema.json",
+  "title": "Solution Patterns Schema",
+  "description": "Schema for proven solution patterns",
+  "type": "object",
+  "required": ["meta", "patterns"],
+  "properties": {
+    "meta": {
+      "type": "object",
+      "required": ["version", "last_updated", "total_patterns"],
+      "properties": {
+        "version": {"type": "string"},
+        "last_updated": {"type": "string", "format": "date-time"},
+        "total_patterns": {"type": "integer", "minimum": 0}
+      }
+    },
+    "patterns": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "name", "category", "description", "success_count"],
+        "properties": {
+          "id": {"type": "string", "pattern": "^pattern-\\d+$"},
+          "name": {"type": "string"},
+          "category": {
+            "type": "string",
+            "enum": ["architecture", "design", "implementation", "testing", "performance", "security"]
+          },
+          "description": {"type": "string"},
+          "context": {"type": "string"},
+          "solution": {"type": "string"},
+          "examples": {
+            "type": "array",
+            "items": {"type": "string"}
+          },
+          "success_count": {"type": "integer", "minimum": 1},
+          "first_used": {"type": "string", "format": "date"},
+          "last_used": {"type": "string", "format": "date"},
+          "tags": {
+            "type": "array",
+            "items": {"type": "string"}
+          },
+          "related_patterns": {
+            "type": "array",
+            "items": {"type": "string"}
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,22 @@
+# Data Structure Definitions
+# Canonical data models and their relationships
+
+meta:
+  version: "1.0.0"
+  updated: "2026-02-25T00:00:00Z"
+
+models: []
+  # Format:
+  # - name: "ModelName"
+  #   location: "pkg/path/model.go"
+  #   description: "Purpose of this model"
+  #   fields:
+  #     - name: "field_name"
+  #       type: "string"
+  #       required: true
+  #       description: "Field purpose"
+  #   relationships:
+  #     - type: has_many | belongs_to | has_one
+  #       model: "RelatedModel"
+  #   validation_rules: []
+  #   tags: ["domain", "category"]

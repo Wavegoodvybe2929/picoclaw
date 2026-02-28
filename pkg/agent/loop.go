@@ -92,25 +92,28 @@ func registerSharedTools(
 			continue
 		}
 
-		// Web tools
-		if searchTool := tools.NewWebSearchTool(tools.WebSearchToolOptions{
-			BraveAPIKey:          cfg.Tools.Web.Brave.APIKey,
-			BraveMaxResults:      cfg.Tools.Web.Brave.MaxResults,
-			BraveEnabled:         cfg.Tools.Web.Brave.Enabled,
-			TavilyAPIKey:         cfg.Tools.Web.Tavily.APIKey,
-			TavilyBaseURL:        cfg.Tools.Web.Tavily.BaseURL,
-			TavilyMaxResults:     cfg.Tools.Web.Tavily.MaxResults,
-			TavilyEnabled:        cfg.Tools.Web.Tavily.Enabled,
-			DuckDuckGoMaxResults: cfg.Tools.Web.DuckDuckGo.MaxResults,
-			DuckDuckGoEnabled:    cfg.Tools.Web.DuckDuckGo.Enabled,
-			PerplexityAPIKey:     cfg.Tools.Web.Perplexity.APIKey,
-			PerplexityMaxResults: cfg.Tools.Web.Perplexity.MaxResults,
-			PerplexityEnabled:    cfg.Tools.Web.Perplexity.Enabled,
-			Proxy:                cfg.Tools.Web.Proxy,
-		}); searchTool != nil {
-			agent.Tools.Register(searchTool)
+		// Web tools - Skip if workspace tools are preferred
+		// When use_workspace_tools: true, agent will use workspace scripts via exec tool instead
+		if !cfg.Agents.Defaults.UseWorkspaceTools {
+			if searchTool := tools.NewWebSearchTool(tools.WebSearchToolOptions{
+				BraveAPIKey:          cfg.Tools.Web.Brave.APIKey,
+				BraveMaxResults:      cfg.Tools.Web.Brave.MaxResults,
+				BraveEnabled:         cfg.Tools.Web.Brave.Enabled,
+				TavilyAPIKey:         cfg.Tools.Web.Tavily.APIKey,
+				TavilyBaseURL:        cfg.Tools.Web.Tavily.BaseURL,
+				TavilyMaxResults:     cfg.Tools.Web.Tavily.MaxResults,
+				TavilyEnabled:        cfg.Tools.Web.Tavily.Enabled,
+				DuckDuckGoMaxResults: cfg.Tools.Web.DuckDuckGo.MaxResults,
+				DuckDuckGoEnabled:    cfg.Tools.Web.DuckDuckGo.Enabled,
+				PerplexityAPIKey:     cfg.Tools.Web.Perplexity.APIKey,
+				PerplexityMaxResults: cfg.Tools.Web.Perplexity.MaxResults,
+				PerplexityEnabled:    cfg.Tools.Web.Perplexity.Enabled,
+				Proxy:                cfg.Tools.Web.Proxy,
+			}); searchTool != nil {
+				agent.Tools.Register(searchTool)
+			}
+			agent.Tools.Register(tools.NewWebFetchToolWithProxy(50000, cfg.Tools.Web.Proxy))
 		}
-		agent.Tools.Register(tools.NewWebFetchToolWithProxy(50000, cfg.Tools.Web.Proxy))
 
 		// Hardware tools (I2C, SPI) - Linux only, returns error on other platforms
 		agent.Tools.Register(tools.NewI2CTool())
@@ -127,6 +130,13 @@ func registerSharedTools(
 			return nil
 		})
 		agent.Tools.Register(messageTool)
+
+		// Request input tool - allows agent to pause and request user input
+		// Note: Actual execution is handled by request_input hooks in the agent loop
+		// Tool registration just makes the LLM aware it can request user input
+		requestInputTool := tools.NewRequestInputTool()
+		requestInputTool.SetContext(cfg.Agents.Defaults.Workspace, "") // Set initial context
+		agent.Tools.Register(requestInputTool)
 
 		// Skill discovery and installation tools
 		registryMgr := skills.NewRegistryManagerFromConfig(skills.RegistryConfig{
@@ -411,11 +421,31 @@ func (al *AgentLoop) runAgentLoop(ctx context.Context, agent *AgentInstance, opt
 		history = agent.Sessions.GetHistory(opts.SessionKey)
 		summary = agent.Sessions.GetSummary(opts.SessionKey)
 	}
+
+	// NEW: Execute before_llm hooks
+	hookVars := map[string]string{
+		"query":        opts.UserMessage,
+		"user_message": opts.UserMessage,
+		"session_key":  opts.SessionKey,
+		"channel":      opts.Channel,
+		"chat_id":      opts.ChatID,
+	}
+
+	hookExecutor := NewHookExecutor(agent.Workspace)
+	hookResults, _ := hookExecutor.ExecuteHooks(
+		ctx,
+		agent.LoopHooks.BeforeLLM,
+		hookVars,
+	)
+
+	// NEW: Inject memory context
+	contextFromHooks := hookResults["context"]
+
 	messages := agent.ContextBuilder.BuildMessages(
 		history,
 		summary,
 		opts.UserMessage,
-		nil,
+		contextFromHooks, // Memory context injected here
 		opts.Channel,
 		opts.ChatID,
 	)
@@ -424,8 +454,12 @@ func (al *AgentLoop) runAgentLoop(ctx context.Context, agent *AgentInstance, opt
 	agent.Sessions.AddMessage(opts.SessionKey, "user", opts.UserMessage)
 
 	// 4. Run LLM iteration loop
-	finalContent, iteration, err := al.runLLMIteration(ctx, agent, messages, opts)
+	finalContent, iteration, err := al.runLLMIteration(ctx, agent, messages, opts, hookExecutor, hookVars)
 	if err != nil {
+		// NEW: Execute on_error hooks
+		errorVars := hookVars
+		errorVars["error"] = err.Error()
+		hookExecutor.ExecuteHooks(ctx, agent.LoopHooks.OnError, errorVars)
 		return "", err
 	}
 
@@ -440,6 +474,14 @@ func (al *AgentLoop) runAgentLoop(ctx context.Context, agent *AgentInstance, opt
 	// 6. Save final assistant message to session
 	agent.Sessions.AddMessage(opts.SessionKey, "assistant", finalContent)
 	agent.Sessions.Save(opts.SessionKey)
+
+	// NEW: Execute after_response hooks (memory write)
+	hookVars["assistant_message"] = finalContent
+	hookExecutor.ExecuteHooks(
+		ctx,
+		agent.LoopHooks.AfterResponse,
+		hookVars,
+	)
 
 	// 7. Optional: summarization
 	if opts.EnableSummary {
@@ -474,6 +516,8 @@ func (al *AgentLoop) runLLMIteration(
 	agent *AgentInstance,
 	messages []providers.Message,
 	opts processOptions,
+	hookExecutor *HookExecutor,
+	hookVars map[string]string,
 ) (string, int, error) {
 	iteration := 0
 	var finalContent string
@@ -577,7 +621,7 @@ func (al *AgentLoop) runLLMIteration(
 				newSummary := agent.Sessions.GetSummary(opts.SessionKey)
 				messages = agent.ContextBuilder.BuildMessages(
 					newHistory, newSummary, "",
-					nil, opts.Channel, opts.ChatID,
+					"", opts.Channel, opts.ChatID,
 				)
 				continue
 			}
@@ -684,14 +728,89 @@ func (al *AgentLoop) runLLMIteration(
 				}
 			}
 
-			toolResult := agent.Tools.ExecuteWithContext(
-				ctx,
-				tc.Name,
-				tc.Arguments,
-				opts.Channel,
-				opts.ChatID,
-				asyncCallback,
-			)
+			var toolResult *tools.ToolResult
+
+			// Special handling for request_input tool - execute hooks instead of tool
+			if tc.Name == "request_input" && len(agent.LoopHooks.RequestInput) > 0 && hookExecutor != nil {
+				prompt, ok := tc.Arguments["prompt"].(string)
+				if !ok || prompt == "" {
+					toolResult = tools.ErrorResult("request_input requires a 'prompt' argument")
+				} else {
+					// Execute request_input hooks - this will block until user responds or timeout
+					var userInput string
+					var inputErr error
+
+					// Execute all request_input hooks in sequence
+					// Typically there should only be one, but we support multiple for flexibility
+					for _, hook := range agent.LoopHooks.RequestInput {
+						if !hook.Enabled {
+							continue
+						}
+
+						// Create hook variables with prompt
+						requestInputVars := make(map[string]string)
+						for k, v := range hookVars {
+							requestInputVars[k] = v
+						}
+						requestInputVars["prompt_text"] = prompt
+
+						// Execute the hook - this blocks until user responds or timeout
+						userInput, inputErr = hookExecutor.ExecuteRequestInputHook(
+							ctx,
+							hook,
+							requestInputVars,
+							al.bus,
+							opts.Channel,
+							opts.ChatID,
+						)
+
+						// If we got a successful response, break
+						if inputErr == nil && userInput != "" {
+							break
+						}
+					}
+
+					// Create tool result with user's input
+					if inputErr != nil {
+						toolResult = tools.ErrorResult(fmt.Sprintf("failed to request user input: %v", inputErr))
+					} else {
+						toolResult = &tools.ToolResult{
+							ForLLM:  fmt.Sprintf("User responded: %s", userInput),
+							ForUser: "", // User already saw the prompt and responded
+							Silent:  true,
+						}
+					}
+				}
+			} else {
+				// Normal tool execution
+				toolResult = agent.Tools.ExecuteWithContext(
+					ctx,
+					tc.Name,
+					tc.Arguments,
+					opts.Channel,
+					opts.ChatID,
+					asyncCallback,
+				)
+			}
+
+			// Execute on_tool_call hooks
+			if len(agent.LoopHooks.OnToolCall) > 0 && hookExecutor != nil {
+				// Create a copy of hookVars with tool-specific variables
+				toolCallVars := make(map[string]string)
+				for k, v := range hookVars {
+					toolCallVars[k] = v
+				}
+				toolCallVars["tool_name"] = tc.Name
+				argsStr, _ := json.Marshal(tc.Arguments)
+				toolCallVars["tool_args"] = string(argsStr)
+				toolCallVars["tool_result"] = toolResult.ForLLM
+
+				hookExecutor.ExecuteHooks(
+					ctx,
+					agent.LoopHooks.OnToolCall,
+					toolCallVars,
+				)
+			}
 
 			// Send ForUser content to user immediately if not Silent
 			if !toolResult.Silent && toolResult.ForUser != "" && opts.SendResponse {

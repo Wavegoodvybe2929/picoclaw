@@ -1,0 +1,68 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "architectural-decisions.schema.json",
+  "title": "Architectural Decisions Schema",
+  "description": "Schema for Architectural Decision Records (ADR)",
+  "type": "object",
+  "required": ["meta", "decisions"],
+  "properties": {
+    "meta": {
+      "type": "object",
+      "required": ["version", "format", "updated"],
+      "properties": {
+        "version": {"type": "string"},
+        "format": {"type": "string"},
+        "updated": {"type": "string", "format": "date-time"}
+      }
+    },
+    "decisions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "title", "date", "status", "context", "decision"],
+        "properties": {
+          "id": {"type": "string", "pattern": "^ADR-\\d+$"},
+          "title": {"type": "string"},
+          "date": {"type": "string", "format": "date"},
+          "status": {
+            "type": "string",
+            "enum": ["proposed", "accepted", "rejected", "deprecated", "superseded"]
+          },
+          "context": {"type": "string"},
+          "decision": {"type": "string"},
+          "consequences": {
+            "type": "object",
+            "properties": {
+              "positive": {
+                "type": "array",
+                "items": {"type": "string"}
+              },
+              "negative": {
+                "type": "array",
+                "items": {"type": "string"}
+              }
+            }
+          },
+          "alternatives_considered": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "option": {"type": "string"},
+                "rejected_because": {"type": "string"}
+              }
+            }
+          },
+          "related_decisions": {
+            "type": "array",
+            "items": {"type": "string"}
+          },
+          "tags": {
+            "type": "array",
+            "items": {"type": "string"}
+          }
+        }
+      }
+    }
+  }
+}

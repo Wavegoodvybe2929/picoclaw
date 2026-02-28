@@ -17,6 +17,13 @@ func DefaultConfig() *Config {
 				MaxTokens:           8192,
 				Temperature:         nil, // nil means use provider default
 				MaxToolIterations:   20,
+				UseWorkspaceTools:   false, // Disabled by default for backward compatibility
+				LoopHooks: LoopHooks{
+					BeforeLLM:     []LoopHook{}, // Empty by default - user can configure hooks
+					AfterResponse: []LoopHook{}, // Empty by default - user can configure hooks
+					OnToolCall:    []LoopHook{}, // Empty by default - user can configure hooks
+					OnError:       []LoopHook{}, // Empty by default - user can configure hooks
+				},
 			},
 		},
 		Bindings: []AgentBinding{},
@@ -321,5 +328,54 @@ func DefaultConfig() *Config {
 			Enabled:    false,
 			MonitorUSB: true,
 		},
+	}
+}
+
+// DefaultMemoryHooks returns the default memory integration hooks for the workspace.
+// These hooks automate memory recall before LLM calls and memory writes after responses.
+func DefaultMemoryHooks() LoopHooks {
+	return LoopHooks{
+		BeforeLLM: []LoopHook{
+			{
+				Name:     "memory_recall",
+				Command:  "./bin/memory_recall --query '{user_message}' --format markdown",
+				Enabled:  true,
+				InjectAs: "context",
+				Metadata: map[string]string{
+					"description": "Recall relevant context from memory before LLM call",
+				},
+			},
+		},
+		AfterResponse: []LoopHook{
+			{
+				Name:     "memory_write_user",
+				Command:  "./bin/memory_write --role user --content '{user_message}'",
+				Enabled:  true,
+				InjectAs: "",
+				Metadata: map[string]string{
+					"description": "Store user message in memory",
+				},
+			},
+			{
+				Name:     "memory_write_assistant",
+				Command:  "./bin/memory_write --role assistant --content '{assistant_message}'",
+				Enabled:  true,
+				InjectAs: "",
+				Metadata: map[string]string{
+					"description": "Store assistant response in memory",
+				},
+			},
+			{
+				Name:     "memory_sync",
+				Command:  "./bin/memory_sync",
+				Enabled:  true,
+				InjectAs: "",
+				Metadata: map[string]string{
+					"description": "Sync memory to index",
+				},
+			},
+		},
+		OnToolCall: []LoopHook{},
+		OnError:    []LoopHook{},
 	}
 }

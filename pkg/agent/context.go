@@ -379,7 +379,7 @@ func (cb *ContextBuilder) BuildMessages(
 	history []providers.Message,
 	summary string,
 	currentMessage string,
-	media []string,
+	hookContext string, // NEW: injected memory context
 	channel, chatID string,
 ) []providers.Message {
 	messages := []providers.Message{}
@@ -421,6 +421,15 @@ func (cb *ContextBuilder) BuildMessages(
 			summary)
 		stringParts = append(stringParts, summaryText)
 		contentBlocks = append(contentBlocks, providers.ContentBlock{Type: "text", Text: summaryText})
+	}
+
+	// NEW: Inject hook context (e.g., memory recall results)
+	if hookContext != "" {
+		hookContextText := fmt.Sprintf(
+			"MEMORY_CONTEXT: Relevant context from memory system:\n\n%s",
+			hookContext)
+		stringParts = append(stringParts, hookContextText)
+		contentBlocks = append(contentBlocks, providers.ContentBlock{Type: "text", Text: hookContextText})
 	}
 
 	fullSystemPrompt := strings.Join(stringParts, "\n\n---\n\n")

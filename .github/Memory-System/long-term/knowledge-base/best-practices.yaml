@@ -1,0 +1,36 @@
+# Best Practices Collection
+# Validated approaches and standards for picoclaw development
+
+meta:
+  version: "1.0.0"
+  last_updated: "2026-02-25T00:00:00Z"
+
+best_practices:
+  golang:
+    - category: "Code Style"
+      practices: []
+    - category: "Error Handling"
+      practices: []
+    - category: "Testing"
+      practices: []
+  
+  agent_system:
+    - category: "Coordination"
+      practices:
+        - name: "Orchestrator-First Routing"
+          description: "All agent requests must route through orchestrator first"
+          rationale: "Prevents agent conflicts and ensures proper work distribution"
+          example: "See Agent-Config/orchestrator.md"
+    
+    - category: "Memory Management"
+      practices:
+        - name: "Dual-Layer Memory"
+          description: "Separate short-term volatile and long-term persistent memory"
+          rationale: "Optimizes for both active context and historical knowledge"
+          example: "See Memory-System/ structure"
+  
+  architecture:
+    - category: "Module Design"
+      practices: []
+    - category: "API Design"
+      practices: []

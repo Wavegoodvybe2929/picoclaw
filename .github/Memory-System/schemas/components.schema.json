@@ -1,0 +1,63 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "components.schema.json",
+  "title": "Components Registry Schema",
+  "description": "Schema for tracking project components and relationships",
+  "type": "object",
+  "required": ["meta", "components"],
+  "properties": {
+    "meta": {
+      "type": "object",
+      "required": ["version", "updated"],
+      "properties": {
+        "version": {"type": "string"},
+        "updated": {"type": "string", "format": "date-time"}
+      }
+    },
+    "components": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "object",
+        "required": ["id", "name", "type", "location", "status"],
+        "properties": {
+          "id": {"type": "string"},
+          "name": {"type": "string"},
+          "type": {
+            "type": "string",
+            "enum": ["agent", "service", "module", "library", "tool", "configuration"]
+          },
+          "location": {"type": "string"},
+          "status": {
+            "type": "string",
+            "enum": ["active", "deprecated", "planned", "archived"]
+          },
+          "dependencies": {
+            "type": "array",
+            "items": {"type": "string"}
+          },
+          "interfaces": {
+            "type": "object",
+            "properties": {
+              "provides": {
+                "type": "array",
+                "items": {"type": "string"}
+              },
+              "requires": {
+                "type": "array",
+                "items": {"type": "string"}
+              }
+            }
+          },
+          "metadata": {
+            "type": "object",
+            "properties": {
+              "created": {"type": "string", "format": "date"},
+              "version": {"type": "string"},
+              "owner": {"type": "string"}
+            }
+          }
+        }
+      }
+    }
+  }
+}

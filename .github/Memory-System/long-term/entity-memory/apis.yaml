@@ -1,0 +1,27 @@
+# API Contracts and Versions
+# Documentation of internal and external API contracts
+
+meta:
+  version: "1.0.0"
+  updated: "2026-02-25T00:00:00Z"
+
+apis:
+  internal: []
+    # Format:
+    # - name: "API Name"
+    #   version: "1.0.0"
+    #   endpoint: "/api/v1/resource"
+    #   method: GET | POST | PUT | DELETE
+    #   request_schema: "path/to/schema"
+    #   response_schema: "path/to/schema"
+    #   authentication: required | optional | none
+    #   rate_limit: "100/minute"
+  
+  external: []
+    # Format:
+    # - provider: "Service Name"
+    #   api_name: "API Name"
+    #   version: "v1"
+    #   documentation: "https://docs.example.com"
+    #   used_by: ["component-1"]
+    #   authentication_type: "oauth2 | api-key | basic"

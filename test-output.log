@@ -1,0 +1,2335 @@
+=== RUN   TestNewPicoclawCommand
+--- PASS: TestNewPicoclawCommand (0.00s)
+PASS
+ok  	github.com/sipeed/picoclaw/cmd/picoclaw	0.360s
+=== RUN   TestGetConfigPath
+--- PASS: TestGetConfigPath (0.00s)
+=== RUN   TestFormatVersion_NoGitCommit
+--- PASS: TestFormatVersion_NoGitCommit (0.00s)
+=== RUN   TestFormatVersion_WithGitCommit
+--- PASS: TestFormatVersion_WithGitCommit (0.00s)
+=== RUN   TestFormatBuildInfo_UsesBuildTimeAndGoVersion_WhenSet
+--- PASS: TestFormatBuildInfo_UsesBuildTimeAndGoVersion_WhenSet (0.00s)
+=== RUN   TestFormatBuildInfo_EmptyBuildTime_ReturnsEmptyBuild
+--- PASS: TestFormatBuildInfo_EmptyBuildTime_ReturnsEmptyBuild (0.00s)
+=== RUN   TestFormatBuildInfo_EmptyGoVersion_FallsBackToRuntimeVersion
+--- PASS: TestFormatBuildInfo_EmptyGoVersion_FallsBackToRuntimeVersion (0.00s)
+=== RUN   TestGetConfigPath_Windows
+    helpers_test.go:83: windows-specific HOME behavior varies; run on windows
+--- SKIP: TestGetConfigPath_Windows (0.00s)
+=== RUN   TestGetVersion
+--- PASS: TestGetVersion (0.00s)
+PASS
+ok  	github.com/sipeed/picoclaw/cmd/picoclaw/internal	0.522s
+=== RUN   TestNewAgentCommand
+--- PASS: TestNewAgentCommand (0.00s)
+PASS
+ok  	github.com/sipeed/picoclaw/cmd/picoclaw/internal/agent	0.761s
+=== RUN   TestNewAuthCommand
+--- PASS: TestNewAuthCommand (0.00s)
+=== RUN   TestNewLoginSubCommand
+--- PASS: TestNewLoginSubCommand (0.00s)
+=== RUN   TestNewLogoutSubcommand
+--- PASS: TestNewLogoutSubcommand (0.00s)
+=== RUN   TestNewModelsCommand
+--- PASS: TestNewModelsCommand (0.00s)
+=== RUN   TestNewStatusSubcommand
+--- PASS: TestNewStatusSubcommand (0.00s)
+PASS
+ok  	github.com/sipeed/picoclaw/cmd/picoclaw/internal/auth	0.920s
+=== RUN   TestNewAddSubcommand
+--- PASS: TestNewAddSubcommand (0.00s)
+=== RUN   TestNewAddCommandEveryAndCronMutuallyExclusive
+Error: if any flags in the group [every cron] are set none of the others can be; [cron every] were all set
+Usage:
+  add [flags]
+
+Flags:
+      --channel string   Channel for delivery
+  -c, --cron string      Cron expression (e.g. '0 9 * * *')
+  -d, --deliver          Deliver response to channel
+  -e, --every int        Run every N seconds
+  -h, --help             help for add
+  -m, --message string   Message for agent
+  -n, --name string      Job name
+      --to string        Recipient for delivery
+
+--- PASS: TestNewAddCommandEveryAndCronMutuallyExclusive (0.00s)
+=== RUN   TestNewCronCommand
+--- PASS: TestNewCronCommand (0.00s)
+=== RUN   TestDisableSubcommand
+--- PASS: TestDisableSubcommand (0.00s)
+=== RUN   TestEnableSubcommand
+--- PASS: TestEnableSubcommand (0.00s)
+=== RUN   TestNewListSubcommand
+--- PASS: TestNewListSubcommand (0.00s)
+=== RUN   TestNewRemoveSubcommand
+--- PASS: TestNewRemoveSubcommand (0.00s)
+PASS
+ok  	github.com/sipeed/picoclaw/cmd/picoclaw/internal/cron	1.068s
+=== RUN   TestNewGatewayCommand
+--- PASS: TestNewGatewayCommand (0.00s)
+PASS
+ok  	github.com/sipeed/picoclaw/cmd/picoclaw/internal/gateway	1.269s
+=== RUN   TestNewMigrateCommand
+--- PASS: TestNewMigrateCommand (0.00s)
+PASS
+ok  	github.com/sipeed/picoclaw/cmd/picoclaw/internal/migrate	1.406s
+=== RUN   TestNewOnboardCommand
+--- PASS: TestNewOnboardCommand (0.00s)
+PASS
+ok  	github.com/sipeed/picoclaw/cmd/picoclaw/internal/onboard	1.499s
+=== RUN   TestNewSkillsCommand
+--- PASS: TestNewSkillsCommand (0.00s)
+=== RUN   TestNewInstallSubcommand
+--- PASS: TestNewInstallSubcommand (0.00s)
+=== RUN   TestNewInstallbuiltinSubcommand
+--- PASS: TestNewInstallbuiltinSubcommand (0.00s)
+=== RUN   TestNewListSubcommand
+--- PASS: TestNewListSubcommand (0.00s)
+=== RUN   TestNewListbuiltinSubcommand
+--- PASS: TestNewListbuiltinSubcommand (0.00s)
+=== RUN   TestNewRemoveSubcommand
+--- PASS: TestNewRemoveSubcommand (0.00s)
+=== RUN   TestNewSearchSubcommand
+--- PASS: TestNewSearchSubcommand (0.00s)
+=== RUN   TestNewShowSubcommand
+--- PASS: TestNewShowSubcommand (0.00s)
+PASS
+ok  	github.com/sipeed/picoclaw/cmd/picoclaw/internal/skills	1.645s
+=== RUN   TestNewStatusCommand
+--- PASS: TestNewStatusCommand (0.00s)
+PASS
+ok  	github.com/sipeed/picoclaw/cmd/picoclaw/internal/status	1.785s
+=== RUN   TestNewVersionCommand
+--- PASS: TestNewVersionCommand (0.00s)
+PASS
+ok  	github.com/sipeed/picoclaw/cmd/picoclaw/internal/version	1.763s
+=== RUN   TestNewWorkspaceCommand
+--- PASS: TestNewWorkspaceCommand (0.00s)
+=== RUN   TestNewStatusCommand
+--- PASS: TestNewStatusCommand (0.00s)
+=== RUN   TestNewVerifyCommand
+--- PASS: TestNewVerifyCommand (0.00s)
+=== RUN   TestNewToolsCommand
+--- PASS: TestNewToolsCommand (0.00s)
+=== RUN   TestNewMemoryCommand
+--- PASS: TestNewMemoryCommand (0.00s)
+=== RUN   TestCountTools
+=== RUN   TestCountTools/empty_categories
+=== RUN   TestCountTools/single_category
+=== RUN   TestCountTools/multiple_categories
+--- PASS: TestCountTools (0.00s)
+    --- PASS: TestCountTools/empty_categories (0.00s)
+    --- PASS: TestCountTools/single_category (0.00s)
+    --- PASS: TestCountTools/multiple_categories (0.00s)
+=== RUN   TestShowBasicWorkspaceStatus
+📊 Basic Workspace Status:
+   ✅ bin/
+   ✅ memory/
+   ✅ calendar/
+   ❌ vaults/ (missing)
+   ❌ sessions/ (missing)
+   ❌ skills/ (missing)
+   ⚠️  Python virtual environment (.venv) - not found
+--- PASS: TestShowBasicWorkspaceStatus (0.00s)
+=== RUN   TestShowBasicMemoryStatus
+=== RUN   TestShowBasicMemoryStatus/memory_directory_exists
+📂 Memory Structure:
+   ✅ short-term/ (1 files)
+   ✅ long-term/ (0 files)
+   ✅ system/ (0 files)
+=== RUN   TestShowBasicMemoryStatus/memory_directory_does_not_exist
+❌ Memory directory does not exist
+--- PASS: TestShowBasicMemoryStatus (0.00s)
+    --- PASS: TestShowBasicMemoryStatus/memory_directory_exists (0.00s)
+    --- PASS: TestShowBasicMemoryStatus/memory_directory_does_not_exist (0.00s)
+=== RUN   TestToolCategorization
+=== RUN   TestToolCategorization/memory_tool
+=== RUN   TestToolCategorization/calendar_tool
+=== RUN   TestToolCategorization/search_tool
+=== RUN   TestToolCategorization/vault_tool
+=== RUN   TestToolCategorization/verify_tool
+=== RUN   TestToolCategorization/agent_tool
+=== RUN   TestToolCategorization/other_tool
+--- PASS: TestToolCategorization (0.00s)
+    --- PASS: TestToolCategorization/memory_tool (0.00s)
+    --- PASS: TestToolCategorization/calendar_tool (0.00s)
+    --- PASS: TestToolCategorization/search_tool (0.00s)
+    --- PASS: TestToolCategorization/vault_tool (0.00s)
+    --- PASS: TestToolCategorization/verify_tool (0.00s)
+    --- PASS: TestToolCategorization/agent_tool (0.00s)
+    --- PASS: TestToolCategorization/other_tool (0.00s)
+=== RUN   TestWorkspaceStructure
+--- PASS: TestWorkspaceStructure (0.00s)
+=== RUN   TestMemoryStructure
+--- PASS: TestMemoryStructure (0.00s)
+=== RUN   TestCategoryOrder
+--- PASS: TestCategoryOrder (0.00s)
+PASS
+ok  	github.com/sipeed/picoclaw/cmd/picoclaw/internal/workspace	1.756s
+=== RUN   TestSingleSystemMessage
+=== RUN   TestSingleSystemMessage/no_summary,_no_history
+=== RUN   TestSingleSystemMessage/with_summary
+=== RUN   TestSingleSystemMessage/with_history_and_summary
+=== RUN   TestSingleSystemMessage/system_message_in_history_is_filtered
+--- PASS: TestSingleSystemMessage (0.00s)
+    --- PASS: TestSingleSystemMessage/no_summary,_no_history (0.00s)
+    --- PASS: TestSingleSystemMessage/with_summary (0.00s)
+    --- PASS: TestSingleSystemMessage/with_history_and_summary (0.00s)
+    --- PASS: TestSingleSystemMessage/system_message_in_history_is_filtered (0.00s)
+=== RUN   TestMtimeAutoInvalidation
+=== RUN   TestMtimeAutoInvalidation/bootstrap_file_change
+=== RUN   TestMtimeAutoInvalidation/memory_file_change
+=== RUN   TestMtimeAutoInvalidation/skills_dir_change
+--- PASS: TestMtimeAutoInvalidation (0.00s)
+    --- PASS: TestMtimeAutoInvalidation/bootstrap_file_change (0.00s)
+    --- PASS: TestMtimeAutoInvalidation/memory_file_change (0.00s)
+    --- PASS: TestMtimeAutoInvalidation/skills_dir_change (0.00s)
+=== RUN   TestExplicitInvalidateCache
+--- PASS: TestExplicitInvalidateCache (0.00s)
+=== RUN   TestCacheStability
+--- PASS: TestCacheStability (0.00s)
+=== RUN   TestNewFileCreationInvalidatesCache
+=== RUN   TestNewFileCreationInvalidatesCache/new_bootstrap_file
+=== RUN   TestNewFileCreationInvalidatesCache/new_memory_file
+--- PASS: TestNewFileCreationInvalidatesCache (0.00s)
+    --- PASS: TestNewFileCreationInvalidatesCache/new_bootstrap_file (0.00s)
+    --- PASS: TestNewFileCreationInvalidatesCache/new_memory_file (0.00s)
+=== RUN   TestSkillFileContentChange
+--- PASS: TestSkillFileContentChange (0.00s)
+=== RUN   TestConcurrentBuildSystemPromptWithCache
+--- PASS: TestConcurrentBuildSystemPromptWithCache (0.07s)
+=== RUN   TestEmptyWorkspaceBaselineDetectsNewFiles
+--- PASS: TestEmptyWorkspaceBaselineDetectsNewFiles (0.00s)
+=== RUN   TestSanitizeHistoryForProvider_EmptyHistory
+--- PASS: TestSanitizeHistoryForProvider_EmptyHistory (0.00s)
+=== RUN   TestSanitizeHistoryForProvider_SingleToolCall
+--- PASS: TestSanitizeHistoryForProvider_SingleToolCall (0.00s)
+=== RUN   TestSanitizeHistoryForProvider_MultiToolCalls
+--- PASS: TestSanitizeHistoryForProvider_MultiToolCalls (0.00s)
+=== RUN   TestSanitizeHistoryForProvider_AssistantToolCallAfterPlainAssistant
+--- PASS: TestSanitizeHistoryForProvider_AssistantToolCallAfterPlainAssistant (0.00s)
+=== RUN   TestSanitizeHistoryForProvider_OrphanedLeadingTool
+--- PASS: TestSanitizeHistoryForProvider_OrphanedLeadingTool (0.00s)
+=== RUN   TestSanitizeHistoryForProvider_ToolAfterUserDropped
+--- PASS: TestSanitizeHistoryForProvider_ToolAfterUserDropped (0.00s)
+=== RUN   TestSanitizeHistoryForProvider_ToolAfterAssistantNoToolCalls
+--- PASS: TestSanitizeHistoryForProvider_ToolAfterAssistantNoToolCalls (0.00s)
+=== RUN   TestSanitizeHistoryForProvider_AssistantToolCallAtStart
+--- PASS: TestSanitizeHistoryForProvider_AssistantToolCallAtStart (0.00s)
+=== RUN   TestSanitizeHistoryForProvider_MultiToolCallsThenNewRound
+--- PASS: TestSanitizeHistoryForProvider_MultiToolCallsThenNewRound (0.00s)
+=== RUN   TestSanitizeHistoryForProvider_ConsecutiveMultiToolRounds
+--- PASS: TestSanitizeHistoryForProvider_ConsecutiveMultiToolRounds (0.00s)
+=== RUN   TestSanitizeHistoryForProvider_PlainConversation
+--- PASS: TestSanitizeHistoryForProvider_PlainConversation (0.00s)
+=== RUN   TestExecuteRequestInputHook_Success
+2026/02/25 19:22:14 [2026-02-26T00:22:14Z] [INFO] agent: Sending input request to user {timeout=5, hook=test_input, request_id=669c7c29-4193-49e9-b586-08770e87eac2}
+2026/02/25 19:22:14 [2026-02-26T00:22:14Z] [INFO] agent: Received user input {request_id=669c7c29-4193-49e9-b586-08770e87eac2, hook=test_input}
+--- PASS: TestExecuteRequestInputHook_Success (1.52s)
+=== RUN   TestExecuteRequestInputHook_Timeout
+2026/02/25 19:22:15 [2026-02-26T00:22:15Z] [INFO] agent: Sending input request to user {hook=test_timeout, request_id=b6bd4cd9-6d0b-480f-9d04-7799767aa61c, timeout=1}
+2026/02/25 19:22:16 [2026-02-26T00:22:16Z] [WARN] agent: Input request timeout expired {hook=test_timeout, request_id=b6bd4cd9-6d0b-480f-9d04-7799767aa61c, timeout=1}
+--- PASS: TestExecuteRequestInputHook_Timeout (2.26s)
+=== RUN   TestExecuteRequestInputHook_NilBus
+2026/02/25 19:22:16 [2026-02-26T00:22:16Z] [WARN] agent: Message bus unavailable for input request {hook=test_nil_bus}
+--- PASS: TestExecuteRequestInputHook_NilBus (0.00s)
+=== RUN   TestExecuteRequestInputHook_EmptyPrompt
+2026/02/25 19:22:17 [2026-02-26T00:22:17Z] [WARN] agent: Input request prompt is empty {hook=test_empty}
+--- PASS: TestExecuteRequestInputHook_EmptyPrompt (0.20s)
+=== RUN   TestExecuteRequestInputHook_ContextCancellation
+2026/02/25 19:22:17 [2026-02-26T00:22:17Z] [WARN] agent: Failed to generate input request prompt {hook=test_cancel, error=command failed: signal: killed}
+--- PASS: TestExecuteRequestInputHook_ContextCancellation (0.10s)
+=== RUN   TestExecuteRequestInputHook_DefaultTimeout
+2026/02/25 19:22:17 [2026-02-26T00:22:17Z] [INFO] agent: Sending input request to user {hook=test_default_timeout, request_id=98a01514-8dc6-408f-9bfe-aecf9ff1be5f, timeout=60}
+2026/02/25 19:22:17 [2026-02-26T00:22:17Z] [INFO] agent: Received user input {hook=test_default_timeout, request_id=98a01514-8dc6-408f-9bfe-aecf9ff1be5f}
+--- PASS: TestExecuteRequestInputHook_DefaultTimeout (0.10s)
+=== RUN   TestExecuteRequestInputHook_VariableSubstitution
+2026/02/25 19:22:17 [2026-02-26T00:22:17Z] [INFO] agent: Sending input request to user {hook=test_vars, request_id=e47ee73f-f270-47c1-ae1c-bf51e4d5ed37, timeout=2}
+2026/02/25 19:22:17 [2026-02-26T00:22:17Z] [INFO] agent: Received user input {hook=test_vars, request_id=e47ee73f-f270-47c1-ae1c-bf51e4d5ed37}
+--- PASS: TestExecuteRequestInputHook_VariableSubstitution (0.22s)
+=== RUN   TestNewHookExecutor
+--- PASS: TestNewHookExecutor (0.00s)
+=== RUN   TestDetectPythonVenv
+--- PASS: TestDetectPythonVenv (0.00s)
+=== RUN   TestDetectPythonVenv_NotFound
+--- PASS: TestDetectPythonVenv_NotFound (0.00s)
+=== RUN   TestSubstituteVariables
+=== RUN   TestSubstituteVariables/simple_substitution
+=== RUN   TestSubstituteVariables/multiple_substitutions
+=== RUN   TestSubstituteVariables/no_substitutions
+=== RUN   TestSubstituteVariables/missing_variable
+=== RUN   TestSubstituteVariables/special_characters
+--- PASS: TestSubstituteVariables (0.00s)
+    --- PASS: TestSubstituteVariables/simple_substitution (0.00s)
+    --- PASS: TestSubstituteVariables/multiple_substitutions (0.00s)
+    --- PASS: TestSubstituteVariables/no_substitutions (0.00s)
+    --- PASS: TestSubstituteVariables/missing_variable (0.00s)
+    --- PASS: TestSubstituteVariables/special_characters (0.00s)
+=== RUN   TestShellEscape
+=== RUN   TestShellEscape/safe_string
+=== RUN   TestShellEscape/string_with_spaces
+=== RUN   TestShellEscape/string_with_single_quote
+=== RUN   TestShellEscape/empty_string
+=== RUN   TestShellEscape/string_with_special_chars
+=== RUN   TestShellEscape/safe_path
+--- PASS: TestShellEscape (0.00s)
+    --- PASS: TestShellEscape/safe_string (0.00s)
+    --- PASS: TestShellEscape/string_with_spaces (0.00s)
+    --- PASS: TestShellEscape/string_with_single_quote (0.00s)
+    --- PASS: TestShellEscape/empty_string (0.00s)
+    --- PASS: TestShellEscape/string_with_special_chars (0.00s)
+    --- PASS: TestShellEscape/safe_path (0.00s)
+=== RUN   TestIsSafeChar
+=== RUN   TestIsSafeChar/a
+=== RUN   TestIsSafeChar/Z
+=== RUN   TestIsSafeChar/0
+=== RUN   TestIsSafeChar/9
+=== RUN   TestIsSafeChar/-
+=== RUN   TestIsSafeChar/_
+=== RUN   TestIsSafeChar/.
+=== RUN   TestIsSafeChar//
+=== RUN   TestIsSafeChar/:
+=== RUN   TestIsSafeChar/@
+=== RUN   TestIsSafeChar/_#01
+=== RUN   TestIsSafeChar/$
+=== RUN   TestIsSafeChar/&
+=== RUN   TestIsSafeChar/|
+=== RUN   TestIsSafeChar/;
+=== RUN   TestIsSafeChar/'
+=== RUN   TestIsSafeChar/"
+--- PASS: TestIsSafeChar (0.00s)
+    --- PASS: TestIsSafeChar/a (0.00s)
+    --- PASS: TestIsSafeChar/Z (0.00s)
+    --- PASS: TestIsSafeChar/0 (0.00s)
+    --- PASS: TestIsSafeChar/9 (0.00s)
+    --- PASS: TestIsSafeChar/- (0.00s)
+    --- PASS: TestIsSafeChar/_ (0.00s)
+    --- PASS: TestIsSafeChar/. (0.00s)
+    --- PASS: TestIsSafeChar// (0.00s)
+    --- PASS: TestIsSafeChar/: (0.00s)
+    --- PASS: TestIsSafeChar/@ (0.00s)
+    --- PASS: TestIsSafeChar/_#01 (0.00s)
+    --- PASS: TestIsSafeChar/$ (0.00s)
+    --- PASS: TestIsSafeChar/& (0.00s)
+    --- PASS: TestIsSafeChar/| (0.00s)
+    --- PASS: TestIsSafeChar/; (0.00s)
+    --- PASS: TestIsSafeChar/' (0.00s)
+    --- PASS: TestIsSafeChar/" (0.00s)
+=== RUN   TestIsPythonCommand
+=== RUN   TestIsPythonCommand/python_command
+=== RUN   TestIsPythonCommand/python3_command
+=== RUN   TestIsPythonCommand/workspace_bin_script
+=== RUN   TestIsPythonCommand/bin_without_dot
+=== RUN   TestIsPythonCommand/not_python
+=== RUN   TestIsPythonCommand/bash_script
+--- PASS: TestIsPythonCommand (0.00s)
+    --- PASS: TestIsPythonCommand/python_command (0.00s)
+    --- PASS: TestIsPythonCommand/python3_command (0.00s)
+    --- PASS: TestIsPythonCommand/workspace_bin_script (0.00s)
+    --- PASS: TestIsPythonCommand/bin_without_dot (0.00s)
+    --- PASS: TestIsPythonCommand/not_python (0.00s)
+    --- PASS: TestIsPythonCommand/bash_script (0.00s)
+=== RUN   TestExecuteHook_Success
+--- PASS: TestExecuteHook_Success (0.01s)
+=== RUN   TestExecuteHook_WithVariableSubstitution
+--- PASS: TestExecuteHook_WithVariableSubstitution (0.01s)
+=== RUN   TestExecuteHook_Timeout
+--- PASS: TestExecuteHook_Timeout (0.10s)
+=== RUN   TestExecuteHooks_MultipleHooks
+--- PASS: TestExecuteHooks_MultipleHooks (0.01s)
+=== RUN   TestExecuteHooks_DisabledHook
+--- PASS: TestExecuteHooks_DisabledHook (0.00s)
+=== RUN   TestExecuteHooks_NoInjection
+--- PASS: TestExecuteHooks_NoInjection (0.00s)
+=== RUN   TestWrapWithVenv
+--- PASS: TestWrapWithVenv (0.00s)
+=== RUN   TestSetTimeout
+--- PASS: TestSetTimeout (0.00s)
+=== RUN   TestOnToolCallHookVariables
+--- PASS: TestOnToolCallHookVariables (0.21s)
+=== RUN   TestOnToolCallHookExecution
+--- PASS: TestOnToolCallHookExecution (0.24s)
+=== RUN   TestNewAgentInstance_UsesDefaultsTemperatureAndMaxTokens
+Warning: deny patterns are disabled. All commands will be allowed.
+--- PASS: TestNewAgentInstance_UsesDefaultsTemperatureAndMaxTokens (0.00s)
+=== RUN   TestNewAgentInstance_DefaultsTemperatureWhenZero
+Warning: deny patterns are disabled. All commands will be allowed.
+--- PASS: TestNewAgentInstance_DefaultsTemperatureWhenZero (0.00s)
+=== RUN   TestNewAgentInstance_DefaultsTemperatureWhenUnset
+Warning: deny patterns are disabled. All commands will be allowed.
+--- PASS: TestNewAgentInstance_DefaultsTemperatureWhenUnset (0.00s)
+=== RUN   TestAgentInstance_LoopHooksResolution
+Warning: deny patterns are disabled. All commands will be allowed.
+--- PASS: TestAgentInstance_LoopHooksResolution (0.00s)
+=== RUN   TestAgentInstance_LoopHooksResolution_DefaultProfile
+Warning: deny patterns are disabled. All commands will be allowed.
+--- PASS: TestAgentInstance_LoopHooksResolution_DefaultProfile (0.00s)
+=== RUN   TestAgentInstance_LoopHooksResolution_BackwardCompatibility
+Warning: deny patterns are disabled. All commands will be allowed.
+--- PASS: TestAgentInstance_LoopHooksResolution_BackwardCompatibility (0.00s)
+=== RUN   TestAgentInstance_LoopHooksResolution_NonExistentProfile
+Warning: deny patterns are disabled. All commands will be allowed.
+--- PASS: TestAgentInstance_LoopHooksResolution_NonExistentProfile (0.00s)
+=== RUN   TestAgentInstance_LoopHooksResolution_NilAgent
+Warning: deny patterns are disabled. All commands will be allowed.
+--- PASS: TestAgentInstance_LoopHooksResolution_NilAgent (0.00s)
+=== RUN   TestAgentInstance_MultipleAgents_DifferentProfiles
+Warning: deny patterns are disabled. All commands will be allowed.
+Warning: deny patterns are disabled. All commands will be allowed.
+Warning: deny patterns are disabled. All commands will be allowed.
+--- PASS: TestAgentInstance_MultipleAgents_DifferentProfiles (0.00s)
+=== RUN   TestRecordLastChannel
+Warning: deny patterns are disabled. All commands will be allowed.
+2026/02/25 19:22:18 [2026-02-26T00:22:18Z] [INFO] agent: Created implicit main agent (no agents.list configured)
+Warning: deny patterns are disabled. All commands will be allowed.
+2026/02/25 19:22:18 [2026-02-26T00:22:18Z] [INFO] agent: Created implicit main agent (no agents.list configured)
+--- PASS: TestRecordLastChannel (0.00s)
+=== RUN   TestRecordLastChatID
+Warning: deny patterns are disabled. All commands will be allowed.
+2026/02/25 19:22:18 [2026-02-26T00:22:18Z] [INFO] agent: Created implicit main agent (no agents.list configured)
+Warning: deny patterns are disabled. All commands will be allowed.
+2026/02/25 19:22:18 [2026-02-26T00:22:18Z] [INFO] agent: Created implicit main agent (no agents.list configured)
+--- PASS: TestRecordLastChatID (0.00s)
+=== RUN   TestNewAgentLoop_StateInitialized
+Warning: deny patterns are disabled. All commands will be allowed.
+2026/02/25 19:22:18 [2026-02-26T00:22:18Z] [INFO] agent: Created implicit main agent (no agents.list configured)
+--- PASS: TestNewAgentLoop_StateInitialized (0.00s)
+=== RUN   TestToolRegistry_ToolRegistration
+Warning: deny patterns are disabled. All commands will be allowed.
+2026/02/25 19:22:18 [2026-02-26T00:22:18Z] [INFO] agent: Created implicit main agent (no agents.list configured)
+--- PASS: TestToolRegistry_ToolRegistration (0.00s)
+=== RUN   TestToolContext_Updates
+Warning: deny patterns are disabled. All commands will be allowed.
+2026/02/25 19:22:18 [2026-02-26T00:22:18Z] [INFO] agent: Created implicit main agent (no agents.list configured)
+--- PASS: TestToolContext_Updates (0.00s)
+=== RUN   TestToolRegistry_GetDefinitions
+Warning: deny patterns are disabled. All commands will be allowed.
+2026/02/25 19:22:18 [2026-02-26T00:22:18Z] [INFO] agent: Created implicit main agent (no agents.list configured)
+--- PASS: TestToolRegistry_GetDefinitions (0.00s)
+=== RUN   TestAgentLoop_GetStartupInfo
+Warning: deny patterns are disabled. All commands will be allowed.
+2026/02/25 19:22:18 [2026-02-26T00:22:18Z] [INFO] agent: Created implicit main agent (no agents.list configured)
+--- PASS: TestAgentLoop_GetStartupInfo (0.00s)
+=== RUN   TestAgentLoop_Stop
+Warning: deny patterns are disabled. All commands will be allowed.
+2026/02/25 19:22:18 [2026-02-26T00:22:18Z] [INFO] agent: Created implicit main agent (no agents.list configured)
+--- PASS: TestAgentLoop_Stop (0.00s)
+=== RUN   TestToolResult_SilentToolDoesNotSendUserMessage
+Warning: deny patterns are disabled. All commands will be allowed.
+2026/02/25 19:22:18 [2026-02-26T00:22:18Z] [INFO] agent: Created implicit main agent (no agents.list configured)
+2026/02/25 19:22:18 [2026-02-26T00:22:18Z] [INFO] agent: Processing message from test:user1: read test.txt {channel=test, chat_id=chat1, sender_id=user1, session_key=test-session}
+2026/02/25 19:22:18 [2026-02-26T00:22:18Z] [INFO] agent: Routed message {agent_id=main, session_key=agent:main:main, matched_by=default}
+2026/02/25 19:22:18 [2026-02-26T00:22:18Z] [INFO] agent: LLM response without tool calls (direct answer) {agent_id=main, iteration=1, content_chars=23}
+2026/02/25 19:22:18 [2026-02-26T00:22:18Z] [INFO] agent: Response: File operation complete {agent_id=main, session_key=agent:main:main, iterations=1, final_length=23}
+--- PASS: TestToolResult_SilentToolDoesNotSendUserMessage (0.01s)
+=== RUN   TestToolResult_UserFacingToolDoesSendMessage
+Warning: deny patterns are disabled. All commands will be allowed.
+2026/02/25 19:22:18 [2026-02-26T00:22:18Z] [INFO] agent: Created implicit main agent (no agents.list configured)
+2026/02/25 19:22:18 [2026-02-26T00:22:18Z] [INFO] agent: Processing message from test:user1: run hello {channel=test, chat_id=chat1, sender_id=user1, session_key=test-session}
+2026/02/25 19:22:18 [2026-02-26T00:22:18Z] [INFO] agent: Routed message {agent_id=main, session_key=agent:main:main, matched_by=default}
+2026/02/25 19:22:18 [2026-02-26T00:22:18Z] [INFO] agent: LLM response without tool calls (direct answer) {agent_id=main, iteration=1, content_chars=27}
+2026/02/25 19:22:18 [2026-02-26T00:22:18Z] [INFO] agent: Response: Command output: hello world {agent_id=main, session_key=agent:main:main, iterations=1, final_length=27}
+--- PASS: TestToolResult_UserFacingToolDoesSendMessage (0.01s)
+=== RUN   TestAgentLoop_ContextExhaustionRetry
+Warning: deny patterns are disabled. All commands will be allowed.
+2026/02/25 19:22:18 [2026-02-26T00:22:18Z] [INFO] agent: Created implicit main agent (no agents.list configured)
+2026/02/25 19:22:18 [2026-02-26T00:22:18Z] [INFO] agent: Processing message from test:cron: Trigger message {channel=test, chat_id=test-chat, sender_id=cron, session_key=test-session-context}
+2026/02/25 19:22:18 [2026-02-26T00:22:18Z] [INFO] agent: Routed message {matched_by=default, agent_id=main, session_key=agent:main:main}
+2026/02/25 19:22:18 [2026-02-26T00:22:18Z] [WARN] agent: Context window error detected, attempting compression {error=InvalidParameter: Total tokens of image and text exceed max message tokens, retry=0}
+2026/02/25 19:22:18 [2026-02-26T00:22:18Z] [INFO] agent: LLM response without tool calls (direct answer) {agent_id=main, iteration=1, content_chars=28}
+2026/02/25 19:22:18 [2026-02-26T00:22:18Z] [INFO] agent: Response: Recovered from context error {agent_id=main, session_key=agent:main:main, iterations=1, final_length=28}
+--- PASS: TestAgentLoop_ContextExhaustionRetry (0.01s)
+=== RUN   TestNewAgentRegistry_ImplicitMain
+Warning: deny patterns are disabled. All commands will be allowed.
+2026/02/25 19:22:18 [2026-02-26T00:22:18Z] [INFO] agent: Created implicit main agent (no agents.list configured)
+--- PASS: TestNewAgentRegistry_ImplicitMain (0.00s)
+=== RUN   TestNewAgentRegistry_ExplicitAgents
+Warning: deny patterns are disabled. All commands will be allowed.
+2026/02/25 19:22:18 [2026-02-26T00:22:18Z] [INFO] agent: Registered agent {agent_id=sales, name=Sales Bot, workspace=/tmp/picoclaw-test-registry, model=gpt-4}
+Warning: deny patterns are disabled. All commands will be allowed.
+2026/02/25 19:22:18 [2026-02-26T00:22:18Z] [INFO] agent: Registered agent {model=gpt-4, agent_id=support, name=Support Bot, workspace=/Users/wavegoodvybe/.picoclaw/workspace-support}
+--- PASS: TestNewAgentRegistry_ExplicitAgents (0.00s)
+=== RUN   TestAgentRegistry_GetAgent_Normalize
+Warning: deny patterns are disabled. All commands will be allowed.
+2026/02/25 19:22:18 [2026-02-26T00:22:18Z] [INFO] agent: Registered agent {name=, workspace=/tmp/picoclaw-test-registry, model=gpt-4, agent_id=my-agent}
+--- PASS: TestAgentRegistry_GetAgent_Normalize (0.00s)
+=== RUN   TestAgentRegistry_GetDefaultAgent
+Warning: deny patterns are disabled. All commands will be allowed.
+2026/02/25 19:22:18 [2026-02-26T00:22:18Z] [INFO] agent: Registered agent {agent_id=alpha, name=, workspace=/Users/wavegoodvybe/.picoclaw/workspace-alpha, model=gpt-4}
+Warning: deny patterns are disabled. All commands will be allowed.
+2026/02/25 19:22:18 [2026-02-26T00:22:18Z] [INFO] agent: Registered agent {agent_id=beta, name=, workspace=/tmp/picoclaw-test-registry, model=gpt-4}
+--- PASS: TestAgentRegistry_GetDefaultAgent (0.00s)
+=== RUN   TestAgentRegistry_CanSpawnSubagent
+Warning: deny patterns are disabled. All commands will be allowed.
+2026/02/25 19:22:18 [2026-02-26T00:22:18Z] [INFO] agent: Registered agent {name=, workspace=/tmp/picoclaw-test-registry, model=gpt-4, agent_id=parent}
+Warning: deny patterns are disabled. All commands will be allowed.
+2026/02/25 19:22:18 [2026-02-26T00:22:18Z] [INFO] agent: Registered agent {agent_id=child1, name=, workspace=/Users/wavegoodvybe/.picoclaw/workspace-child1, model=gpt-4}
+Warning: deny patterns are disabled. All commands will be allowed.
+2026/02/25 19:22:18 [2026-02-26T00:22:18Z] [INFO] agent: Registered agent {model=gpt-4, agent_id=child2, name=, workspace=/Users/wavegoodvybe/.picoclaw/workspace-child2}
+Warning: deny patterns are disabled. All commands will be allowed.
+2026/02/25 19:22:18 [2026-02-26T00:22:18Z] [INFO] agent: Registered agent {agent_id=restricted, name=, workspace=/Users/wavegoodvybe/.picoclaw/workspace-restricted, model=gpt-4}
+--- PASS: TestAgentRegistry_CanSpawnSubagent (0.00s)
+=== RUN   TestAgentRegistry_CanSpawnSubagent_Wildcard
+Warning: deny patterns are disabled. All commands will be allowed.
+2026/02/25 19:22:18 [2026-02-26T00:22:18Z] [INFO] agent: Registered agent {agent_id=admin, name=, workspace=/tmp/picoclaw-test-registry, model=gpt-4}
+Warning: deny patterns are disabled. All commands will be allowed.
+2026/02/25 19:22:18 [2026-02-26T00:22:18Z] [INFO] agent: Registered agent {model=gpt-4, agent_id=any-agent, name=, workspace=/Users/wavegoodvybe/.picoclaw/workspace-any-agent}
+--- PASS: TestAgentRegistry_CanSpawnSubagent_Wildcard (0.00s)
+=== RUN   TestAgentInstance_Model
+Warning: deny patterns are disabled. All commands will be allowed.
+2026/02/25 19:22:18 [2026-02-26T00:22:18Z] [INFO] agent: Registered agent {workspace=/tmp/picoclaw-test-registry, model=claude-opus, agent_id=custom, name=}
+--- PASS: TestAgentInstance_Model (0.00s)
+=== RUN   TestAgentInstance_FallbackInheritance
+Warning: deny patterns are disabled. All commands will be allowed.
+2026/02/25 19:22:18 [2026-02-26T00:22:18Z] [INFO] agent: Registered agent {model=gpt-4, agent_id=inherit, name=, workspace=/tmp/picoclaw-test-registry}
+--- PASS: TestAgentInstance_FallbackInheritance (0.00s)
+=== RUN   TestAgentInstance_FallbackExplicitEmpty
+Warning: deny patterns are disabled. All commands will be allowed.
+2026/02/25 19:22:18 [2026-02-26T00:22:18Z] [INFO] agent: Registered agent {model=gpt-4, agent_id=no-fallback, name=, workspace=/tmp/picoclaw-test-registry}
+--- PASS: TestAgentInstance_FallbackExplicitEmpty (0.00s)
+PASS
+ok  	github.com/sipeed/picoclaw/pkg/agent	6.854s
+=== RUN   TestBuildAuthorizeURL
+--- PASS: TestBuildAuthorizeURL (0.00s)
+=== RUN   TestBuildAuthorizeURLOpenAIExtras
+--- PASS: TestBuildAuthorizeURLOpenAIExtras (0.00s)
+=== RUN   TestParseTokenResponse
+--- PASS: TestParseTokenResponse (0.00s)
+=== RUN   TestParseTokenResponseExtractsAccountIDFromIDToken
+--- PASS: TestParseTokenResponseExtractsAccountIDFromIDToken (0.00s)
+=== RUN   TestExtractAccountIDFromOrganizationsFallback
+--- PASS: TestExtractAccountIDFromOrganizationsFallback (0.00s)
+=== RUN   TestParseTokenResponseNoAccessToken
+--- PASS: TestParseTokenResponseNoAccessToken (0.00s)
+=== RUN   TestParseTokenResponseAccountIDFromIDToken
+--- PASS: TestParseTokenResponseAccountIDFromIDToken (0.00s)
+=== RUN   TestExchangeCodeForTokens
+--- PASS: TestExchangeCodeForTokens (0.00s)
+=== RUN   TestRefreshAccessToken
+--- PASS: TestRefreshAccessToken (0.00s)
+=== RUN   TestRefreshAccessTokenNoRefreshToken
+--- PASS: TestRefreshAccessTokenNoRefreshToken (0.00s)
+=== RUN   TestRefreshAccessTokenPreservesRefreshAndAccountID
+--- PASS: TestRefreshAccessTokenPreservesRefreshAndAccountID (0.00s)
+=== RUN   TestOpenAIOAuthConfig
+--- PASS: TestOpenAIOAuthConfig (0.00s)
+=== RUN   TestParseDeviceCodeResponseIntervalAsNumber
+--- PASS: TestParseDeviceCodeResponseIntervalAsNumber (0.00s)
+=== RUN   TestParseDeviceCodeResponseIntervalAsString
+--- PASS: TestParseDeviceCodeResponseIntervalAsString (0.00s)
+=== RUN   TestParseDeviceCodeResponseInvalidInterval
+--- PASS: TestParseDeviceCodeResponseInvalidInterval (0.00s)
+=== RUN   TestGeneratePKCE
+--- PASS: TestGeneratePKCE (0.00s)
+=== RUN   TestGeneratePKCEUniqueness
+--- PASS: TestGeneratePKCEUniqueness (0.00s)
+=== RUN   TestAuthCredentialIsExpired
+=== RUN   TestAuthCredentialIsExpired/zero_time
+=== RUN   TestAuthCredentialIsExpired/future
+=== RUN   TestAuthCredentialIsExpired/past
+--- PASS: TestAuthCredentialIsExpired (0.00s)
+    --- PASS: TestAuthCredentialIsExpired/zero_time (0.00s)
+    --- PASS: TestAuthCredentialIsExpired/future (0.00s)
+    --- PASS: TestAuthCredentialIsExpired/past (0.00s)
+=== RUN   TestAuthCredentialNeedsRefresh
+=== RUN   TestAuthCredentialNeedsRefresh/zero_time
+=== RUN   TestAuthCredentialNeedsRefresh/far_future
+=== RUN   TestAuthCredentialNeedsRefresh/within_5_min
+=== RUN   TestAuthCredentialNeedsRefresh/already_expired
+--- PASS: TestAuthCredentialNeedsRefresh (0.00s)
+    --- PASS: TestAuthCredentialNeedsRefresh/zero_time (0.00s)
+    --- PASS: TestAuthCredentialNeedsRefresh/far_future (0.00s)
+    --- PASS: TestAuthCredentialNeedsRefresh/within_5_min (0.00s)
+    --- PASS: TestAuthCredentialNeedsRefresh/already_expired (0.00s)
+=== RUN   TestStoreRoundtrip
+--- PASS: TestStoreRoundtrip (0.00s)
+=== RUN   TestStoreFilePermissions
+--- PASS: TestStoreFilePermissions (0.00s)
+=== RUN   TestStoreMultiProvider
+--- PASS: TestStoreMultiProvider (0.00s)
+=== RUN   TestDeleteCredential
+--- PASS: TestDeleteCredential (0.00s)
+=== RUN   TestLoadStoreEmpty
+--- PASS: TestLoadStoreEmpty (0.00s)
+PASS
+ok  	github.com/sipeed/picoclaw/pkg/auth	1.709s
+=== RUN   TestMessageBus_InputRequestPublishAndSubscribe
+--- PASS: TestMessageBus_InputRequestPublishAndSubscribe (0.00s)
+=== RUN   TestMessageBus_InputResponseTimeout
+--- PASS: TestMessageBus_InputResponseTimeout (0.00s)
+=== RUN   TestMessageBus_MultipleInputRequests
+--- PASS: TestMessageBus_MultipleInputRequests (0.00s)
+=== RUN   TestMessageBus_PublishResponseWithoutSubscriber
+--- PASS: TestMessageBus_PublishResponseWithoutSubscriber (0.00s)
+=== RUN   TestMessageBus_CloseWithPendingInputRequests
+--- PASS: TestMessageBus_CloseWithPendingInputRequests (0.00s)
+=== RUN   TestMessageBus_ConsumeInputRequestWithContext
+--- PASS: TestMessageBus_ConsumeInputRequestWithContext (0.10s)
+=== RUN   TestMessageBus_ConsumeInputRequestContextCancellation
+--- PASS: TestMessageBus_ConsumeInputRequestContextCancellation (0.00s)
+PASS
+ok  	github.com/sipeed/picoclaw/pkg/bus	(cached)
+=== RUN   TestBaseChannelIsAllowed
+=== RUN   TestBaseChannelIsAllowed/empty_allowlist_allows_all
+=== RUN   TestBaseChannelIsAllowed/compound_sender_matches_numeric_allowlist
+=== RUN   TestBaseChannelIsAllowed/compound_sender_matches_username_allowlist
+=== RUN   TestBaseChannelIsAllowed/numeric_sender_matches_legacy_compound_allowlist
+=== RUN   TestBaseChannelIsAllowed/non_matching_sender_is_denied
+--- PASS: TestBaseChannelIsAllowed (0.00s)
+    --- PASS: TestBaseChannelIsAllowed/empty_allowlist_allows_all (0.00s)
+    --- PASS: TestBaseChannelIsAllowed/compound_sender_matches_numeric_allowlist (0.00s)
+    --- PASS: TestBaseChannelIsAllowed/compound_sender_matches_username_allowlist (0.00s)
+    --- PASS: TestBaseChannelIsAllowed/numeric_sender_matches_legacy_compound_allowlist (0.00s)
+    --- PASS: TestBaseChannelIsAllowed/non_matching_sender_is_denied (0.00s)
+=== RUN   TestParseSlackChatID
+=== RUN   TestParseSlackChatID/channel_only
+=== RUN   TestParseSlackChatID/channel_with_thread
+=== RUN   TestParseSlackChatID/DM_channel
+=== RUN   TestParseSlackChatID/empty_string
+--- PASS: TestParseSlackChatID (0.00s)
+    --- PASS: TestParseSlackChatID/channel_only (0.00s)
+    --- PASS: TestParseSlackChatID/channel_with_thread (0.00s)
+    --- PASS: TestParseSlackChatID/DM_channel (0.00s)
+    --- PASS: TestParseSlackChatID/empty_string (0.00s)
+=== RUN   TestStripBotMention
+=== RUN   TestStripBotMention/mention_at_start
+=== RUN   TestStripBotMention/mention_in_middle
+=== RUN   TestStripBotMention/no_mention
+=== RUN   TestStripBotMention/empty_string
+=== RUN   TestStripBotMention/only_mention
+--- PASS: TestStripBotMention (0.00s)
+    --- PASS: TestStripBotMention/mention_at_start (0.00s)
+    --- PASS: TestStripBotMention/mention_in_middle (0.00s)
+    --- PASS: TestStripBotMention/no_mention (0.00s)
+    --- PASS: TestStripBotMention/empty_string (0.00s)
+    --- PASS: TestStripBotMention/only_mention (0.00s)
+=== RUN   TestNewSlackChannel
+=== RUN   TestNewSlackChannel/missing_bot_token
+=== RUN   TestNewSlackChannel/missing_app_token
+=== RUN   TestNewSlackChannel/valid_config
+--- PASS: TestNewSlackChannel (0.00s)
+    --- PASS: TestNewSlackChannel/missing_bot_token (0.00s)
+    --- PASS: TestNewSlackChannel/missing_app_token (0.00s)
+    --- PASS: TestNewSlackChannel/valid_config (0.00s)
+=== RUN   TestSlackChannelIsAllowed
+=== RUN   TestSlackChannelIsAllowed/empty_allowlist_allows_all
+=== RUN   TestSlackChannelIsAllowed/allowlist_restricts_users
+--- PASS: TestSlackChannelIsAllowed (0.00s)
+    --- PASS: TestSlackChannelIsAllowed/empty_allowlist_allows_all (0.00s)
+    --- PASS: TestSlackChannelIsAllowed/allowlist_restricts_users (0.00s)
+=== RUN   TestNewWeComAppChannel
+=== RUN   TestNewWeComAppChannel/missing_corp_id
+=== RUN   TestNewWeComAppChannel/missing_corp_secret
+=== RUN   TestNewWeComAppChannel/missing_agent_id
+=== RUN   TestNewWeComAppChannel/valid_config
+--- PASS: TestNewWeComAppChannel (0.00s)
+    --- PASS: TestNewWeComAppChannel/missing_corp_id (0.00s)
+    --- PASS: TestNewWeComAppChannel/missing_corp_secret (0.00s)
+    --- PASS: TestNewWeComAppChannel/missing_agent_id (0.00s)
+    --- PASS: TestNewWeComAppChannel/valid_config (0.00s)
+=== RUN   TestWeComAppChannelIsAllowed
+=== RUN   TestWeComAppChannelIsAllowed/empty_allowlist_allows_all
+=== RUN   TestWeComAppChannelIsAllowed/allowlist_restricts_users
+--- PASS: TestWeComAppChannelIsAllowed (0.00s)
+    --- PASS: TestWeComAppChannelIsAllowed/empty_allowlist_allows_all (0.00s)
+    --- PASS: TestWeComAppChannelIsAllowed/allowlist_restricts_users (0.00s)
+=== RUN   TestWeComAppVerifySignature
+=== RUN   TestWeComAppVerifySignature/valid_signature
+=== RUN   TestWeComAppVerifySignature/invalid_signature
+=== RUN   TestWeComAppVerifySignature/empty_token_skips_verification
+--- PASS: TestWeComAppVerifySignature (0.00s)
+    --- PASS: TestWeComAppVerifySignature/valid_signature (0.00s)
+    --- PASS: TestWeComAppVerifySignature/invalid_signature (0.00s)
+    --- PASS: TestWeComAppVerifySignature/empty_token_skips_verification (0.00s)
+=== RUN   TestWeComAppDecryptMessage
+=== RUN   TestWeComAppDecryptMessage/decrypt_without_AES_key
+=== RUN   TestWeComAppDecryptMessage/decrypt_with_AES_key
+=== RUN   TestWeComAppDecryptMessage/invalid_base64
+=== RUN   TestWeComAppDecryptMessage/invalid_AES_key
+=== RUN   TestWeComAppDecryptMessage/ciphertext_too_short
+--- PASS: TestWeComAppDecryptMessage (0.00s)
+    --- PASS: TestWeComAppDecryptMessage/decrypt_without_AES_key (0.00s)
+    --- PASS: TestWeComAppDecryptMessage/decrypt_with_AES_key (0.00s)
+    --- PASS: TestWeComAppDecryptMessage/invalid_base64 (0.00s)
+    --- PASS: TestWeComAppDecryptMessage/invalid_AES_key (0.00s)
+    --- PASS: TestWeComAppDecryptMessage/ciphertext_too_short (0.00s)
+=== RUN   TestWeComAppPKCS7Unpad
+=== RUN   TestWeComAppPKCS7Unpad/empty_input
+=== RUN   TestWeComAppPKCS7Unpad/valid_padding_3_bytes
+=== RUN   TestWeComAppPKCS7Unpad/valid_padding_16_bytes_(full_block)
+=== RUN   TestWeComAppPKCS7Unpad/invalid_padding_larger_than_data
+=== RUN   TestWeComAppPKCS7Unpad/invalid_padding_zero
+--- PASS: TestWeComAppPKCS7Unpad (0.00s)
+    --- PASS: TestWeComAppPKCS7Unpad/empty_input (0.00s)
+    --- PASS: TestWeComAppPKCS7Unpad/valid_padding_3_bytes (0.00s)
+    --- PASS: TestWeComAppPKCS7Unpad/valid_padding_16_bytes_(full_block) (0.00s)
+    --- PASS: TestWeComAppPKCS7Unpad/invalid_padding_larger_than_data (0.00s)
+    --- PASS: TestWeComAppPKCS7Unpad/invalid_padding_zero (0.00s)
+=== RUN   TestWeComAppHandleVerification
+=== RUN   TestWeComAppHandleVerification/valid_verification_request
+=== RUN   TestWeComAppHandleVerification/missing_parameters
+2026/02/25 19:22:13 [2026-02-26T00:22:13Z] [ERROR] wecom_app: Missing parameters in verification request
+=== RUN   TestWeComAppHandleVerification/invalid_signature
+2026/02/25 19:22:13 [2026-02-26T00:22:13Z] [WARN] wecom_app: Signature verification failed {nonce=test_nonce, token=test_token, msg_signature=invalid_sig, timestamp=1234567890}
+--- PASS: TestWeComAppHandleVerification (0.00s)
+    --- PASS: TestWeComAppHandleVerification/valid_verification_request (0.00s)
+    --- PASS: TestWeComAppHandleVerification/missing_parameters (0.00s)
+    --- PASS: TestWeComAppHandleVerification/invalid_signature (0.00s)
+=== RUN   TestWeComAppHandleMessageCallback
+=== RUN   TestWeComAppHandleMessageCallback/valid_message_callback
+=== RUN   TestWeComAppHandleMessageCallback/missing_parameters
+=== RUN   TestWeComAppHandleMessageCallback/invalid_XML
+2026/02/25 19:22:13 [2026-02-26T00:22:13Z] [ERROR] wecom_app: Failed to parse XML {error=EOF}
+=== RUN   TestWeComAppHandleMessageCallback/invalid_signature
+2026/02/25 19:22:13 [2026-02-26T00:22:13Z] [WARN] wecom_app: Message signature verification failed
+--- PASS: TestWeComAppHandleMessageCallback (0.00s)
+    --- PASS: TestWeComAppHandleMessageCallback/valid_message_callback (0.00s)
+    --- PASS: TestWeComAppHandleMessageCallback/missing_parameters (0.00s)
+    --- PASS: TestWeComAppHandleMessageCallback/invalid_XML (0.00s)
+    --- PASS: TestWeComAppHandleMessageCallback/invalid_signature (0.00s)
+=== RUN   TestWeComAppProcessMessage
+=== RUN   TestWeComAppProcessMessage/process_text_message
+=== RUN   TestWeComAppProcessMessage/process_image_message
+=== RUN   TestWeComAppProcessMessage/process_voice_message
+=== RUN   TestWeComAppProcessMessage/skip_unsupported_message_type
+=== RUN   TestWeComAppProcessMessage/process_event_message
+--- PASS: TestWeComAppProcessMessage (0.00s)
+    --- PASS: TestWeComAppProcessMessage/process_text_message (0.00s)
+    --- PASS: TestWeComAppProcessMessage/process_image_message (0.00s)
+    --- PASS: TestWeComAppProcessMessage/process_voice_message (0.00s)
+    --- PASS: TestWeComAppProcessMessage/skip_unsupported_message_type (0.00s)
+    --- PASS: TestWeComAppProcessMessage/process_event_message (0.00s)
+=== RUN   TestWeComAppHandleWebhook
+=== RUN   TestWeComAppHandleWebhook/GET_request_calls_verification
+=== RUN   TestWeComAppHandleWebhook/POST_request_calls_message_callback
+2026/02/25 19:22:13 [2026-02-26T00:22:13Z] [ERROR] wecom_app: Failed to parse decrypted message {error=EOF}
+=== RUN   TestWeComAppHandleWebhook/unsupported_method
+2026/02/25 19:22:13 [2026-02-26T00:22:13Z] [WARN] wecom_app: Method not allowed {method=PUT}
+--- PASS: TestWeComAppHandleWebhook (0.00s)
+    --- PASS: TestWeComAppHandleWebhook/GET_request_calls_verification (0.00s)
+    --- PASS: TestWeComAppHandleWebhook/POST_request_calls_message_callback (0.00s)
+    --- PASS: TestWeComAppHandleWebhook/unsupported_method (0.00s)
+=== RUN   TestWeComAppHandleHealth
+--- PASS: TestWeComAppHandleHealth (0.00s)
+=== RUN   TestWeComAppAccessToken
+=== RUN   TestWeComAppAccessToken/get_empty_access_token_initially
+=== RUN   TestWeComAppAccessToken/set_and_get_access_token
+=== RUN   TestWeComAppAccessToken/expired_token_returns_empty
+--- PASS: TestWeComAppAccessToken (0.00s)
+    --- PASS: TestWeComAppAccessToken/get_empty_access_token_initially (0.00s)
+    --- PASS: TestWeComAppAccessToken/set_and_get_access_token (0.00s)
+    --- PASS: TestWeComAppAccessToken/expired_token_returns_empty (0.00s)
+=== RUN   TestWeComAppMessageStructures
+=== RUN   TestWeComAppMessageStructures/WeComTextMessage_structure
+=== RUN   TestWeComAppMessageStructures/WeComMarkdownMessage_structure
+=== RUN   TestWeComAppMessageStructures/WeComAccessTokenResponse_structure
+=== RUN   TestWeComAppMessageStructures/WeComSendMessageResponse_structure
+--- PASS: TestWeComAppMessageStructures (0.00s)
+    --- PASS: TestWeComAppMessageStructures/WeComTextMessage_structure (0.00s)
+    --- PASS: TestWeComAppMessageStructures/WeComMarkdownMessage_structure (0.00s)
+    --- PASS: TestWeComAppMessageStructures/WeComAccessTokenResponse_structure (0.00s)
+    --- PASS: TestWeComAppMessageStructures/WeComSendMessageResponse_structure (0.00s)
+=== RUN   TestWeComAppXMLMessageStructure
+--- PASS: TestWeComAppXMLMessageStructure (0.00s)
+=== RUN   TestWeComAppXMLMessageImage
+--- PASS: TestWeComAppXMLMessageImage (0.00s)
+=== RUN   TestWeComAppXMLMessageVoice
+--- PASS: TestWeComAppXMLMessageVoice (0.00s)
+=== RUN   TestWeComAppXMLMessageLocation
+--- PASS: TestWeComAppXMLMessageLocation (0.00s)
+=== RUN   TestWeComAppXMLMessageLink
+--- PASS: TestWeComAppXMLMessageLink (0.00s)
+=== RUN   TestWeComAppXMLMessageEvent
+--- PASS: TestWeComAppXMLMessageEvent (0.00s)
+=== RUN   TestNewWeComBotChannel
+=== RUN   TestNewWeComBotChannel/missing_token
+=== RUN   TestNewWeComBotChannel/missing_webhook_url
+=== RUN   TestNewWeComBotChannel/valid_config
+--- PASS: TestNewWeComBotChannel (0.00s)
+    --- PASS: TestNewWeComBotChannel/missing_token (0.00s)
+    --- PASS: TestNewWeComBotChannel/missing_webhook_url (0.00s)
+    --- PASS: TestNewWeComBotChannel/valid_config (0.00s)
+=== RUN   TestWeComBotChannelIsAllowed
+=== RUN   TestWeComBotChannelIsAllowed/empty_allowlist_allows_all
+=== RUN   TestWeComBotChannelIsAllowed/allowlist_restricts_users
+--- PASS: TestWeComBotChannelIsAllowed (0.00s)
+    --- PASS: TestWeComBotChannelIsAllowed/empty_allowlist_allows_all (0.00s)
+    --- PASS: TestWeComBotChannelIsAllowed/allowlist_restricts_users (0.00s)
+=== RUN   TestWeComBotVerifySignature
+=== RUN   TestWeComBotVerifySignature/valid_signature
+=== RUN   TestWeComBotVerifySignature/invalid_signature
+=== RUN   TestWeComBotVerifySignature/empty_token_skips_verification
+--- PASS: TestWeComBotVerifySignature (0.00s)
+    --- PASS: TestWeComBotVerifySignature/valid_signature (0.00s)
+    --- PASS: TestWeComBotVerifySignature/invalid_signature (0.00s)
+    --- PASS: TestWeComBotVerifySignature/empty_token_skips_verification (0.00s)
+=== RUN   TestWeComBotDecryptMessage
+=== RUN   TestWeComBotDecryptMessage/decrypt_without_AES_key
+=== RUN   TestWeComBotDecryptMessage/decrypt_with_AES_key
+=== RUN   TestWeComBotDecryptMessage/invalid_base64
+=== RUN   TestWeComBotDecryptMessage/invalid_AES_key
+--- PASS: TestWeComBotDecryptMessage (0.00s)
+    --- PASS: TestWeComBotDecryptMessage/decrypt_without_AES_key (0.00s)
+    --- PASS: TestWeComBotDecryptMessage/decrypt_with_AES_key (0.00s)
+    --- PASS: TestWeComBotDecryptMessage/invalid_base64 (0.00s)
+    --- PASS: TestWeComBotDecryptMessage/invalid_AES_key (0.00s)
+=== RUN   TestWeComBotPKCS7Unpad
+=== RUN   TestWeComBotPKCS7Unpad/empty_input
+=== RUN   TestWeComBotPKCS7Unpad/valid_padding_3_bytes
+=== RUN   TestWeComBotPKCS7Unpad/valid_padding_16_bytes_(full_block)
+=== RUN   TestWeComBotPKCS7Unpad/invalid_padding_larger_than_data
+=== RUN   TestWeComBotPKCS7Unpad/invalid_padding_zero
+--- PASS: TestWeComBotPKCS7Unpad (0.00s)
+    --- PASS: TestWeComBotPKCS7Unpad/empty_input (0.00s)
+    --- PASS: TestWeComBotPKCS7Unpad/valid_padding_3_bytes (0.00s)
+    --- PASS: TestWeComBotPKCS7Unpad/valid_padding_16_bytes_(full_block) (0.00s)
+    --- PASS: TestWeComBotPKCS7Unpad/invalid_padding_larger_than_data (0.00s)
+    --- PASS: TestWeComBotPKCS7Unpad/invalid_padding_zero (0.00s)
+=== RUN   TestWeComBotHandleVerification
+=== RUN   TestWeComBotHandleVerification/valid_verification_request
+=== RUN   TestWeComBotHandleVerification/missing_parameters
+=== RUN   TestWeComBotHandleVerification/invalid_signature
+2026/02/25 19:22:13 [2026-02-26T00:22:13Z] [WARN] wecom: Signature verification failed
+--- PASS: TestWeComBotHandleVerification (0.00s)
+    --- PASS: TestWeComBotHandleVerification/valid_verification_request (0.00s)
+    --- PASS: TestWeComBotHandleVerification/missing_parameters (0.00s)
+    --- PASS: TestWeComBotHandleVerification/invalid_signature (0.00s)
+=== RUN   TestWeComBotHandleMessageCallback
+=== RUN   TestWeComBotHandleMessageCallback/valid_direct_message_callback
+=== RUN   TestWeComBotHandleMessageCallback/valid_group_message_callback
+=== RUN   TestWeComBotHandleMessageCallback/missing_parameters
+=== RUN   TestWeComBotHandleMessageCallback/invalid_XML
+2026/02/25 19:22:13 [2026-02-26T00:22:13Z] [ERROR] wecom: Failed to parse XML {error=EOF}
+=== RUN   TestWeComBotHandleMessageCallback/invalid_signature
+2026/02/25 19:22:13 [2026-02-26T00:22:13Z] [WARN] wecom: Message signature verification failed
+--- PASS: TestWeComBotHandleMessageCallback (0.00s)
+    --- PASS: TestWeComBotHandleMessageCallback/valid_direct_message_callback (0.00s)
+    --- PASS: TestWeComBotHandleMessageCallback/valid_group_message_callback (0.00s)
+    --- PASS: TestWeComBotHandleMessageCallback/missing_parameters (0.00s)
+    --- PASS: TestWeComBotHandleMessageCallback/invalid_XML (0.00s)
+    --- PASS: TestWeComBotHandleMessageCallback/invalid_signature (0.00s)
+=== RUN   TestWeComBotProcessMessage
+=== RUN   TestWeComBotProcessMessage/process_direct_text_message
+=== RUN   TestWeComBotProcessMessage/process_group_text_message
+=== RUN   TestWeComBotProcessMessage/process_voice_message
+=== RUN   TestWeComBotProcessMessage/skip_unsupported_message_type
+--- PASS: TestWeComBotProcessMessage (0.00s)
+    --- PASS: TestWeComBotProcessMessage/process_direct_text_message (0.00s)
+    --- PASS: TestWeComBotProcessMessage/process_group_text_message (0.00s)
+    --- PASS: TestWeComBotProcessMessage/process_voice_message (0.00s)
+    --- PASS: TestWeComBotProcessMessage/skip_unsupported_message_type (0.00s)
+=== RUN   TestWeComBotHandleWebhook
+=== RUN   TestWeComBotHandleWebhook/GET_request_calls_verification
+=== RUN   TestWeComBotHandleWebhook/POST_request_calls_message_callback
+2026/02/25 19:22:13 [2026-02-26T00:22:13Z] [ERROR] wecom: Failed to parse decrypted message {error=invalid character 'e' in literal true (expecting 'r')}
+=== RUN   TestWeComBotHandleWebhook/unsupported_method
+--- PASS: TestWeComBotHandleWebhook (0.00s)
+    --- PASS: TestWeComBotHandleWebhook/GET_request_calls_verification (0.00s)
+    --- PASS: TestWeComBotHandleWebhook/POST_request_calls_message_callback (0.00s)
+    --- PASS: TestWeComBotHandleWebhook/unsupported_method (0.00s)
+=== RUN   TestWeComBotHandleHealth
+--- PASS: TestWeComBotHandleHealth (0.00s)
+=== RUN   TestWeComBotReplyMessage
+--- PASS: TestWeComBotReplyMessage (0.00s)
+=== RUN   TestWeComBotMessageStructure
+--- PASS: TestWeComBotMessageStructure (0.00s)
+PASS
+ok  	github.com/sipeed/picoclaw/pkg/channels	1.759s
+=== RUN   TestAgentModelConfig_UnmarshalString
+--- PASS: TestAgentModelConfig_UnmarshalString (0.00s)
+=== RUN   TestAgentModelConfig_UnmarshalObject
+--- PASS: TestAgentModelConfig_UnmarshalObject (0.00s)
+=== RUN   TestAgentModelConfig_MarshalString
+--- PASS: TestAgentModelConfig_MarshalString (0.00s)
+=== RUN   TestAgentModelConfig_MarshalObject
+--- PASS: TestAgentModelConfig_MarshalObject (0.00s)
+=== RUN   TestAgentConfig_FullParse
+--- PASS: TestAgentConfig_FullParse (0.00s)
+=== RUN   TestConfig_BackwardCompat_NoAgentsList
+--- PASS: TestConfig_BackwardCompat_NoAgentsList (0.00s)
+=== RUN   TestDefaultConfig_HeartbeatEnabled
+--- PASS: TestDefaultConfig_HeartbeatEnabled (0.00s)
+=== RUN   TestDefaultConfig_WorkspacePath
+--- PASS: TestDefaultConfig_WorkspacePath (0.00s)
+=== RUN   TestDefaultConfig_Model
+--- PASS: TestDefaultConfig_Model (0.00s)
+=== RUN   TestDefaultConfig_MaxTokens
+--- PASS: TestDefaultConfig_MaxTokens (0.00s)
+=== RUN   TestDefaultConfig_MaxToolIterations
+--- PASS: TestDefaultConfig_MaxToolIterations (0.00s)
+=== RUN   TestDefaultConfig_Temperature
+--- PASS: TestDefaultConfig_Temperature (0.00s)
+=== RUN   TestDefaultConfig_Gateway
+--- PASS: TestDefaultConfig_Gateway (0.00s)
+=== RUN   TestDefaultConfig_Providers
+--- PASS: TestDefaultConfig_Providers (0.00s)
+=== RUN   TestDefaultConfig_Channels
+--- PASS: TestDefaultConfig_Channels (0.00s)
+=== RUN   TestDefaultConfig_WebTools
+--- PASS: TestDefaultConfig_WebTools (0.00s)
+=== RUN   TestSaveConfig_FilePermissions
+--- PASS: TestSaveConfig_FilePermissions (0.00s)
+=== RUN   TestConfig_Complete
+--- PASS: TestConfig_Complete (0.00s)
+=== RUN   TestDefaultConfig_OpenAIWebSearchEnabled
+--- PASS: TestDefaultConfig_OpenAIWebSearchEnabled (0.00s)
+=== RUN   TestLoadConfig_OpenAIWebSearchDefaultsTrueWhenUnset
+--- PASS: TestLoadConfig_OpenAIWebSearchDefaultsTrueWhenUnset (0.00s)
+=== RUN   TestLoadConfig_OpenAIWebSearchCanBeDisabled
+--- PASS: TestLoadConfig_OpenAIWebSearchCanBeDisabled (0.00s)
+=== RUN   TestLoadConfig_WebToolsProxy
+--- PASS: TestLoadConfig_WebToolsProxy (0.00s)
+=== RUN   TestResolveLoopHooks_RequestedProfile
+--- PASS: TestResolveLoopHooks_RequestedProfile (0.00s)
+=== RUN   TestResolveLoopHooks_DefaultProfile
+--- PASS: TestResolveLoopHooks_DefaultProfile (0.00s)
+=== RUN   TestResolveLoopHooks_FallbackToLoopHooks
+--- PASS: TestResolveLoopHooks_FallbackToLoopHooks (0.00s)
+=== RUN   TestResolveLoopHooks_NonExistentProfile
+--- PASS: TestResolveLoopHooks_NonExistentProfile (0.00s)
+=== RUN   TestResolveLoopHooks_NoProfilesNoLoopHooks
+--- PASS: TestResolveLoopHooks_NoProfilesNoLoopHooks (0.00s)
+=== RUN   TestLoopProfiles_JSONParsing
+--- PASS: TestLoopProfiles_JSONParsing (0.00s)
+=== RUN   TestAgentConfig_LoopProfile
+--- PASS: TestAgentConfig_LoopProfile (0.00s)
+=== RUN   TestLoopProfiles_BackwardCompatibility
+--- PASS: TestLoopProfiles_BackwardCompatibility (0.00s)
+=== RUN   TestLoopProfiles_MixedConfig
+--- PASS: TestLoopProfiles_MixedConfig (0.00s)
+=== RUN   TestConvertProvidersToModelList_OpenAI
+--- PASS: TestConvertProvidersToModelList_OpenAI (0.00s)
+=== RUN   TestConvertProvidersToModelList_Anthropic
+--- PASS: TestConvertProvidersToModelList_Anthropic (0.00s)
+=== RUN   TestConvertProvidersToModelList_Multiple
+--- PASS: TestConvertProvidersToModelList_Multiple (0.00s)
+=== RUN   TestConvertProvidersToModelList_Empty
+--- PASS: TestConvertProvidersToModelList_Empty (0.00s)
+=== RUN   TestConvertProvidersToModelList_Nil
+--- PASS: TestConvertProvidersToModelList_Nil (0.00s)
+=== RUN   TestConvertProvidersToModelList_AllProviders
+--- PASS: TestConvertProvidersToModelList_AllProviders (0.00s)
+=== RUN   TestConvertProvidersToModelList_Proxy
+--- PASS: TestConvertProvidersToModelList_Proxy (0.00s)
+=== RUN   TestConvertProvidersToModelList_AuthMethod
+--- PASS: TestConvertProvidersToModelList_AuthMethod (0.00s)
+=== RUN   TestConvertProvidersToModelList_PreservesUserModel_DeepSeek
+--- PASS: TestConvertProvidersToModelList_PreservesUserModel_DeepSeek (0.00s)
+=== RUN   TestConvertProvidersToModelList_PreservesUserModel_OpenAI
+--- PASS: TestConvertProvidersToModelList_PreservesUserModel_OpenAI (0.00s)
+=== RUN   TestConvertProvidersToModelList_PreservesUserModel_Anthropic
+--- PASS: TestConvertProvidersToModelList_PreservesUserModel_Anthropic (0.00s)
+=== RUN   TestConvertProvidersToModelList_PreservesUserModel_Qwen
+--- PASS: TestConvertProvidersToModelList_PreservesUserModel_Qwen (0.00s)
+=== RUN   TestConvertProvidersToModelList_UsesDefaultWhenNoUserModel
+--- PASS: TestConvertProvidersToModelList_UsesDefaultWhenNoUserModel (0.00s)
+=== RUN   TestConvertProvidersToModelList_MultipleProviders_PreservesUserModel
+--- PASS: TestConvertProvidersToModelList_MultipleProviders_PreservesUserModel (0.00s)
+=== RUN   TestConvertProvidersToModelList_ProviderNameAliases
+=== RUN   TestConvertProvidersToModelList_ProviderNameAliases/gpt
+=== RUN   TestConvertProvidersToModelList_ProviderNameAliases/claude
+=== RUN   TestConvertProvidersToModelList_ProviderNameAliases/doubao
+=== RUN   TestConvertProvidersToModelList_ProviderNameAliases/tongyi
+=== RUN   TestConvertProvidersToModelList_ProviderNameAliases/kimi
+--- PASS: TestConvertProvidersToModelList_ProviderNameAliases (0.00s)
+    --- PASS: TestConvertProvidersToModelList_ProviderNameAliases/gpt (0.00s)
+    --- PASS: TestConvertProvidersToModelList_ProviderNameAliases/claude (0.00s)
+    --- PASS: TestConvertProvidersToModelList_ProviderNameAliases/doubao (0.00s)
+    --- PASS: TestConvertProvidersToModelList_ProviderNameAliases/tongyi (0.00s)
+    --- PASS: TestConvertProvidersToModelList_ProviderNameAliases/kimi (0.00s)
+=== RUN   TestConvertProvidersToModelList_NoProviderField_SingleProvider
+--- PASS: TestConvertProvidersToModelList_NoProviderField_SingleProvider (0.00s)
+=== RUN   TestConvertProvidersToModelList_NoProviderField_MultipleProviders
+--- PASS: TestConvertProvidersToModelList_NoProviderField_MultipleProviders (0.00s)
+=== RUN   TestConvertProvidersToModelList_NoProviderField_NoModel
+--- PASS: TestConvertProvidersToModelList_NoProviderField_NoModel (0.00s)
+=== RUN   TestBuildModelWithProtocol_NoPrefix
+--- PASS: TestBuildModelWithProtocol_NoPrefix (0.00s)
+=== RUN   TestBuildModelWithProtocol_AlreadyHasPrefix
+--- PASS: TestBuildModelWithProtocol_AlreadyHasPrefix (0.00s)
+=== RUN   TestBuildModelWithProtocol_DifferentPrefix
+--- PASS: TestBuildModelWithProtocol_DifferentPrefix (0.00s)
+=== RUN   TestConvertProvidersToModelList_LegacyModelWithProtocolPrefix
+--- PASS: TestConvertProvidersToModelList_LegacyModelWithProtocolPrefix (0.00s)
+=== RUN   TestGetModelConfig_Found
+--- PASS: TestGetModelConfig_Found (0.00s)
+=== RUN   TestGetModelConfig_NotFound
+--- PASS: TestGetModelConfig_NotFound (0.00s)
+=== RUN   TestGetModelConfig_EmptyList
+--- PASS: TestGetModelConfig_EmptyList (0.00s)
+=== RUN   TestGetModelConfig_RoundRobin
+--- PASS: TestGetModelConfig_RoundRobin (0.00s)
+=== RUN   TestGetModelConfig_Concurrent
+--- PASS: TestGetModelConfig_Concurrent (0.00s)
+=== RUN   TestAgentDefaults_GetModelName_BackwardCompat
+=== RUN   TestAgentDefaults_GetModelName_BackwardCompat/new_model_name_field_only
+=== RUN   TestAgentDefaults_GetModelName_BackwardCompat/old_model_field_only
+=== RUN   TestAgentDefaults_GetModelName_BackwardCompat/both_fields_-_model_name_takes_precedence
+--- PASS: TestAgentDefaults_GetModelName_BackwardCompat (0.00s)
+    --- PASS: TestAgentDefaults_GetModelName_BackwardCompat/new_model_name_field_only (0.00s)
+    --- PASS: TestAgentDefaults_GetModelName_BackwardCompat/old_model_field_only (0.00s)
+    --- PASS: TestAgentDefaults_GetModelName_BackwardCompat/both_fields_-_model_name_takes_precedence (0.00s)
+=== RUN   TestAgentDefaults_JSON_BackwardCompat
+=== RUN   TestAgentDefaults_JSON_BackwardCompat/new_model_name_field
+=== RUN   TestAgentDefaults_JSON_BackwardCompat/old_model_field
+=== RUN   TestAgentDefaults_JSON_BackwardCompat/both_fields_-_model_name_wins
+--- PASS: TestAgentDefaults_JSON_BackwardCompat (0.00s)
+    --- PASS: TestAgentDefaults_JSON_BackwardCompat/new_model_name_field (0.00s)
+    --- PASS: TestAgentDefaults_JSON_BackwardCompat/old_model_field (0.00s)
+    --- PASS: TestAgentDefaults_JSON_BackwardCompat/both_fields_-_model_name_wins (0.00s)
+=== RUN   TestFullConfig_JSON_BackwardCompat
+=== RUN   TestFullConfig_JSON_BackwardCompat/old_format_(model)
+=== RUN   TestFullConfig_JSON_BackwardCompat/new_format_(model_name)
+--- PASS: TestFullConfig_JSON_BackwardCompat (0.00s)
+    --- PASS: TestFullConfig_JSON_BackwardCompat/old_format_(model) (0.00s)
+    --- PASS: TestFullConfig_JSON_BackwardCompat/new_format_(model_name) (0.00s)
+=== RUN   TestModelConfig_Validate
+=== RUN   TestModelConfig_Validate/valid_config
+=== RUN   TestModelConfig_Validate/missing_model_name
+=== RUN   TestModelConfig_Validate/missing_model
+=== RUN   TestModelConfig_Validate/empty_config
+--- PASS: TestModelConfig_Validate (0.00s)
+    --- PASS: TestModelConfig_Validate/valid_config (0.00s)
+    --- PASS: TestModelConfig_Validate/missing_model_name (0.00s)
+    --- PASS: TestModelConfig_Validate/missing_model (0.00s)
+    --- PASS: TestModelConfig_Validate/empty_config (0.00s)
+=== RUN   TestConfig_ValidateModelList
+=== RUN   TestConfig_ValidateModelList/valid_list
+=== RUN   TestConfig_ValidateModelList/invalid_entry
+=== RUN   TestConfig_ValidateModelList/empty_list
+=== RUN   TestConfig_ValidateModelList/duplicate_model_name_for_load_balancing
+=== RUN   TestConfig_ValidateModelList/duplicate_model_name_non-adjacent_for_load_balancing
+--- PASS: TestConfig_ValidateModelList (0.00s)
+    --- PASS: TestConfig_ValidateModelList/valid_list (0.00s)
+    --- PASS: TestConfig_ValidateModelList/invalid_entry (0.00s)
+    --- PASS: TestConfig_ValidateModelList/empty_list (0.00s)
+    --- PASS: TestConfig_ValidateModelList/duplicate_model_name_for_load_balancing (0.00s)
+    --- PASS: TestConfig_ValidateModelList/duplicate_model_name_non-adjacent_for_load_balancing (0.00s)
+PASS
+ok  	github.com/sipeed/picoclaw/pkg/config	(cached)
+?   	github.com/sipeed/picoclaw/pkg/constants	[no test files]
+=== RUN   TestSaveStore_FilePermissions
+--- PASS: TestSaveStore_FilePermissions (0.00s)
+PASS
+ok  	github.com/sipeed/picoclaw/pkg/cron	1.660s
+?   	github.com/sipeed/picoclaw/pkg/devices	[no test files]
+?   	github.com/sipeed/picoclaw/pkg/devices/events	[no test files]
+?   	github.com/sipeed/picoclaw/pkg/devices/sources	[no test files]
+?   	github.com/sipeed/picoclaw/pkg/health	[no test files]
+=== RUN   TestExecuteHeartbeat_Async
+2026/02/25 19:22:13 [2026-02-26T00:22:13Z] [INFO] heartbeat: Async heartbeat task started {message=Background task started}
+--- PASS: TestExecuteHeartbeat_Async (0.00s)
+=== RUN   TestExecuteHeartbeat_Error
+--- PASS: TestExecuteHeartbeat_Error (0.00s)
+=== RUN   TestExecuteHeartbeat_Silent
+--- PASS: TestExecuteHeartbeat_Silent (0.00s)
+=== RUN   TestHeartbeatService_StartStop
+2026/02/25 19:22:13 [2026-02-26T00:22:13Z] [INFO] heartbeat: Heartbeat service started {interval_minutes=5}
+2026/02/25 19:22:13 [2026-02-26T00:22:13Z] [INFO] heartbeat: Stopping heartbeat service
+--- PASS: TestHeartbeatService_StartStop (0.10s)
+=== RUN   TestHeartbeatService_Disabled
+2026/02/25 19:22:13 [2026-02-26T00:22:13Z] [INFO] heartbeat: Heartbeat service disabled
+--- PASS: TestHeartbeatService_Disabled (0.00s)
+=== RUN   TestExecuteHeartbeat_NilResult
+--- PASS: TestExecuteHeartbeat_NilResult (0.00s)
+=== RUN   TestLogPath
+--- PASS: TestLogPath (0.00s)
+=== RUN   TestHeartbeatFilePath
+--- PASS: TestHeartbeatFilePath (0.00s)
+PASS
+ok  	github.com/sipeed/picoclaw/pkg/heartbeat	1.809s
+=== RUN   TestLogLevelFiltering
+=== RUN   TestLogLevelFiltering/DEBUG_message
+=== RUN   TestLogLevelFiltering/INFO_message
+=== RUN   TestLogLevelFiltering/WARN_message
+2026/02/25 19:22:13 [2026-02-26T00:22:13Z] [WARN] WARN message
+=== RUN   TestLogLevelFiltering/ERROR_message
+2026/02/25 19:22:13 [2026-02-26T00:22:13Z] [ERROR] ERROR message
+=== RUN   TestLogLevelFiltering/FATAL_message
+    logger_test.go:38: FATAL test skipped to prevent program exit
+--- PASS: TestLogLevelFiltering (0.00s)
+    --- PASS: TestLogLevelFiltering/DEBUG_message (0.00s)
+    --- PASS: TestLogLevelFiltering/INFO_message (0.00s)
+    --- PASS: TestLogLevelFiltering/WARN_message (0.00s)
+    --- PASS: TestLogLevelFiltering/ERROR_message (0.00s)
+    --- PASS: TestLogLevelFiltering/FATAL_message (0.00s)
+=== RUN   TestLoggerWithComponent
+=== RUN   TestLoggerWithComponent/Simple_message
+2026/02/25 19:22:13 [2026-02-26T00:22:13Z] [INFO] test: Hello, world!
+=== RUN   TestLoggerWithComponent/Message_with_component
+2026/02/25 19:22:13 [2026-02-26T00:22:13Z] [INFO] discord: Discord message
+=== RUN   TestLoggerWithComponent/Message_with_fields
+2026/02/25 19:22:13 [2026-02-26T00:22:13Z] [INFO] Telegram message {user_id=12345, count=42}
+--- PASS: TestLoggerWithComponent (0.00s)
+    --- PASS: TestLoggerWithComponent/Simple_message (0.00s)
+    --- PASS: TestLoggerWithComponent/Message_with_component (0.00s)
+    --- PASS: TestLoggerWithComponent/Message_with_fields (0.00s)
+=== RUN   TestLogLevels
+=== RUN   TestLogLevels/DEBUG_level
+=== RUN   TestLogLevels/INFO_level
+=== RUN   TestLogLevels/WARN_level
+=== RUN   TestLogLevels/ERROR_level
+=== RUN   TestLogLevels/FATAL_level
+--- PASS: TestLogLevels (0.00s)
+    --- PASS: TestLogLevels/DEBUG_level (0.00s)
+    --- PASS: TestLogLevels/INFO_level (0.00s)
+    --- PASS: TestLogLevels/WARN_level (0.00s)
+    --- PASS: TestLogLevels/ERROR_level (0.00s)
+    --- PASS: TestLogLevels/FATAL_level (0.00s)
+=== RUN   TestSetGetLevel
+--- PASS: TestSetGetLevel (0.00s)
+=== RUN   TestLoggerHelperFunctions
+2026/02/25 19:22:13 [2026-02-26T00:22:13Z] [INFO] This should log
+2026/02/25 19:22:13 [2026-02-26T00:22:13Z] [WARN] This should log
+2026/02/25 19:22:13 [2026-02-26T00:22:13Z] [ERROR] This should log
+2026/02/25 19:22:13 [2026-02-26T00:22:13Z] [INFO] test: Component message
+2026/02/25 19:22:13 [2026-02-26T00:22:13Z] [INFO] Fields message {key=value}
+2026/02/25 19:22:13 [2026-02-26T00:22:13Z] [WARN] test: Warning with component
+2026/02/25 19:22:13 [2026-02-26T00:22:13Z] [ERROR] Error with fields {error=test}
+2026/02/25 19:22:13 [2026-02-26T00:22:13Z] [DEBUG] test: Debug with component
+2026/02/25 19:22:13 [2026-02-26T00:22:13Z] [WARN] Warning with fields {key=value}
+--- PASS: TestLoggerHelperFunctions (0.00s)
+PASS
+ok  	github.com/sipeed/picoclaw/pkg/logger	1.681s
+=== RUN   TestCamelToSnake
+=== RUN   TestCamelToSnake/simple
+=== RUN   TestCamelToSnake/two_words
+=== RUN   TestCamelToSnake/three_words
+=== RUN   TestCamelToSnake/already_snake
+=== RUN   TestCamelToSnake/single_word
+=== RUN   TestCamelToSnake/all_lower
+=== RUN   TestCamelToSnake/consecutive_caps
+=== RUN   TestCamelToSnake/starts_upper
+=== RUN   TestCamelToSnake/bridge_url
+=== RUN   TestCamelToSnake/client_id
+=== RUN   TestCamelToSnake/app_secret
+=== RUN   TestCamelToSnake/verification_token
+=== RUN   TestCamelToSnake/allow_from
+--- PASS: TestCamelToSnake (0.00s)
+    --- PASS: TestCamelToSnake/simple (0.00s)
+    --- PASS: TestCamelToSnake/two_words (0.00s)
+    --- PASS: TestCamelToSnake/three_words (0.00s)
+    --- PASS: TestCamelToSnake/already_snake (0.00s)
+    --- PASS: TestCamelToSnake/single_word (0.00s)
+    --- PASS: TestCamelToSnake/all_lower (0.00s)
+    --- PASS: TestCamelToSnake/consecutive_caps (0.00s)
+    --- PASS: TestCamelToSnake/starts_upper (0.00s)
+    --- PASS: TestCamelToSnake/bridge_url (0.00s)
+    --- PASS: TestCamelToSnake/client_id (0.00s)
+    --- PASS: TestCamelToSnake/app_secret (0.00s)
+    --- PASS: TestCamelToSnake/verification_token (0.00s)
+    --- PASS: TestCamelToSnake/allow_from (0.00s)
+=== RUN   TestConvertKeysToSnake
+--- PASS: TestConvertKeysToSnake (0.00s)
+=== RUN   TestLoadOpenClawConfig
+--- PASS: TestLoadOpenClawConfig (0.00s)
+=== RUN   TestConvertConfig
+=== RUN   TestConvertConfig/providers_mapping
+=== RUN   TestConvertConfig/unsupported_provider_warning
+=== RUN   TestConvertConfig/channels_mapping
+=== RUN   TestConvertConfig/unsupported_channel_warning
+=== RUN   TestConvertConfig/agent_defaults
+=== RUN   TestConvertConfig/empty_config
+--- PASS: TestConvertConfig (0.00s)
+    --- PASS: TestConvertConfig/providers_mapping (0.00s)
+    --- PASS: TestConvertConfig/unsupported_provider_warning (0.00s)
+    --- PASS: TestConvertConfig/channels_mapping (0.00s)
+    --- PASS: TestConvertConfig/unsupported_channel_warning (0.00s)
+    --- PASS: TestConvertConfig/agent_defaults (0.00s)
+    --- PASS: TestConvertConfig/empty_config (0.00s)
+=== RUN   TestSupportedProvidersCompatibility
+--- PASS: TestSupportedProvidersCompatibility (0.00s)
+=== RUN   TestMergeConfig
+=== RUN   TestMergeConfig/fills_empty_fields
+=== RUN   TestMergeConfig/preserves_existing_non-empty_fields
+=== RUN   TestMergeConfig/merges_enabled_channels
+=== RUN   TestMergeConfig/preserves_existing_enabled_channels
+--- PASS: TestMergeConfig (0.00s)
+    --- PASS: TestMergeConfig/fills_empty_fields (0.00s)
+    --- PASS: TestMergeConfig/preserves_existing_non-empty_fields (0.00s)
+    --- PASS: TestMergeConfig/merges_enabled_channels (0.00s)
+    --- PASS: TestMergeConfig/preserves_existing_enabled_channels (0.00s)
+=== RUN   TestPlanWorkspaceMigration
+=== RUN   TestPlanWorkspaceMigration/copies_available_files
+=== RUN   TestPlanWorkspaceMigration/plans_backup_for_existing_destination_files
+=== RUN   TestPlanWorkspaceMigration/force_skips_backup
+=== RUN   TestPlanWorkspaceMigration/handles_memory_directory
+=== RUN   TestPlanWorkspaceMigration/handles_skills_directory
+--- PASS: TestPlanWorkspaceMigration (0.01s)
+    --- PASS: TestPlanWorkspaceMigration/copies_available_files (0.00s)
+    --- PASS: TestPlanWorkspaceMigration/plans_backup_for_existing_destination_files (0.00s)
+    --- PASS: TestPlanWorkspaceMigration/force_skips_backup (0.00s)
+    --- PASS: TestPlanWorkspaceMigration/handles_memory_directory (0.00s)
+    --- PASS: TestPlanWorkspaceMigration/handles_skills_directory (0.00s)
+=== RUN   TestFindOpenClawConfig
+=== RUN   TestFindOpenClawConfig/finds_openclaw.json
+=== RUN   TestFindOpenClawConfig/falls_back_to_config.json
+=== RUN   TestFindOpenClawConfig/prefers_openclaw.json_over_config.json
+=== RUN   TestFindOpenClawConfig/error_when_no_config_found
+--- PASS: TestFindOpenClawConfig (0.00s)
+    --- PASS: TestFindOpenClawConfig/finds_openclaw.json (0.00s)
+    --- PASS: TestFindOpenClawConfig/falls_back_to_config.json (0.00s)
+    --- PASS: TestFindOpenClawConfig/prefers_openclaw.json_over_config.json (0.00s)
+    --- PASS: TestFindOpenClawConfig/error_when_no_config_found (0.00s)
+=== RUN   TestRewriteWorkspacePath
+=== RUN   TestRewriteWorkspacePath/default_path
+=== RUN   TestRewriteWorkspacePath/custom_path
+=== RUN   TestRewriteWorkspacePath/empty
+--- PASS: TestRewriteWorkspacePath (0.00s)
+    --- PASS: TestRewriteWorkspacePath/default_path (0.00s)
+    --- PASS: TestRewriteWorkspacePath/custom_path (0.00s)
+    --- PASS: TestRewriteWorkspacePath/empty (0.00s)
+=== RUN   TestRunDryRun
+Migrating from OpenClaw to PicoClaw
+  Source:      /var/folders/pb/t3rv92c136x3fdpj26f5m4_00000gn/T/TestRunDryRun1159222534/001
+  Destination: /var/folders/pb/t3rv92c136x3fdpj26f5m4_00000gn/T/TestRunDryRun1159222534/002
+
+Planned actions:
+  [config]  /var/folders/pb/t3rv92c136x3fdpj26f5m4_00000gn/T/TestRunDryRun1159222534/001/openclaw.json -> /var/folders/pb/t3rv92c136x3fdpj26f5m4_00000gn/T/TestRunDryRun1159222534/002/config.json
+  [copy]    AGENTS.md
+  [copy]    SOUL.md
+  [skip]    USER.md (source file not found)
+  [skip]    TOOLS.md (source file not found)
+  [skip]    HEARTBEAT.md (source file not found)
+
+2 files to copy, 1 configs to convert, 0 backups needed, 3 skipped
+--- PASS: TestRunDryRun (0.00s)
+=== RUN   TestRunFullMigration
+Migrating from OpenClaw to PicoClaw
+  Source:      /var/folders/pb/t3rv92c136x3fdpj26f5m4_00000gn/T/TestRunFullMigration1844552210/001
+  Destination: /var/folders/pb/t3rv92c136x3fdpj26f5m4_00000gn/T/TestRunFullMigration1844552210/002
+
+  ✓ Converted config: /var/folders/pb/t3rv92c136x3fdpj26f5m4_00000gn/T/TestRunFullMigration1844552210/002/config.json
+  ✓ Copied workspace/AGENTS.md
+  ✓ Copied workspace/SOUL.md
+  ✓ Copied workspace/USER.md
+  ✓ Copied workspace/memory/MEMORY.md
+--- PASS: TestRunFullMigration (0.00s)
+=== RUN   TestRunOpenClawNotFound
+--- PASS: TestRunOpenClawNotFound (0.00s)
+=== RUN   TestRunMutuallyExclusiveFlags
+--- PASS: TestRunMutuallyExclusiveFlags (0.00s)
+=== RUN   TestBackupFile
+--- PASS: TestBackupFile (0.00s)
+=== RUN   TestCopyFile
+--- PASS: TestCopyFile (0.00s)
+=== RUN   TestRunConfigOnly
+Migrating from OpenClaw to PicoClaw
+  Source:      /var/folders/pb/t3rv92c136x3fdpj26f5m4_00000gn/T/TestRunConfigOnly2877964902/001
+  Destination: /var/folders/pb/t3rv92c136x3fdpj26f5m4_00000gn/T/TestRunConfigOnly2877964902/002
+
+  ✓ Converted config: /var/folders/pb/t3rv92c136x3fdpj26f5m4_00000gn/T/TestRunConfigOnly2877964902/002/config.json
+--- PASS: TestRunConfigOnly (0.00s)
+=== RUN   TestRunWorkspaceOnly
+Migrating from OpenClaw to PicoClaw
+  Source:      /var/folders/pb/t3rv92c136x3fdpj26f5m4_00000gn/T/TestRunWorkspaceOnly3715807578/001
+  Destination: /var/folders/pb/t3rv92c136x3fdpj26f5m4_00000gn/T/TestRunWorkspaceOnly3715807578/002
+
+  ✓ Copied workspace/SOUL.md
+--- PASS: TestRunWorkspaceOnly (0.00s)
+PASS
+ok  	github.com/sipeed/picoclaw/pkg/migrate	1.664s
+=== RUN   TestBuildRequestUsesFunctionFieldsWhenToolCallNameMissing
+--- PASS: TestBuildRequestUsesFunctionFieldsWhenToolCallNameMissing (0.00s)
+=== RUN   TestResolveToolResponseNameInfersNameFromGeneratedCallID
+--- PASS: TestResolveToolResponseNameInfersNameFromGeneratedCallID (0.00s)
+=== RUN   TestNewClaudeCliProvider
+--- PASS: TestNewClaudeCliProvider (0.00s)
+=== RUN   TestNewClaudeCliProvider_EmptyWorkspace
+--- PASS: TestNewClaudeCliProvider_EmptyWorkspace (0.00s)
+=== RUN   TestClaudeCliProvider_GetDefaultModel
+--- PASS: TestClaudeCliProvider_GetDefaultModel (0.00s)
+=== RUN   TestChat_Success
+--- PASS: TestChat_Success (1.56s)
+=== RUN   TestChat_IsErrorResponse
+--- PASS: TestChat_IsErrorResponse (0.24s)
+=== RUN   TestChat_WithToolCallsInResponse
+--- PASS: TestChat_WithToolCallsInResponse (0.14s)
+=== RUN   TestChat_StderrError
+--- PASS: TestChat_StderrError (0.13s)
+=== RUN   TestChat_NonZeroExitNoStderr
+--- PASS: TestChat_NonZeroExitNoStderr (0.10s)
+=== RUN   TestChat_CommandNotFound
+--- PASS: TestChat_CommandNotFound (0.00s)
+=== RUN   TestChat_InvalidResponseJSON
+--- PASS: TestChat_InvalidResponseJSON (0.13s)
+=== RUN   TestChat_ContextCancellation
+--- PASS: TestChat_ContextCancellation (0.10s)
+=== RUN   TestChat_PassesSystemPromptFlag
+--- PASS: TestChat_PassesSystemPromptFlag (0.14s)
+=== RUN   TestChat_PassesModelFlag
+--- PASS: TestChat_PassesModelFlag (0.13s)
+=== RUN   TestChat_SkipsModelFlagForClaudeCode
+--- PASS: TestChat_SkipsModelFlagForClaudeCode (0.13s)
+=== RUN   TestChat_SkipsModelFlagForEmptyModel
+--- PASS: TestChat_SkipsModelFlagForEmptyModel (0.22s)
+=== RUN   TestChat_EmptyWorkspaceDoesNotSetDir
+--- PASS: TestChat_EmptyWorkspaceDoesNotSetDir (0.20s)
+=== RUN   TestCreateProvider_ClaudeCli
+--- PASS: TestCreateProvider_ClaudeCli (0.00s)
+=== RUN   TestCreateProvider_ClaudeCode
+--- PASS: TestCreateProvider_ClaudeCode (0.00s)
+=== RUN   TestCreateProvider_ClaudeCodec
+--- PASS: TestCreateProvider_ClaudeCodec (0.00s)
+=== RUN   TestCreateProvider_ClaudeCliDefaultWorkspace
+--- PASS: TestCreateProvider_ClaudeCliDefaultWorkspace (0.00s)
+=== RUN   TestMessagesToPrompt_SingleUser
+--- PASS: TestMessagesToPrompt_SingleUser (0.00s)
+=== RUN   TestMessagesToPrompt_Conversation
+--- PASS: TestMessagesToPrompt_Conversation (0.00s)
+=== RUN   TestMessagesToPrompt_WithSystemMessage
+--- PASS: TestMessagesToPrompt_WithSystemMessage (0.00s)
+=== RUN   TestMessagesToPrompt_WithToolResults
+--- PASS: TestMessagesToPrompt_WithToolResults (0.00s)
+=== RUN   TestMessagesToPrompt_EmptyMessages
+--- PASS: TestMessagesToPrompt_EmptyMessages (0.00s)
+=== RUN   TestMessagesToPrompt_OnlySystemMessages
+--- PASS: TestMessagesToPrompt_OnlySystemMessages (0.00s)
+=== RUN   TestBuildSystemPrompt_NoSystemNoTools
+--- PASS: TestBuildSystemPrompt_NoSystemNoTools (0.00s)
+=== RUN   TestBuildSystemPrompt_SystemOnly
+--- PASS: TestBuildSystemPrompt_SystemOnly (0.00s)
+=== RUN   TestBuildSystemPrompt_MultipleSystemMessages
+--- PASS: TestBuildSystemPrompt_MultipleSystemMessages (0.00s)
+=== RUN   TestBuildSystemPrompt_WithTools
+--- PASS: TestBuildSystemPrompt_WithTools (0.00s)
+=== RUN   TestBuildSystemPrompt_ToolsOnlyNoSystem
+--- PASS: TestBuildSystemPrompt_ToolsOnlyNoSystem (0.00s)
+=== RUN   TestBuildToolsPrompt_SkipsNonFunction
+--- PASS: TestBuildToolsPrompt_SkipsNonFunction (0.00s)
+=== RUN   TestBuildToolsPrompt_NoDescription
+--- PASS: TestBuildToolsPrompt_NoDescription (0.00s)
+=== RUN   TestBuildToolsPrompt_NoParameters
+--- PASS: TestBuildToolsPrompt_NoParameters (0.00s)
+=== RUN   TestParseClaudeCliResponse_TextOnly
+--- PASS: TestParseClaudeCliResponse_TextOnly (0.00s)
+=== RUN   TestParseClaudeCliResponse_EmptyResult
+--- PASS: TestParseClaudeCliResponse_EmptyResult (0.00s)
+=== RUN   TestParseClaudeCliResponse_IsError
+--- PASS: TestParseClaudeCliResponse_IsError (0.00s)
+=== RUN   TestParseClaudeCliResponse_NoUsage
+--- PASS: TestParseClaudeCliResponse_NoUsage (0.00s)
+=== RUN   TestParseClaudeCliResponse_InvalidJSON
+--- PASS: TestParseClaudeCliResponse_InvalidJSON (0.00s)
+=== RUN   TestParseClaudeCliResponse_WithToolCalls
+--- PASS: TestParseClaudeCliResponse_WithToolCalls (0.00s)
+=== RUN   TestParseClaudeCliResponse_WhitespaceResult
+--- PASS: TestParseClaudeCliResponse_WhitespaceResult (0.00s)
+=== RUN   TestExtractToolCalls_NoToolCalls
+--- PASS: TestExtractToolCalls_NoToolCalls (0.00s)
+=== RUN   TestExtractToolCalls_WithToolCalls
+--- PASS: TestExtractToolCalls_WithToolCalls (0.00s)
+=== RUN   TestExtractToolCalls_InvalidJSON
+--- PASS: TestExtractToolCalls_InvalidJSON (0.00s)
+=== RUN   TestExtractToolCalls_MultipleToolCalls
+--- PASS: TestExtractToolCalls_MultipleToolCalls (0.00s)
+=== RUN   TestExtractToolCalls_UnmatchedBrace
+--- PASS: TestExtractToolCalls_UnmatchedBrace (0.00s)
+=== RUN   TestExtractToolCalls_ToolCallArgumentsParsing
+--- PASS: TestExtractToolCalls_ToolCallArgumentsParsing (0.00s)
+=== RUN   TestStripToolCallsJSON
+--- PASS: TestStripToolCallsJSON (0.00s)
+=== RUN   TestStripToolCallsJSON_NoToolCalls
+--- PASS: TestStripToolCallsJSON_NoToolCalls (0.00s)
+=== RUN   TestStripToolCallsJSON_OnlyToolCalls
+--- PASS: TestStripToolCallsJSON_OnlyToolCalls (0.00s)
+=== RUN   TestFindMatchingBrace
+--- PASS: TestFindMatchingBrace (0.00s)
+=== RUN   TestClaudeProvider_ChatRoundTrip
+--- PASS: TestClaudeProvider_ChatRoundTrip (0.00s)
+=== RUN   TestClaudeProvider_GetDefaultModel
+--- PASS: TestClaudeProvider_GetDefaultModel (0.00s)
+=== RUN   TestReadCodexCliCredentials_Valid
+--- PASS: TestReadCodexCliCredentials_Valid (0.00s)
+=== RUN   TestReadCodexCliCredentials_MissingFile
+--- PASS: TestReadCodexCliCredentials_MissingFile (0.00s)
+=== RUN   TestReadCodexCliCredentials_EmptyToken
+--- PASS: TestReadCodexCliCredentials_EmptyToken (0.00s)
+=== RUN   TestReadCodexCliCredentials_InvalidJSON
+--- PASS: TestReadCodexCliCredentials_InvalidJSON (0.00s)
+=== RUN   TestReadCodexCliCredentials_NoAccountID
+--- PASS: TestReadCodexCliCredentials_NoAccountID (0.00s)
+=== RUN   TestReadCodexCliCredentials_CodexHomeEnv
+--- PASS: TestReadCodexCliCredentials_CodexHomeEnv (0.00s)
+=== RUN   TestCreateCodexCliTokenSource_Valid
+--- PASS: TestCreateCodexCliTokenSource_Valid (0.00s)
+=== RUN   TestCreateCodexCliTokenSource_Expired
+--- PASS: TestCreateCodexCliTokenSource_Expired (0.00s)
+=== RUN   TestParseJSONLEvents_AgentMessage
+--- PASS: TestParseJSONLEvents_AgentMessage (0.00s)
+=== RUN   TestParseJSONLEvents_ToolCallExtraction
+--- PASS: TestParseJSONLEvents_ToolCallExtraction (0.00s)
+=== RUN   TestParseJSONLEvents_MultipleToolCalls
+--- PASS: TestParseJSONLEvents_MultipleToolCalls (0.00s)
+=== RUN   TestParseJSONLEvents_MultipleMessages
+--- PASS: TestParseJSONLEvents_MultipleMessages (0.00s)
+=== RUN   TestParseJSONLEvents_ErrorEvent
+--- PASS: TestParseJSONLEvents_ErrorEvent (0.00s)
+=== RUN   TestParseJSONLEvents_TurnFailed
+--- PASS: TestParseJSONLEvents_TurnFailed (0.00s)
+=== RUN   TestParseJSONLEvents_ErrorWithContent
+--- PASS: TestParseJSONLEvents_ErrorWithContent (0.00s)
+=== RUN   TestParseJSONLEvents_EmptyOutput
+--- PASS: TestParseJSONLEvents_EmptyOutput (0.00s)
+=== RUN   TestParseJSONLEvents_MalformedLines
+--- PASS: TestParseJSONLEvents_MalformedLines (0.00s)
+=== RUN   TestParseJSONLEvents_CommandExecution
+--- PASS: TestParseJSONLEvents_CommandExecution (0.00s)
+=== RUN   TestParseJSONLEvents_NoUsage
+--- PASS: TestParseJSONLEvents_NoUsage (0.00s)
+=== RUN   TestBuildPrompt_SystemAsInstructions
+--- PASS: TestBuildPrompt_SystemAsInstructions (0.00s)
+=== RUN   TestBuildPrompt_NoSystem
+--- PASS: TestBuildPrompt_NoSystem (0.00s)
+=== RUN   TestBuildPrompt_WithTools
+--- PASS: TestBuildPrompt_WithTools (0.00s)
+=== RUN   TestBuildPrompt_MultipleMessages
+--- PASS: TestBuildPrompt_MultipleMessages (0.00s)
+=== RUN   TestBuildPrompt_ToolResults
+--- PASS: TestBuildPrompt_ToolResults (0.00s)
+=== RUN   TestBuildPrompt_SystemAndTools
+--- PASS: TestBuildPrompt_SystemAndTools (0.00s)
+=== RUN   TestCodexCliProvider_GetDefaultModel
+--- PASS: TestCodexCliProvider_GetDefaultModel (0.00s)
+=== RUN   TestCodexCliProvider_MockCLI_Success
+--- PASS: TestCodexCliProvider_MockCLI_Success (0.21s)
+=== RUN   TestCodexCliProvider_MockCLI_Error
+--- PASS: TestCodexCliProvider_MockCLI_Error (0.12s)
+=== RUN   TestCodexCliProvider_MockCLI_WithModel
+--- PASS: TestCodexCliProvider_MockCLI_WithModel (0.23s)
+=== RUN   TestCodexCliProvider_MockCLI_ContextCancel
+--- PASS: TestCodexCliProvider_MockCLI_ContextCancel (0.00s)
+=== RUN   TestCodexCliProvider_EmptyCommand
+--- PASS: TestCodexCliProvider_EmptyCommand (0.00s)
+=== RUN   TestCodexCliProvider_Integration
+    codex_cli_provider_test.go:558: skipping integration test (set PICOCLAW_INTEGRATION_TESTS=1 to enable)
+--- SKIP: TestCodexCliProvider_Integration (0.00s)
+=== RUN   TestBuildCodexParams_BasicMessage
+--- PASS: TestBuildCodexParams_BasicMessage (0.00s)
+=== RUN   TestBuildCodexParams_SystemAsInstructions
+--- PASS: TestBuildCodexParams_SystemAsInstructions (0.00s)
+=== RUN   TestBuildCodexParams_ToolCallConversation
+--- PASS: TestBuildCodexParams_ToolCallConversation (0.00s)
+=== RUN   TestBuildCodexParams_ToolCallFunctionFallback
+--- PASS: TestBuildCodexParams_ToolCallFunctionFallback (0.00s)
+=== RUN   TestBuildCodexParams_WithTools
+--- PASS: TestBuildCodexParams_WithTools (0.00s)
+=== RUN   TestBuildCodexParams_StoreIsFalse
+--- PASS: TestBuildCodexParams_StoreIsFalse (0.00s)
+=== RUN   TestBuildCodexParams_DefaultWebSearchEnabled
+--- PASS: TestBuildCodexParams_DefaultWebSearchEnabled (0.00s)
+=== RUN   TestBuildCodexParams_WebSearchFunctionReplacedWithBuiltin
+--- PASS: TestBuildCodexParams_WebSearchFunctionReplacedWithBuiltin (0.00s)
+=== RUN   TestParseCodexResponse_TextOutput
+--- PASS: TestParseCodexResponse_TextOutput (0.00s)
+=== RUN   TestParseCodexResponse_FunctionCall
+--- PASS: TestParseCodexResponse_FunctionCall (0.00s)
+=== RUN   TestCodexProvider_ChatRoundTrip
+--- PASS: TestCodexProvider_ChatRoundTrip (0.00s)
+=== RUN   TestCodexProvider_ChatRoundTrip_WebSearchDisabled
+--- PASS: TestCodexProvider_ChatRoundTrip_WebSearchDisabled (0.00s)
+=== RUN   TestCodexProvider_ChatRoundTrip_TokenSourceFallbackAccountID
+--- PASS: TestCodexProvider_ChatRoundTrip_TokenSourceFallbackAccountID (0.00s)
+=== RUN   TestCodexProvider_ChatRoundTrip_ModelFallbackFromUnsupported
+--- PASS: TestCodexProvider_ChatRoundTrip_ModelFallbackFromUnsupported (0.00s)
+=== RUN   TestCodexProvider_GetDefaultModel
+--- PASS: TestCodexProvider_GetDefaultModel (0.00s)
+=== RUN   TestResolveCodexModel
+=== RUN   TestResolveCodexModel/empty
+=== RUN   TestResolveCodexModel/unsupported_namespace
+=== RUN   TestResolveCodexModel/non-openai_prefixed
+=== RUN   TestResolveCodexModel/openai_prefix
+=== RUN   TestResolveCodexModel/direct_gpt
+--- PASS: TestResolveCodexModel (0.00s)
+    --- PASS: TestResolveCodexModel/empty (0.00s)
+    --- PASS: TestResolveCodexModel/unsupported_namespace (0.00s)
+    --- PASS: TestResolveCodexModel/non-openai_prefixed (0.00s)
+    --- PASS: TestResolveCodexModel/openai_prefix (0.00s)
+    --- PASS: TestResolveCodexModel/direct_gpt (0.00s)
+=== RUN   TestCooldown_InitiallyAvailable
+--- PASS: TestCooldown_InitiallyAvailable (0.00s)
+=== RUN   TestCooldown_StandardEscalation
+--- PASS: TestCooldown_StandardEscalation (0.00s)
+=== RUN   TestCooldown_StandardCap
+--- PASS: TestCooldown_StandardCap (0.00s)
+=== RUN   TestCooldown_BillingEscalation
+--- PASS: TestCooldown_BillingEscalation (0.00s)
+=== RUN   TestCooldown_BillingCap
+--- PASS: TestCooldown_BillingCap (0.00s)
+=== RUN   TestCooldown_SuccessReset
+--- PASS: TestCooldown_SuccessReset (0.00s)
+=== RUN   TestCooldown_FailureWindowReset
+--- PASS: TestCooldown_FailureWindowReset (0.00s)
+=== RUN   TestCooldown_PerReasonTracking
+--- PASS: TestCooldown_PerReasonTracking (0.00s)
+=== RUN   TestCooldown_BillingTakesPrecedence
+--- PASS: TestCooldown_BillingTakesPrecedence (0.00s)
+=== RUN   TestCooldown_CooldownRemaining
+--- PASS: TestCooldown_CooldownRemaining (0.00s)
+=== RUN   TestCooldown_SuccessOnUnknownProvider
+--- PASS: TestCooldown_SuccessOnUnknownProvider (0.00s)
+=== RUN   TestCooldown_ConcurrentAccess
+--- PASS: TestCooldown_ConcurrentAccess (0.00s)
+=== RUN   TestCooldown_MultipleProviders
+--- PASS: TestCooldown_MultipleProviders (0.00s)
+=== RUN   TestClassifyError_Nil
+--- PASS: TestClassifyError_Nil (0.00s)
+=== RUN   TestClassifyError_ContextCanceled
+--- PASS: TestClassifyError_ContextCanceled (0.00s)
+=== RUN   TestClassifyError_ContextDeadlineExceeded
+--- PASS: TestClassifyError_ContextDeadlineExceeded (0.00s)
+=== RUN   TestClassifyError_StatusCodes
+--- PASS: TestClassifyError_StatusCodes (0.00s)
+=== RUN   TestClassifyError_RateLimitPatterns
+--- PASS: TestClassifyError_RateLimitPatterns (0.00s)
+=== RUN   TestClassifyError_OverloadedPatterns
+--- PASS: TestClassifyError_OverloadedPatterns (0.00s)
+=== RUN   TestClassifyError_BillingPatterns
+--- PASS: TestClassifyError_BillingPatterns (0.00s)
+=== RUN   TestClassifyError_TimeoutPatterns
+--- PASS: TestClassifyError_TimeoutPatterns (0.00s)
+=== RUN   TestClassifyError_AuthPatterns
+--- PASS: TestClassifyError_AuthPatterns (0.00s)
+=== RUN   TestClassifyError_FormatPatterns
+--- PASS: TestClassifyError_FormatPatterns (0.00s)
+=== RUN   TestClassifyError_ImageDimensionError
+--- PASS: TestClassifyError_ImageDimensionError (0.00s)
+=== RUN   TestClassifyError_ImageSizeError
+--- PASS: TestClassifyError_ImageSizeError (0.00s)
+=== RUN   TestClassifyError_UnknownError
+--- PASS: TestClassifyError_UnknownError (0.00s)
+=== RUN   TestClassifyError_ProviderModelPropagation
+--- PASS: TestClassifyError_ProviderModelPropagation (0.00s)
+=== RUN   TestFailoverError_IsRetriable
+--- PASS: TestFailoverError_IsRetriable (0.00s)
+=== RUN   TestFailoverError_ErrorString
+--- PASS: TestFailoverError_ErrorString (0.00s)
+=== RUN   TestFailoverError_Unwrap
+--- PASS: TestFailoverError_Unwrap (0.00s)
+=== RUN   TestExtractHTTPStatus
+--- PASS: TestExtractHTTPStatus (0.00s)
+=== RUN   TestIsImageDimensionError
+--- PASS: TestIsImageDimensionError (0.00s)
+=== RUN   TestIsImageSizeError
+--- PASS: TestIsImageSizeError (0.00s)
+=== RUN   TestExtractProtocol
+=== RUN   TestExtractProtocol/openai_with_prefix
+=== RUN   TestExtractProtocol/anthropic_with_prefix
+=== RUN   TestExtractProtocol/no_prefix_-_defaults_to_openai
+=== RUN   TestExtractProtocol/groq_with_prefix
+=== RUN   TestExtractProtocol/empty_string
+=== RUN   TestExtractProtocol/with_whitespace
+=== RUN   TestExtractProtocol/multiple_slashes
+--- PASS: TestExtractProtocol (0.00s)
+    --- PASS: TestExtractProtocol/openai_with_prefix (0.00s)
+    --- PASS: TestExtractProtocol/anthropic_with_prefix (0.00s)
+    --- PASS: TestExtractProtocol/no_prefix_-_defaults_to_openai (0.00s)
+    --- PASS: TestExtractProtocol/groq_with_prefix (0.00s)
+    --- PASS: TestExtractProtocol/empty_string (0.00s)
+    --- PASS: TestExtractProtocol/with_whitespace (0.00s)
+    --- PASS: TestExtractProtocol/multiple_slashes (0.00s)
+=== RUN   TestCreateProviderFromConfig_OpenAI
+--- PASS: TestCreateProviderFromConfig_OpenAI (0.00s)
+=== RUN   TestCreateProviderFromConfig_DefaultAPIBase
+=== RUN   TestCreateProviderFromConfig_DefaultAPIBase/openai
+=== RUN   TestCreateProviderFromConfig_DefaultAPIBase/groq
+=== RUN   TestCreateProviderFromConfig_DefaultAPIBase/openrouter
+=== RUN   TestCreateProviderFromConfig_DefaultAPIBase/cerebras
+=== RUN   TestCreateProviderFromConfig_DefaultAPIBase/qwen
+=== RUN   TestCreateProviderFromConfig_DefaultAPIBase/vllm
+=== RUN   TestCreateProviderFromConfig_DefaultAPIBase/deepseek
+=== RUN   TestCreateProviderFromConfig_DefaultAPIBase/ollama
+--- PASS: TestCreateProviderFromConfig_DefaultAPIBase (0.00s)
+    --- PASS: TestCreateProviderFromConfig_DefaultAPIBase/openai (0.00s)
+    --- PASS: TestCreateProviderFromConfig_DefaultAPIBase/groq (0.00s)
+    --- PASS: TestCreateProviderFromConfig_DefaultAPIBase/openrouter (0.00s)
+    --- PASS: TestCreateProviderFromConfig_DefaultAPIBase/cerebras (0.00s)
+    --- PASS: TestCreateProviderFromConfig_DefaultAPIBase/qwen (0.00s)
+    --- PASS: TestCreateProviderFromConfig_DefaultAPIBase/vllm (0.00s)
+    --- PASS: TestCreateProviderFromConfig_DefaultAPIBase/deepseek (0.00s)
+    --- PASS: TestCreateProviderFromConfig_DefaultAPIBase/ollama (0.00s)
+=== RUN   TestCreateProviderFromConfig_Anthropic
+--- PASS: TestCreateProviderFromConfig_Anthropic (0.00s)
+=== RUN   TestCreateProviderFromConfig_Antigravity
+--- PASS: TestCreateProviderFromConfig_Antigravity (0.00s)
+=== RUN   TestCreateProviderFromConfig_ClaudeCLI
+--- PASS: TestCreateProviderFromConfig_ClaudeCLI (0.00s)
+=== RUN   TestCreateProviderFromConfig_CodexCLI
+--- PASS: TestCreateProviderFromConfig_CodexCLI (0.00s)
+=== RUN   TestCreateProviderFromConfig_MissingAPIKey
+--- PASS: TestCreateProviderFromConfig_MissingAPIKey (0.00s)
+=== RUN   TestCreateProviderFromConfig_UnknownProtocol
+--- PASS: TestCreateProviderFromConfig_UnknownProtocol (0.00s)
+=== RUN   TestCreateProviderFromConfig_NilConfig
+--- PASS: TestCreateProviderFromConfig_NilConfig (0.00s)
+=== RUN   TestCreateProviderFromConfig_EmptyModel
+--- PASS: TestCreateProviderFromConfig_EmptyModel (0.00s)
+=== RUN   TestResolveProviderSelection
+=== RUN   TestResolveProviderSelection/explicit_claude-cli_provider_routes_to_cli_provider_type
+=== RUN   TestResolveProviderSelection/explicit_copilot_provider_routes_to_github_copilot_type
+=== RUN   TestResolveProviderSelection/explicit_deepseek_provider_uses_deepseek_defaults
+=== RUN   TestResolveProviderSelection/explicit_shengsuanyun_provider_uses_defaults
+=== RUN   TestResolveProviderSelection/explicit_nvidia_provider_uses_defaults
+=== RUN   TestResolveProviderSelection/openrouter_model_uses_openrouter_defaults
+=== RUN   TestResolveProviderSelection/anthropic_oauth_routes_to_claude_auth_provider
+=== RUN   TestResolveProviderSelection/openai_oauth_routes_to_codex_auth_provider
+=== RUN   TestResolveProviderSelection/openai_codex-cli_auth_routes_to_codex_cli_token_provider
+=== RUN   TestResolveProviderSelection/explicit_codex-code_provider_routes_to_codex_cli_provider_type
+=== RUN   TestResolveProviderSelection/zhipu_model_uses_zhipu_base_default
+=== RUN   TestResolveProviderSelection/groq_model_uses_groq_base_default
+=== RUN   TestResolveProviderSelection/ollama_model_uses_ollama_base_default
+=== RUN   TestResolveProviderSelection/moonshot_model_keeps_proxy_and_default_base
+=== RUN   TestResolveProviderSelection/missing_keys_returns_model_config_error
+=== RUN   TestResolveProviderSelection/openrouter_prefix_without_key_returns_provider_key_error
+--- PASS: TestResolveProviderSelection (0.00s)
+    --- PASS: TestResolveProviderSelection/explicit_claude-cli_provider_routes_to_cli_provider_type (0.00s)
+    --- PASS: TestResolveProviderSelection/explicit_copilot_provider_routes_to_github_copilot_type (0.00s)
+    --- PASS: TestResolveProviderSelection/explicit_deepseek_provider_uses_deepseek_defaults (0.00s)
+    --- PASS: TestResolveProviderSelection/explicit_shengsuanyun_provider_uses_defaults (0.00s)
+    --- PASS: TestResolveProviderSelection/explicit_nvidia_provider_uses_defaults (0.00s)
+    --- PASS: TestResolveProviderSelection/openrouter_model_uses_openrouter_defaults (0.00s)
+    --- PASS: TestResolveProviderSelection/anthropic_oauth_routes_to_claude_auth_provider (0.00s)
+    --- PASS: TestResolveProviderSelection/openai_oauth_routes_to_codex_auth_provider (0.00s)
+    --- PASS: TestResolveProviderSelection/openai_codex-cli_auth_routes_to_codex_cli_token_provider (0.00s)
+    --- PASS: TestResolveProviderSelection/explicit_codex-code_provider_routes_to_codex_cli_provider_type (0.00s)
+    --- PASS: TestResolveProviderSelection/zhipu_model_uses_zhipu_base_default (0.00s)
+    --- PASS: TestResolveProviderSelection/groq_model_uses_groq_base_default (0.00s)
+    --- PASS: TestResolveProviderSelection/ollama_model_uses_ollama_base_default (0.00s)
+    --- PASS: TestResolveProviderSelection/moonshot_model_keeps_proxy_and_default_base (0.00s)
+    --- PASS: TestResolveProviderSelection/missing_keys_returns_model_config_error (0.00s)
+    --- PASS: TestResolveProviderSelection/openrouter_prefix_without_key_returns_provider_key_error (0.00s)
+=== RUN   TestCreateProviderReturnsHTTPProviderForOpenRouter
+--- PASS: TestCreateProviderReturnsHTTPProviderForOpenRouter (0.00s)
+=== RUN   TestCreateProviderReturnsCodexCliProviderForCodexCode
+--- PASS: TestCreateProviderReturnsCodexCliProviderForCodexCode (0.00s)
+=== RUN   TestCreateProviderReturnsClaudeCliProviderForClaudeCli
+--- PASS: TestCreateProviderReturnsClaudeCliProviderForClaudeCli (0.00s)
+=== RUN   TestCreateProviderReturnsClaudeProviderForAnthropicOAuth
+--- PASS: TestCreateProviderReturnsClaudeProviderForAnthropicOAuth (0.00s)
+=== RUN   TestCreateProviderReturnsCodexProviderForOpenAIOAuth
+    factory_test.go:298: OpenAI OAuth via model_list not yet implemented
+--- SKIP: TestCreateProviderReturnsCodexProviderForOpenAIOAuth (0.00s)
+=== RUN   TestFallback_SingleCandidate_Success
+--- PASS: TestFallback_SingleCandidate_Success (0.00s)
+=== RUN   TestFallback_SecondCandidateSuccess
+--- PASS: TestFallback_SecondCandidateSuccess (0.00s)
+=== RUN   TestFallback_AllFail
+--- PASS: TestFallback_AllFail (0.00s)
+=== RUN   TestFallback_ContextCanceled
+--- PASS: TestFallback_ContextCanceled (0.00s)
+=== RUN   TestFallback_NonRetriableError
+--- PASS: TestFallback_NonRetriableError (0.00s)
+=== RUN   TestFallback_CooldownSkip
+--- PASS: TestFallback_CooldownSkip (0.00s)
+=== RUN   TestFallback_AllInCooldown
+--- PASS: TestFallback_AllInCooldown (0.00s)
+=== RUN   TestFallback_NoCandidates
+--- PASS: TestFallback_NoCandidates (0.00s)
+=== RUN   TestFallback_EmptyFallbacks
+--- PASS: TestFallback_EmptyFallbacks (0.00s)
+=== RUN   TestFallback_UnclassifiedError
+--- PASS: TestFallback_UnclassifiedError (0.00s)
+=== RUN   TestFallback_SuccessResetsCooldown
+--- PASS: TestFallback_SuccessResetsCooldown (0.00s)
+=== RUN   TestImageFallback_Success
+--- PASS: TestImageFallback_Success (0.00s)
+=== RUN   TestImageFallback_DimensionError
+--- PASS: TestImageFallback_DimensionError (0.00s)
+=== RUN   TestImageFallback_SizeError
+--- PASS: TestImageFallback_SizeError (0.00s)
+=== RUN   TestImageFallback_RetryOnOtherErrors
+--- PASS: TestImageFallback_RetryOnOtherErrors (0.00s)
+=== RUN   TestImageFallback_NoCandidates
+--- PASS: TestImageFallback_NoCandidates (0.00s)
+=== RUN   TestResolveCandidates_Simple
+--- PASS: TestResolveCandidates_Simple (0.00s)
+=== RUN   TestResolveCandidates_Deduplication
+--- PASS: TestResolveCandidates_Deduplication (0.00s)
+=== RUN   TestResolveCandidates_EmptyFallbacks
+--- PASS: TestResolveCandidates_EmptyFallbacks (0.00s)
+=== RUN   TestResolveCandidates_EmptyPrimary
+--- PASS: TestResolveCandidates_EmptyPrimary (0.00s)
+=== RUN   TestFallbackExhaustedError_Message
+--- PASS: TestFallbackExhaustedError_Message (0.00s)
+=== RUN   TestParseModelRef_WithSlash
+--- PASS: TestParseModelRef_WithSlash (0.00s)
+=== RUN   TestParseModelRef_WithoutSlash
+--- PASS: TestParseModelRef_WithoutSlash (0.00s)
+=== RUN   TestParseModelRef_Empty
+--- PASS: TestParseModelRef_Empty (0.00s)
+=== RUN   TestParseModelRef_EmptyModelAfterSlash
+--- PASS: TestParseModelRef_EmptyModelAfterSlash (0.00s)
+=== RUN   TestParseModelRef_WhitespaceHandling
+--- PASS: TestParseModelRef_WhitespaceHandling (0.00s)
+=== RUN   TestNormalizeProvider
+--- PASS: TestNormalizeProvider (0.00s)
+=== RUN   TestModelKey
+--- PASS: TestModelKey (0.00s)
+=== RUN   TestParseModelRef_ProviderNormalization
+--- PASS: TestParseModelRef_ProviderNormalization (0.00s)
+=== RUN   TestParseModelRef_DefaultProviderNormalization
+--- PASS: TestParseModelRef_DefaultProviderNormalization (0.00s)
+PASS
+ok  	github.com/sipeed/picoclaw/pkg/providers	5.488s
+=== RUN   TestBuildParams_BasicMessage
+--- PASS: TestBuildParams_BasicMessage (0.00s)
+=== RUN   TestBuildParams_SystemMessage
+--- PASS: TestBuildParams_SystemMessage (0.00s)
+=== RUN   TestBuildParams_ToolCallMessage
+--- PASS: TestBuildParams_ToolCallMessage (0.00s)
+=== RUN   TestBuildParams_WithTools
+--- PASS: TestBuildParams_WithTools (0.00s)
+=== RUN   TestParseResponse_TextOnly
+--- PASS: TestParseResponse_TextOnly (0.00s)
+=== RUN   TestParseResponse_StopReasons
+--- PASS: TestParseResponse_StopReasons (0.00s)
+=== RUN   TestProvider_ChatRoundTrip
+--- PASS: TestProvider_ChatRoundTrip (0.00s)
+=== RUN   TestProvider_GetDefaultModel
+--- PASS: TestProvider_GetDefaultModel (0.00s)
+=== RUN   TestProvider_NewProviderWithBaseURL_NormalizesV1Suffix
+--- PASS: TestProvider_NewProviderWithBaseURL_NormalizesV1Suffix (0.00s)
+=== RUN   TestProvider_ChatUsesTokenSource
+--- PASS: TestProvider_ChatUsesTokenSource (0.00s)
+PASS
+ok  	github.com/sipeed/picoclaw/pkg/providers/anthropic	1.713s
+=== RUN   TestProviderChat_UsesMaxCompletionTokensForGLM
+--- PASS: TestProviderChat_UsesMaxCompletionTokensForGLM (0.00s)
+=== RUN   TestProviderChat_ParsesToolCalls
+--- PASS: TestProviderChat_ParsesToolCalls (0.00s)
+=== RUN   TestProviderChat_ParsesReasoningContent
+--- PASS: TestProviderChat_ParsesReasoningContent (0.00s)
+=== RUN   TestProviderChat_HTTPError
+--- PASS: TestProviderChat_HTTPError (0.00s)
+=== RUN   TestProviderChat_StripsMoonshotPrefixAndNormalizesKimiTemperature
+--- PASS: TestProviderChat_StripsMoonshotPrefixAndNormalizesKimiTemperature (0.00s)
+=== RUN   TestProviderChat_StripsGroqAndOllamaPrefixes
+=== RUN   TestProviderChat_StripsGroqAndOllamaPrefixes/strips_groq_prefix_and_keeps_nested_model
+=== RUN   TestProviderChat_StripsGroqAndOllamaPrefixes/strips_ollama_prefix
+=== RUN   TestProviderChat_StripsGroqAndOllamaPrefixes/strips_deepseek_prefix
+--- PASS: TestProviderChat_StripsGroqAndOllamaPrefixes (0.00s)
+    --- PASS: TestProviderChat_StripsGroqAndOllamaPrefixes/strips_groq_prefix_and_keeps_nested_model (0.00s)
+    --- PASS: TestProviderChat_StripsGroqAndOllamaPrefixes/strips_ollama_prefix (0.00s)
+    --- PASS: TestProviderChat_StripsGroqAndOllamaPrefixes/strips_deepseek_prefix (0.00s)
+=== RUN   TestProvider_ProxyConfigured
+--- PASS: TestProvider_ProxyConfigured (0.00s)
+=== RUN   TestProviderChat_AcceptsNumericOptionTypes
+--- PASS: TestProviderChat_AcceptsNumericOptionTypes (0.00s)
+=== RUN   TestNormalizeModel_UsesAPIBase
+--- PASS: TestNormalizeModel_UsesAPIBase (0.00s)
+PASS
+ok  	github.com/sipeed/picoclaw/pkg/providers/openai_compat	1.718s
+?   	github.com/sipeed/picoclaw/pkg/providers/protocoltypes	[no test files]
+=== RUN   TestNormalizeAgentID_Empty
+--- PASS: TestNormalizeAgentID_Empty (0.00s)
+=== RUN   TestNormalizeAgentID_Whitespace
+--- PASS: TestNormalizeAgentID_Whitespace (0.00s)
+=== RUN   TestNormalizeAgentID_Valid
+--- PASS: TestNormalizeAgentID_Valid (0.00s)
+=== RUN   TestNormalizeAgentID_InvalidChars
+--- PASS: TestNormalizeAgentID_InvalidChars (0.00s)
+=== RUN   TestNormalizeAgentID_AllInvalid
+--- PASS: TestNormalizeAgentID_AllInvalid (0.00s)
+=== RUN   TestNormalizeAgentID_TruncatesAt64
+--- PASS: TestNormalizeAgentID_TruncatesAt64 (0.00s)
+=== RUN   TestNormalizeAccountID_Empty
+--- PASS: TestNormalizeAccountID_Empty (0.00s)
+=== RUN   TestNormalizeAccountID_Valid
+--- PASS: TestNormalizeAccountID_Valid (0.00s)
+=== RUN   TestNormalizeAccountID_InvalidChars
+--- PASS: TestNormalizeAccountID_InvalidChars (0.00s)
+=== RUN   TestResolveRoute_DefaultAgent_NoBindings
+--- PASS: TestResolveRoute_DefaultAgent_NoBindings (0.00s)
+=== RUN   TestResolveRoute_PeerBinding
+--- PASS: TestResolveRoute_PeerBinding (0.00s)
+=== RUN   TestResolveRoute_GuildBinding
+--- PASS: TestResolveRoute_GuildBinding (0.00s)
+=== RUN   TestResolveRoute_TeamBinding
+--- PASS: TestResolveRoute_TeamBinding (0.00s)
+=== RUN   TestResolveRoute_AccountBinding
+--- PASS: TestResolveRoute_AccountBinding (0.00s)
+=== RUN   TestResolveRoute_ChannelWildcard
+--- PASS: TestResolveRoute_ChannelWildcard (0.00s)
+=== RUN   TestResolveRoute_PriorityOrder_PeerBeatsGuild
+--- PASS: TestResolveRoute_PriorityOrder_PeerBeatsGuild (0.00s)
+=== RUN   TestResolveRoute_InvalidAgentFallsToDefault
+--- PASS: TestResolveRoute_InvalidAgentFallsToDefault (0.00s)
+=== RUN   TestResolveRoute_DefaultAgentSelection
+--- PASS: TestResolveRoute_DefaultAgentSelection (0.00s)
+=== RUN   TestResolveRoute_NoDefaultUsesFirst
+--- PASS: TestResolveRoute_NoDefaultUsesFirst (0.00s)
+=== RUN   TestBuildAgentMainSessionKey
+--- PASS: TestBuildAgentMainSessionKey (0.00s)
+=== RUN   TestBuildAgentMainSessionKey_Normalizes
+--- PASS: TestBuildAgentMainSessionKey_Normalizes (0.00s)
+=== RUN   TestBuildAgentPeerSessionKey_DMScopeMain
+--- PASS: TestBuildAgentPeerSessionKey_DMScopeMain (0.00s)
+=== RUN   TestBuildAgentPeerSessionKey_DMScopePerPeer
+--- PASS: TestBuildAgentPeerSessionKey_DMScopePerPeer (0.00s)
+=== RUN   TestBuildAgentPeerSessionKey_DMScopePerChannelPeer
+--- PASS: TestBuildAgentPeerSessionKey_DMScopePerChannelPeer (0.00s)
+=== RUN   TestBuildAgentPeerSessionKey_DMScopePerAccountChannelPeer
+--- PASS: TestBuildAgentPeerSessionKey_DMScopePerAccountChannelPeer (0.00s)
+=== RUN   TestBuildAgentPeerSessionKey_GroupPeer
+--- PASS: TestBuildAgentPeerSessionKey_GroupPeer (0.00s)
+=== RUN   TestBuildAgentPeerSessionKey_NilPeer
+--- PASS: TestBuildAgentPeerSessionKey_NilPeer (0.00s)
+=== RUN   TestBuildAgentPeerSessionKey_IdentityLink
+--- PASS: TestBuildAgentPeerSessionKey_IdentityLink (0.00s)
+=== RUN   TestParseAgentSessionKey_Valid
+--- PASS: TestParseAgentSessionKey_Valid (0.00s)
+=== RUN   TestParseAgentSessionKey_Invalid
+--- PASS: TestParseAgentSessionKey_Invalid (0.00s)
+=== RUN   TestIsSubagentSessionKey
+--- PASS: TestIsSubagentSessionKey (0.00s)
+PASS
+ok  	github.com/sipeed/picoclaw/pkg/routing	1.588s
+=== RUN   TestSanitizeFilename
+=== RUN   TestSanitizeFilename/simple
+=== RUN   TestSanitizeFilename/telegram:123456
+=== RUN   TestSanitizeFilename/discord:987654321
+=== RUN   TestSanitizeFilename/slack:C01234
+=== RUN   TestSanitizeFilename/no-colons-here
+=== RUN   TestSanitizeFilename/multiple:colons:here
+--- PASS: TestSanitizeFilename (0.00s)
+    --- PASS: TestSanitizeFilename/simple (0.00s)
+    --- PASS: TestSanitizeFilename/telegram:123456 (0.00s)
+    --- PASS: TestSanitizeFilename/discord:987654321 (0.00s)
+    --- PASS: TestSanitizeFilename/slack:C01234 (0.00s)
+    --- PASS: TestSanitizeFilename/no-colons-here (0.00s)
+    --- PASS: TestSanitizeFilename/multiple:colons:here (0.00s)
+=== RUN   TestSave_WithColonInKey
+--- PASS: TestSave_WithColonInKey (0.01s)
+=== RUN   TestSave_RejectsPathTraversal
+--- PASS: TestSave_RejectsPathTraversal (0.00s)
+PASS
+ok  	github.com/sipeed/picoclaw/pkg/session	1.639s
+=== RUN   TestClawHubRegistrySearch
+--- PASS: TestClawHubRegistrySearch (0.00s)
+=== RUN   TestClawHubRegistryGetSkillMeta
+--- PASS: TestClawHubRegistryGetSkillMeta (0.00s)
+=== RUN   TestClawHubRegistryGetSkillMetaUnsafeSlug
+--- PASS: TestClawHubRegistryGetSkillMetaUnsafeSlug (0.00s)
+=== RUN   TestClawHubRegistryDownloadAndInstall
+--- PASS: TestClawHubRegistryDownloadAndInstall (0.00s)
+=== RUN   TestClawHubRegistryAuthToken
+--- PASS: TestClawHubRegistryAuthToken (0.00s)
+=== RUN   TestExtractZipPathTraversal
+--- PASS: TestExtractZipPathTraversal (0.00s)
+=== RUN   TestExtractZipWithSubdirectories
+--- PASS: TestExtractZipWithSubdirectories (0.00s)
+=== RUN   TestClawHubRegistrySearchHTTPError
+--- PASS: TestClawHubRegistrySearchHTTPError (0.00s)
+=== RUN   TestClawHubRegistrySearchNullableFields
+--- PASS: TestClawHubRegistrySearchNullableFields (0.00s)
+=== RUN   TestSkillsInfoValidate
+=== RUN   TestSkillsInfoValidate/valid-skill
+=== RUN   TestSkillsInfoValidate/empty-name
+=== RUN   TestSkillsInfoValidate/empty-description
+=== RUN   TestSkillsInfoValidate/empty-both
+=== RUN   TestSkillsInfoValidate/name-with-spaces
+=== RUN   TestSkillsInfoValidate/name-with-underscore
+--- PASS: TestSkillsInfoValidate (0.00s)
+    --- PASS: TestSkillsInfoValidate/valid-skill (0.00s)
+    --- PASS: TestSkillsInfoValidate/empty-name (0.00s)
+    --- PASS: TestSkillsInfoValidate/empty-description (0.00s)
+    --- PASS: TestSkillsInfoValidate/empty-both (0.00s)
+    --- PASS: TestSkillsInfoValidate/name-with-spaces (0.00s)
+    --- PASS: TestSkillsInfoValidate/name-with-underscore (0.00s)
+=== RUN   TestExtractFrontmatter
+=== RUN   TestExtractFrontmatter/unix-line-endings
+=== RUN   TestExtractFrontmatter/windows-line-endings
+=== RUN   TestExtractFrontmatter/classic-mac-line-endings
+--- PASS: TestExtractFrontmatter (0.00s)
+    --- PASS: TestExtractFrontmatter/unix-line-endings (0.00s)
+    --- PASS: TestExtractFrontmatter/windows-line-endings (0.00s)
+    --- PASS: TestExtractFrontmatter/classic-mac-line-endings (0.00s)
+=== RUN   TestListSkillsWorkspaceOverridesGlobal
+--- PASS: TestListSkillsWorkspaceOverridesGlobal (0.00s)
+=== RUN   TestListSkillsGlobalOverridesBuiltin
+--- PASS: TestListSkillsGlobalOverridesBuiltin (0.00s)
+=== RUN   TestListSkillsMetadataNameDedup
+--- PASS: TestListSkillsMetadataNameDedup (0.00s)
+=== RUN   TestListSkillsMultipleDistinctSkills
+--- PASS: TestListSkillsMultipleDistinctSkills (0.00s)
+=== RUN   TestListSkillsInvalidSkillSkipped
+2026/02/25 19:22:15 WARN invalid skill from workspace name=bad_skill error="name must be alphanumeric with hyphens"
+--- PASS: TestListSkillsInvalidSkillSkipped (0.00s)
+=== RUN   TestListSkillsEmptyAndNonexistentDirs
+--- PASS: TestListSkillsEmptyAndNonexistentDirs (0.00s)
+=== RUN   TestListSkillsDirWithoutSkillMD
+--- PASS: TestListSkillsDirWithoutSkillMD (0.00s)
+=== RUN   TestStripFrontmatter
+=== RUN   TestStripFrontmatter/unix-line-endings
+=== RUN   TestStripFrontmatter/windows-line-endings
+=== RUN   TestStripFrontmatter/classic-mac-line-endings
+=== RUN   TestStripFrontmatter/unix-line-endings-without-trailing-newline
+=== RUN   TestStripFrontmatter/windows-line-endings-without-trailing-newline
+=== RUN   TestStripFrontmatter/no-frontmatter
+--- PASS: TestStripFrontmatter (0.00s)
+    --- PASS: TestStripFrontmatter/unix-line-endings (0.00s)
+    --- PASS: TestStripFrontmatter/windows-line-endings (0.00s)
+    --- PASS: TestStripFrontmatter/classic-mac-line-endings (0.00s)
+    --- PASS: TestStripFrontmatter/unix-line-endings-without-trailing-newline (0.00s)
+    --- PASS: TestStripFrontmatter/windows-line-endings-without-trailing-newline (0.00s)
+    --- PASS: TestStripFrontmatter/no-frontmatter (0.00s)
+=== RUN   TestRegistryManagerSearchAllSingle
+--- PASS: TestRegistryManagerSearchAllSingle (0.00s)
+=== RUN   TestRegistryManagerSearchAllMultiple
+--- PASS: TestRegistryManagerSearchAllMultiple (0.00s)
+=== RUN   TestRegistryManagerSearchAllOneFailsGracefully
+2026/02/25 19:22:15 WARN registry search failed registry=failing error="network error"
+--- PASS: TestRegistryManagerSearchAllOneFailsGracefully (0.00s)
+=== RUN   TestRegistryManagerSearchAllAllFail
+2026/02/25 19:22:15 WARN registry search failed registry=fail-1 error="error 1"
+--- PASS: TestRegistryManagerSearchAllAllFail (0.00s)
+=== RUN   TestRegistryManagerSearchAllNoRegistries
+--- PASS: TestRegistryManagerSearchAllNoRegistries (0.00s)
+=== RUN   TestRegistryManagerGetRegistry
+--- PASS: TestRegistryManagerGetRegistry (0.00s)
+=== RUN   TestRegistryManagerSearchAllRespectLimit
+--- PASS: TestRegistryManagerSearchAllRespectLimit (0.00s)
+=== RUN   TestRegistryManagerSearchAllTimeout
+2026/02/25 19:22:15 WARN registry search failed registry=slow error="context deadline exceeded"
+--- PASS: TestRegistryManagerSearchAllTimeout (0.01s)
+=== RUN   TestSortByScoreDesc
+--- PASS: TestSortByScoreDesc (0.00s)
+=== RUN   TestIsSafeSlug
+--- PASS: TestIsSafeSlug (0.00s)
+=== RUN   TestSearchCacheExactHit
+--- PASS: TestSearchCacheExactHit (0.00s)
+=== RUN   TestSearchCacheExactHitCaseInsensitive
+--- PASS: TestSearchCacheExactHitCaseInsensitive (0.00s)
+=== RUN   TestSearchCacheSimilarHit
+--- PASS: TestSearchCacheSimilarHit (0.00s)
+=== RUN   TestSearchCacheDissimilarMiss
+--- PASS: TestSearchCacheDissimilarMiss (0.00s)
+=== RUN   TestSearchCacheTTLExpiration
+--- PASS: TestSearchCacheTTLExpiration (0.10s)
+=== RUN   TestSearchCacheLRUEviction
+--- PASS: TestSearchCacheLRUEviction (0.00s)
+=== RUN   TestSearchCacheEmptyQuery
+--- PASS: TestSearchCacheEmptyQuery (0.00s)
+=== RUN   TestSearchCacheResultsCopied
+--- PASS: TestSearchCacheResultsCopied (0.00s)
+=== RUN   TestBuildTrigrams
+--- PASS: TestBuildTrigrams (0.00s)
+=== RUN   TestJaccardSimilarity
+--- PASS: TestJaccardSimilarity (0.00s)
+=== RUN   TestJaccardSimilarityEdgeCases
+--- PASS: TestJaccardSimilarityEdgeCases (0.00s)
+=== RUN   TestSearchCacheConcurrency
+--- PASS: TestSearchCacheConcurrency (0.00s)
+=== RUN   TestSearchCacheLRUUpdateOnGet
+--- PASS: TestSearchCacheLRUUpdateOnGet (0.00s)
+PASS
+ok  	github.com/sipeed/picoclaw/pkg/skills	1.790s
+=== RUN   TestAtomicSave
+--- PASS: TestAtomicSave (0.00s)
+=== RUN   TestSetLastChatID
+--- PASS: TestSetLastChatID (0.00s)
+=== RUN   TestAtomicity_NoCorruptionOnInterrupt
+--- PASS: TestAtomicity_NoCorruptionOnInterrupt (0.00s)
+=== RUN   TestConcurrentAccess
+--- PASS: TestConcurrentAccess (0.00s)
+=== RUN   TestNewManager_ExistingState
+--- PASS: TestNewManager_ExistingState (0.00s)
+=== RUN   TestNewManager_EmptyWorkspace
+--- PASS: TestNewManager_EmptyWorkspace (0.00s)
+PASS
+ok  	github.com/sipeed/picoclaw/pkg/state	1.507s
+=== RUN   TestEditTool_EditFile_Success
+--- PASS: TestEditTool_EditFile_Success (0.00s)
+=== RUN   TestEditTool_EditFile_NotFound
+--- PASS: TestEditTool_EditFile_NotFound (0.00s)
+=== RUN   TestEditTool_EditFile_OldTextNotFound
+--- PASS: TestEditTool_EditFile_OldTextNotFound (0.00s)
+=== RUN   TestEditTool_EditFile_MultipleMatches
+--- PASS: TestEditTool_EditFile_MultipleMatches (0.00s)
+=== RUN   TestEditTool_EditFile_OutsideAllowedDir
+--- PASS: TestEditTool_EditFile_OutsideAllowedDir (0.00s)
+=== RUN   TestEditTool_EditFile_MissingPath
+--- PASS: TestEditTool_EditFile_MissingPath (0.00s)
+=== RUN   TestEditTool_EditFile_MissingOldText
+--- PASS: TestEditTool_EditFile_MissingOldText (0.00s)
+=== RUN   TestEditTool_EditFile_MissingNewText
+--- PASS: TestEditTool_EditFile_MissingNewText (0.00s)
+=== RUN   TestEditTool_AppendFile_Success
+--- PASS: TestEditTool_AppendFile_Success (0.00s)
+=== RUN   TestEditTool_AppendFile_MissingPath
+--- PASS: TestEditTool_AppendFile_MissingPath (0.00s)
+=== RUN   TestEditTool_AppendFile_MissingContent
+--- PASS: TestEditTool_AppendFile_MissingContent (0.00s)
+=== RUN   TestReplaceEditContent
+=== RUN   TestReplaceEditContent/successful_replacement
+=== RUN   TestReplaceEditContent/old_text_not_found
+=== RUN   TestReplaceEditContent/multiple_matches_found
+--- PASS: TestReplaceEditContent (0.00s)
+    --- PASS: TestReplaceEditContent/successful_replacement (0.00s)
+    --- PASS: TestReplaceEditContent/old_text_not_found (0.00s)
+    --- PASS: TestReplaceEditContent/multiple_matches_found (0.00s)
+=== RUN   TestAppendFileTool_AppendToNonExistent_Restricted
+--- PASS: TestAppendFileTool_AppendToNonExistent_Restricted (0.00s)
+=== RUN   TestAppendFileTool_Restricted_Success
+--- PASS: TestAppendFileTool_Restricted_Success (0.00s)
+=== RUN   TestEditFileTool_Restricted_InPlaceEdit
+--- PASS: TestEditFileTool_Restricted_InPlaceEdit (0.00s)
+=== RUN   TestEditFileTool_Restricted_FileNotFound
+--- PASS: TestEditFileTool_Restricted_FileNotFound (0.00s)
+=== RUN   TestFilesystemTool_ReadFile_Success
+--- PASS: TestFilesystemTool_ReadFile_Success (0.00s)
+=== RUN   TestFilesystemTool_ReadFile_NotFound
+--- PASS: TestFilesystemTool_ReadFile_NotFound (0.00s)
+=== RUN   TestFilesystemTool_ReadFile_MissingPath
+--- PASS: TestFilesystemTool_ReadFile_MissingPath (0.00s)
+=== RUN   TestFilesystemTool_WriteFile_Success
+--- PASS: TestFilesystemTool_WriteFile_Success (0.00s)
+=== RUN   TestFilesystemTool_WriteFile_CreateDir
+--- PASS: TestFilesystemTool_WriteFile_CreateDir (0.00s)
+=== RUN   TestFilesystemTool_WriteFile_MissingPath
+--- PASS: TestFilesystemTool_WriteFile_MissingPath (0.00s)
+=== RUN   TestFilesystemTool_WriteFile_MissingContent
+--- PASS: TestFilesystemTool_WriteFile_MissingContent (0.00s)
+=== RUN   TestFilesystemTool_ListDir_Success
+--- PASS: TestFilesystemTool_ListDir_Success (0.00s)
+=== RUN   TestFilesystemTool_ListDir_NotFound
+--- PASS: TestFilesystemTool_ListDir_NotFound (0.00s)
+=== RUN   TestFilesystemTool_ListDir_DefaultPath
+--- PASS: TestFilesystemTool_ListDir_DefaultPath (0.00s)
+=== RUN   TestFilesystemTool_ReadFile_RejectsSymlinkEscape
+--- PASS: TestFilesystemTool_ReadFile_RejectsSymlinkEscape (0.00s)
+=== RUN   TestFilesystemTool_EmptyWorkspace_AccessDenied
+--- PASS: TestFilesystemTool_EmptyWorkspace_AccessDenied (0.00s)
+=== RUN   TestRootMkdirAll
+--- PASS: TestRootMkdirAll (0.00s)
+=== RUN   TestFilesystemTool_WriteFile_Restricted_CreateDir
+--- PASS: TestFilesystemTool_WriteFile_Restricted_CreateDir (0.00s)
+=== RUN   TestHostRW_Read_PermissionDenied
+--- PASS: TestHostRW_Read_PermissionDenied (0.00s)
+=== RUN   TestHostRW_Read_Directory
+--- PASS: TestHostRW_Read_Directory (0.00s)
+=== RUN   TestRootRW_Read_Directory
+--- PASS: TestRootRW_Read_Directory (0.00s)
+=== RUN   TestHostRW_Write_ParentDirMissing
+--- PASS: TestHostRW_Write_ParentDirMissing (0.00s)
+=== RUN   TestRootRW_Write_ParentDirMissing
+--- PASS: TestRootRW_Write_ParentDirMissing (0.00s)
+=== RUN   TestHostRW_Write
+--- PASS: TestHostRW_Write (0.00s)
+=== RUN   TestRootRW_Write
+--- PASS: TestRootRW_Write (0.00s)
+=== RUN   TestMessageTool_Execute_Success
+--- PASS: TestMessageTool_Execute_Success (0.00s)
+=== RUN   TestMessageTool_Execute_WithCustomChannel
+--- PASS: TestMessageTool_Execute_WithCustomChannel (0.00s)
+=== RUN   TestMessageTool_Execute_SendFailure
+--- PASS: TestMessageTool_Execute_SendFailure (0.00s)
+=== RUN   TestMessageTool_Execute_MissingContent
+--- PASS: TestMessageTool_Execute_MissingContent (0.00s)
+=== RUN   TestMessageTool_Execute_NoTargetChannel
+--- PASS: TestMessageTool_Execute_NoTargetChannel (0.00s)
+=== RUN   TestMessageTool_Execute_NotConfigured
+--- PASS: TestMessageTool_Execute_NotConfigured (0.00s)
+=== RUN   TestMessageTool_Name
+--- PASS: TestMessageTool_Name (0.00s)
+=== RUN   TestMessageTool_Description
+--- PASS: TestMessageTool_Description (0.00s)
+=== RUN   TestMessageTool_Parameters
+--- PASS: TestMessageTool_Parameters (0.00s)
+=== RUN   TestNewToolRegistry
+--- PASS: TestNewToolRegistry (0.00s)
+=== RUN   TestToolRegistry_RegisterAndGet
+--- PASS: TestToolRegistry_RegisterAndGet (0.00s)
+=== RUN   TestToolRegistry_Get_NotFound
+--- PASS: TestToolRegistry_Get_NotFound (0.00s)
+=== RUN   TestToolRegistry_RegisterOverwrite
+--- PASS: TestToolRegistry_RegisterOverwrite (0.00s)
+=== RUN   TestToolRegistry_Execute_Success
+2026/02/25 19:22:15 [2026-02-26T00:22:15Z] [INFO] tool: Tool execution started {tool=greet, args=map[]}
+2026/02/25 19:22:15 [2026-02-26T00:22:15Z] [INFO] tool: Tool execution completed {result_length=5, tool=greet, duration_ms=0}
+--- PASS: TestToolRegistry_Execute_Success (0.00s)
+=== RUN   TestToolRegistry_Execute_NotFound
+2026/02/25 19:22:15 [2026-02-26T00:22:15Z] [INFO] tool: Tool execution started {tool=missing, args=map[]}
+2026/02/25 19:22:15 [2026-02-26T00:22:15Z] [ERROR] tool: Tool not found {tool=missing}
+--- PASS: TestToolRegistry_Execute_NotFound (0.00s)
+=== RUN   TestToolRegistry_ExecuteWithContext_ContextualTool
+2026/02/25 19:22:15 [2026-02-26T00:22:15Z] [INFO] tool: Tool execution started {tool=ctx_tool, args=map[]}
+2026/02/25 19:22:15 [2026-02-26T00:22:15Z] [INFO] tool: Tool execution completed {tool=ctx_tool, duration_ms=0, result_length=2}
+--- PASS: TestToolRegistry_ExecuteWithContext_ContextualTool (0.00s)
+=== RUN   TestToolRegistry_ExecuteWithContext_SkipsEmptyContext
+2026/02/25 19:22:15 [2026-02-26T00:22:15Z] [INFO] tool: Tool execution started {tool=ctx_tool, args=map[]}
+2026/02/25 19:22:15 [2026-02-26T00:22:15Z] [INFO] tool: Tool execution completed {duration_ms=0, result_length=2, tool=ctx_tool}
+--- PASS: TestToolRegistry_ExecuteWithContext_SkipsEmptyContext (0.00s)
+=== RUN   TestToolRegistry_ExecuteWithContext_AsyncCallback
+2026/02/25 19:22:15 [2026-02-26T00:22:15Z] [INFO] tool: Tool execution started {tool=async_tool, args=map[]}
+2026/02/25 19:22:15 [2026-02-26T00:22:15Z] [INFO] tool: Tool started (async) {tool=async_tool, duration=0}
+--- PASS: TestToolRegistry_ExecuteWithContext_AsyncCallback (0.00s)
+=== RUN   TestToolRegistry_GetDefinitions
+--- PASS: TestToolRegistry_GetDefinitions (0.00s)
+=== RUN   TestToolRegistry_ToProviderDefs
+--- PASS: TestToolRegistry_ToProviderDefs (0.00s)
+=== RUN   TestToolRegistry_List
+--- PASS: TestToolRegistry_List (0.00s)
+=== RUN   TestToolRegistry_Count
+--- PASS: TestToolRegistry_Count (0.00s)
+=== RUN   TestToolRegistry_GetSummaries
+--- PASS: TestToolRegistry_GetSummaries (0.00s)
+=== RUN   TestToolToSchema
+--- PASS: TestToolToSchema (0.00s)
+=== RUN   TestToolRegistry_ConcurrentAccess
+--- PASS: TestToolRegistry_ConcurrentAccess (0.00s)
+=== RUN   TestRequestInputTool_Name
+--- PASS: TestRequestInputTool_Name (0.00s)
+=== RUN   TestRequestInputTool_Description
+--- PASS: TestRequestInputTool_Description (0.00s)
+=== RUN   TestRequestInputTool_Parameters
+--- PASS: TestRequestInputTool_Parameters (0.00s)
+=== RUN   TestRequestInputTool_Execute_MissingPrompt
+--- PASS: TestRequestInputTool_Execute_MissingPrompt (0.00s)
+=== RUN   TestRequestInputTool_Execute_EmptyPrompt
+--- PASS: TestRequestInputTool_Execute_EmptyPrompt (0.00s)
+=== RUN   TestRequestInputTool_Execute_NoCallback
+--- PASS: TestRequestInputTool_Execute_NoCallback (0.00s)
+=== RUN   TestRequestInputTool_Execute_Success
+--- PASS: TestRequestInputTool_Execute_Success (0.00s)
+=== RUN   TestRequestInputTool_Execute_CallbackError
+--- PASS: TestRequestInputTool_Execute_CallbackError (0.00s)
+=== RUN   TestRequestInputTool_SetContext
+--- PASS: TestRequestInputTool_SetContext (0.00s)
+=== RUN   TestRequestInputTool_Execute_WithContext
+--- PASS: TestRequestInputTool_Execute_WithContext (0.00s)
+=== RUN   TestRequestInputTool_Execute_InvalidPromptType
+--- PASS: TestRequestInputTool_Execute_InvalidPromptType (0.00s)
+=== RUN   TestNewToolResult
+--- PASS: TestNewToolResult (0.00s)
+=== RUN   TestSilentResult
+--- PASS: TestSilentResult (0.00s)
+=== RUN   TestAsyncResult
+--- PASS: TestAsyncResult (0.00s)
+=== RUN   TestErrorResult
+--- PASS: TestErrorResult (0.00s)
+=== RUN   TestUserResult
+--- PASS: TestUserResult (0.00s)
+=== RUN   TestToolResultJSONSerialization
+=== RUN   TestToolResultJSONSerialization/basic_result
+=== RUN   TestToolResultJSONSerialization/silent_result
+=== RUN   TestToolResultJSONSerialization/async_result
+=== RUN   TestToolResultJSONSerialization/error_result
+=== RUN   TestToolResultJSONSerialization/user_result
+--- PASS: TestToolResultJSONSerialization (0.00s)
+    --- PASS: TestToolResultJSONSerialization/basic_result (0.00s)
+    --- PASS: TestToolResultJSONSerialization/silent_result (0.00s)
+    --- PASS: TestToolResultJSONSerialization/async_result (0.00s)
+    --- PASS: TestToolResultJSONSerialization/error_result (0.00s)
+    --- PASS: TestToolResultJSONSerialization/user_result (0.00s)
+=== RUN   TestToolResultWithErrors
+--- PASS: TestToolResultWithErrors (0.00s)
+=== RUN   TestToolResultJSONStructure
+--- PASS: TestToolResultJSONStructure (0.00s)
+=== RUN   TestShellTool_Success
+--- PASS: TestShellTool_Success (0.00s)
+=== RUN   TestShellTool_Failure
+--- PASS: TestShellTool_Failure (0.00s)
+=== RUN   TestShellTool_Timeout
+--- PASS: TestShellTool_Timeout (0.10s)
+=== RUN   TestShellTool_WorkingDir
+--- PASS: TestShellTool_WorkingDir (0.00s)
+=== RUN   TestShellTool_DangerousCommand
+--- PASS: TestShellTool_DangerousCommand (0.00s)
+=== RUN   TestShellTool_MissingCommand
+--- PASS: TestShellTool_MissingCommand (0.00s)
+=== RUN   TestShellTool_StderrCapture
+--- PASS: TestShellTool_StderrCapture (0.00s)
+=== RUN   TestShellTool_OutputTruncation
+--- PASS: TestShellTool_OutputTruncation (0.03s)
+=== RUN   TestShellTool_WorkingDir_OutsideWorkspace
+--- PASS: TestShellTool_WorkingDir_OutsideWorkspace (0.00s)
+=== RUN   TestShellTool_WorkingDir_SymlinkEscape
+--- PASS: TestShellTool_WorkingDir_SymlinkEscape (0.00s)
+=== RUN   TestShellTool_RestrictToWorkspace
+--- PASS: TestShellTool_RestrictToWorkspace (0.00s)
+=== RUN   TestShellTool_TimeoutKillsChildProcess
+--- PASS: TestShellTool_TimeoutKillsChildProcess (0.50s)
+=== RUN   TestInstallSkillToolName
+--- PASS: TestInstallSkillToolName (0.00s)
+=== RUN   TestInstallSkillToolMissingSlug
+--- PASS: TestInstallSkillToolMissingSlug (0.00s)
+=== RUN   TestInstallSkillToolEmptySlug
+--- PASS: TestInstallSkillToolEmptySlug (0.00s)
+=== RUN   TestInstallSkillToolUnsafeSlug
+--- PASS: TestInstallSkillToolUnsafeSlug (0.00s)
+=== RUN   TestInstallSkillToolAlreadyExists
+--- PASS: TestInstallSkillToolAlreadyExists (0.00s)
+=== RUN   TestInstallSkillToolRegistryNotFound
+--- PASS: TestInstallSkillToolRegistryNotFound (0.00s)
+=== RUN   TestInstallSkillToolParameters
+--- PASS: TestInstallSkillToolParameters (0.00s)
+=== RUN   TestInstallSkillToolMissingRegistry
+--- PASS: TestInstallSkillToolMissingRegistry (0.00s)
+=== RUN   TestFindSkillsToolName
+--- PASS: TestFindSkillsToolName (0.00s)
+=== RUN   TestFindSkillsToolMissingQuery
+--- PASS: TestFindSkillsToolMissingQuery (0.00s)
+=== RUN   TestFindSkillsToolEmptyQuery
+--- PASS: TestFindSkillsToolEmptyQuery (0.00s)
+=== RUN   TestFindSkillsToolCacheHit
+--- PASS: TestFindSkillsToolCacheHit (0.00s)
+=== RUN   TestFindSkillsToolParameters
+--- PASS: TestFindSkillsToolParameters (0.00s)
+=== RUN   TestFindSkillsToolDescription
+--- PASS: TestFindSkillsToolDescription (0.00s)
+=== RUN   TestFormatSearchResultsEmpty
+--- PASS: TestFormatSearchResultsEmpty (0.00s)
+=== RUN   TestFormatSearchResultsWithData
+--- PASS: TestFormatSearchResultsWithData (0.00s)
+=== RUN   TestSpawnTool_Execute_EmptyTask
+=== RUN   TestSpawnTool_Execute_EmptyTask/empty_string
+=== RUN   TestSpawnTool_Execute_EmptyTask/whitespace_only
+=== RUN   TestSpawnTool_Execute_EmptyTask/tabs_and_newlines
+=== RUN   TestSpawnTool_Execute_EmptyTask/missing_task_key
+=== RUN   TestSpawnTool_Execute_EmptyTask/wrong_type
+--- PASS: TestSpawnTool_Execute_EmptyTask (0.00s)
+    --- PASS: TestSpawnTool_Execute_EmptyTask/empty_string (0.00s)
+    --- PASS: TestSpawnTool_Execute_EmptyTask/whitespace_only (0.00s)
+    --- PASS: TestSpawnTool_Execute_EmptyTask/tabs_and_newlines (0.00s)
+    --- PASS: TestSpawnTool_Execute_EmptyTask/missing_task_key (0.00s)
+    --- PASS: TestSpawnTool_Execute_EmptyTask/wrong_type (0.00s)
+=== RUN   TestSpawnTool_Execute_ValidTask
+--- PASS: TestSpawnTool_Execute_ValidTask (0.00s)
+=== RUN   TestSpawnTool_Execute_NilManager
+--- PASS: TestSpawnTool_Execute_NilManager (0.00s)
+=== RUN   TestSubagentManager_SetLLMOptions_AppliesToRunToolLoop
+2026/02/25 19:22:16 [2026-02-26T00:22:16Z] [INFO] toolloop: LLM response without tool calls (direct answer) {iteration=1, content_chars=42}
+2026/02/25 19:22:16 [2026-02-26T00:22:16Z] [INFO] toolloop: LLM response without tool calls (direct answer) {iteration=1, content_chars=28}
+--- PASS: TestSubagentManager_SetLLMOptions_AppliesToRunToolLoop (0.00s)
+=== RUN   TestSubagentTool_Name
+--- PASS: TestSubagentTool_Name (0.00s)
+=== RUN   TestSubagentTool_Description
+--- PASS: TestSubagentTool_Description (0.00s)
+=== RUN   TestSubagentTool_Parameters
+--- PASS: TestSubagentTool_Parameters (0.00s)
+=== RUN   TestSubagentTool_SetContext
+--- PASS: TestSubagentTool_SetContext (0.00s)
+=== RUN   TestSubagentTool_Execute_Success
+2026/02/25 19:22:16 [2026-02-26T00:22:16Z] [INFO] toolloop: LLM response without tool calls (direct answer) {iteration=1, content_chars=42}
+--- PASS: TestSubagentTool_Execute_Success (0.00s)
+=== RUN   TestSubagentTool_Execute_NoLabel
+2026/02/25 19:22:16 [2026-02-26T00:22:16Z] [INFO] toolloop: LLM response without tool calls (direct answer) {iteration=1, content_chars=39}
+--- PASS: TestSubagentTool_Execute_NoLabel (0.00s)
+=== RUN   TestSubagentTool_Execute_MissingTask
+--- PASS: TestSubagentTool_Execute_MissingTask (0.00s)
+=== RUN   TestSubagentTool_Execute_NilManager
+--- PASS: TestSubagentTool_Execute_NilManager (0.00s)
+=== RUN   TestSubagentTool_Execute_ContextPassing
+2026/02/25 19:22:16 [2026-02-26T00:22:16Z] [INFO] toolloop: LLM response without tool calls (direct answer) {iteration=1, content_chars=36}
+--- PASS: TestSubagentTool_Execute_ContextPassing (0.00s)
+=== RUN   TestSubagentTool_ForUserTruncation
+2026/02/25 19:22:16 [2026-02-26T00:22:16Z] [INFO] toolloop: LLM response without tool calls (direct answer) {iteration=1, content_chars=3816}
+--- PASS: TestSubagentTool_ForUserTruncation (0.00s)
+=== RUN   TestWebTool_WebFetch_Success
+--- PASS: TestWebTool_WebFetch_Success (0.00s)
+=== RUN   TestWebTool_WebFetch_JSON
+--- PASS: TestWebTool_WebFetch_JSON (0.00s)
+=== RUN   TestWebTool_WebFetch_InvalidURL
+--- PASS: TestWebTool_WebFetch_InvalidURL (0.00s)
+=== RUN   TestWebTool_WebFetch_UnsupportedScheme
+--- PASS: TestWebTool_WebFetch_UnsupportedScheme (0.00s)
+=== RUN   TestWebTool_WebFetch_MissingURL
+--- PASS: TestWebTool_WebFetch_MissingURL (0.00s)
+=== RUN   TestWebTool_WebFetch_Truncation
+--- PASS: TestWebTool_WebFetch_Truncation (0.00s)
+=== RUN   TestWebTool_WebSearch_NoApiKey
+--- PASS: TestWebTool_WebSearch_NoApiKey (0.00s)
+=== RUN   TestWebTool_WebSearch_MissingQuery
+--- PASS: TestWebTool_WebSearch_MissingQuery (0.00s)
+=== RUN   TestWebTool_WebFetch_HTMLExtraction
+--- PASS: TestWebTool_WebFetch_HTMLExtraction (0.00s)
+=== RUN   TestWebFetchTool_extractText
+=== RUN   TestWebFetchTool_extractText/preserves_newlines_between_block_elements
+=== RUN   TestWebFetchTool_extractText/removes_script_and_style_tags
+=== RUN   TestWebFetchTool_extractText/collapses_excessive_blank_lines
+=== RUN   TestWebFetchTool_extractText/collapses_horizontal_whitespace
+=== RUN   TestWebFetchTool_extractText/empty_input
+--- PASS: TestWebFetchTool_extractText (0.00s)
+    --- PASS: TestWebFetchTool_extractText/preserves_newlines_between_block_elements (0.00s)
+    --- PASS: TestWebFetchTool_extractText/removes_script_and_style_tags (0.00s)
+    --- PASS: TestWebFetchTool_extractText/collapses_excessive_blank_lines (0.00s)
+    --- PASS: TestWebFetchTool_extractText/collapses_horizontal_whitespace (0.00s)
+    --- PASS: TestWebFetchTool_extractText/empty_input (0.00s)
+=== RUN   TestWebTool_WebFetch_MissingDomain
+--- PASS: TestWebTool_WebFetch_MissingDomain (0.00s)
+=== RUN   TestCreateHTTPClient_ProxyConfigured
+--- PASS: TestCreateHTTPClient_ProxyConfigured (0.00s)
+=== RUN   TestCreateHTTPClient_InvalidProxy
+--- PASS: TestCreateHTTPClient_InvalidProxy (0.00s)
+=== RUN   TestCreateHTTPClient_Socks5ProxyConfigured
+--- PASS: TestCreateHTTPClient_Socks5ProxyConfigured (0.00s)
+=== RUN   TestCreateHTTPClient_UnsupportedProxyScheme
+--- PASS: TestCreateHTTPClient_UnsupportedProxyScheme (0.00s)
+=== RUN   TestCreateHTTPClient_ProxyFromEnvironmentWhenConfigEmpty
+--- PASS: TestCreateHTTPClient_ProxyFromEnvironmentWhenConfigEmpty (0.00s)
+=== RUN   TestNewWebFetchToolWithProxy
+--- PASS: TestNewWebFetchToolWithProxy (0.00s)
+=== RUN   TestNewWebSearchTool_PropagatesProxy
+=== RUN   TestNewWebSearchTool_PropagatesProxy/perplexity
+=== RUN   TestNewWebSearchTool_PropagatesProxy/brave
+=== RUN   TestNewWebSearchTool_PropagatesProxy/duckduckgo
+--- PASS: TestNewWebSearchTool_PropagatesProxy (0.00s)
+    --- PASS: TestNewWebSearchTool_PropagatesProxy/perplexity (0.00s)
+    --- PASS: TestNewWebSearchTool_PropagatesProxy/brave (0.00s)
+    --- PASS: TestNewWebSearchTool_PropagatesProxy/duckduckgo (0.00s)
+=== RUN   TestWebTool_TavilySearch_Success
+--- PASS: TestWebTool_TavilySearch_Success (0.00s)
+PASS
+ok  	github.com/sipeed/picoclaw/pkg/tools	2.340s
+=== RUN   TestSplitMessage
+=== RUN   TestSplitMessage/Empty_message
+=== RUN   TestSplitMessage/Short_message_fits_in_one_chunk
+=== RUN   TestSplitMessage/Simple_split_regular_text
+=== RUN   TestSplitMessage/Split_at_newline
+=== RUN   TestSplitMessage/Long_code_block_split
+=== RUN   TestSplitMessage/Preserve_Unicode_characters
+--- PASS: TestSplitMessage (0.00s)
+    --- PASS: TestSplitMessage/Empty_message (0.00s)
+    --- PASS: TestSplitMessage/Short_message_fits_in_one_chunk (0.00s)
+    --- PASS: TestSplitMessage/Simple_split_regular_text (0.00s)
+    --- PASS: TestSplitMessage/Split_at_newline (0.00s)
+    --- PASS: TestSplitMessage/Long_code_block_split (0.00s)
+    --- PASS: TestSplitMessage/Preserve_Unicode_characters (0.00s)
+=== RUN   TestSplitMessage_CodeBlockIntegrity
+--- PASS: TestSplitMessage_CodeBlockIntegrity (0.00s)
+=== RUN   TestTruncate
+=== RUN   TestTruncate/short_string_unchanged
+=== RUN   TestTruncate/exact_length_unchanged
+=== RUN   TestTruncate/long_string_truncated_with_ellipsis
+=== RUN   TestTruncate/maxLen_equals_4_leaves_1_char_plus_ellipsis
+=== RUN   TestTruncate/maxLen_3_returns_first_3_chars_without_ellipsis
+=== RUN   TestTruncate/maxLen_2_returns_first_2_chars
+=== RUN   TestTruncate/maxLen_1_returns_first_char
+=== RUN   TestTruncate/maxLen_0_returns_empty
+=== RUN   TestTruncate/negative_maxLen_returns_empty
+=== RUN   TestTruncate/empty_string_unchanged
+=== RUN   TestTruncate/empty_string_with_zero_maxLen
+=== RUN   TestTruncate/unicode_truncated_correctly
+=== RUN   TestTruncate/unicode_short_enough
+=== RUN   TestTruncate/mixed_ascii_and_unicode
+--- PASS: TestTruncate (0.00s)
+    --- PASS: TestTruncate/short_string_unchanged (0.00s)
+    --- PASS: TestTruncate/exact_length_unchanged (0.00s)
+    --- PASS: TestTruncate/long_string_truncated_with_ellipsis (0.00s)
+    --- PASS: TestTruncate/maxLen_equals_4_leaves_1_char_plus_ellipsis (0.00s)
+    --- PASS: TestTruncate/maxLen_3_returns_first_3_chars_without_ellipsis (0.00s)
+    --- PASS: TestTruncate/maxLen_2_returns_first_2_chars (0.00s)
+    --- PASS: TestTruncate/maxLen_1_returns_first_char (0.00s)
+    --- PASS: TestTruncate/maxLen_0_returns_empty (0.00s)
+    --- PASS: TestTruncate/negative_maxLen_returns_empty (0.00s)
+    --- PASS: TestTruncate/empty_string_unchanged (0.00s)
+    --- PASS: TestTruncate/empty_string_with_zero_maxLen (0.00s)
+    --- PASS: TestTruncate/unicode_truncated_correctly (0.00s)
+    --- PASS: TestTruncate/unicode_short_enough (0.00s)
+    --- PASS: TestTruncate/mixed_ascii_and_unicode (0.00s)
+PASS
+ok  	github.com/sipeed/picoclaw/pkg/utils	1.625s
+?   	github.com/sipeed/picoclaw/pkg/voice	[no test files]

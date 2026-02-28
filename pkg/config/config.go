@@ -129,13 +129,14 @@ func (m AgentModelConfig) MarshalJSON() ([]byte, error) {
 }
 
 type AgentConfig struct {
-	ID        string            `json:"id"`
-	Default   bool              `json:"default,omitempty"`
-	Name      string            `json:"name,omitempty"`
-	Workspace string            `json:"workspace,omitempty"`
-	Model     *AgentModelConfig `json:"model,omitempty"`
-	Skills    []string          `json:"skills,omitempty"`
-	Subagents *SubagentsConfig  `json:"subagents,omitempty"`
+	ID          string            `json:"id"`
+	Default     bool              `json:"default,omitempty"`
+	Name        string            `json:"name,omitempty"`
+	Workspace   string            `json:"workspace,omitempty"`
+	Model       *AgentModelConfig `json:"model,omitempty"`
+	Skills      []string          `json:"skills,omitempty"`
+	Subagents   *SubagentsConfig  `json:"subagents,omitempty"`
+	LoopProfile string            `json:"loop_profile,omitempty"` // Name of loop profile to use from loop_profiles map
 }
 
 type SubagentsConfig struct {
@@ -166,18 +167,46 @@ type SessionConfig struct {
 	IdentityLinks map[string][]string `json:"identity_links,omitempty"`
 }
 
+// LoopHook represents a command to execute at specific lifecycle points in the agent loop.
+// Hooks enable automated execution of workspace scripts (via exec) at key moments,
+// allowing for memory integration, context injection, and custom workflows.
+type LoopHook struct {
+	Name     string            `json:"name"`                // Human-readable name for the hook
+	Command  string            `json:"command"`             // Command to execute (supports template variables)
+	Enabled  bool              `json:"enabled"`             // Whether this hook is active
+	InjectAs string            `json:"inject_as,omitempty"` // Where to inject output: "context" or empty for no injection
+	Metadata map[string]string `json:"metadata,omitempty"`  // Optional metadata for the hook
+	// Fields specific to request_input hooks:
+	Timeout      int    `json:"timeout,omitempty"`       // Seconds to wait for user response (default: 60, request_input only)
+	ReturnAs     string `json:"return_as,omitempty"`     // Variable name to store user's response (request_input only)
+	DefaultValue string `json:"default_value,omitempty"` // Value to use if timeout expires (request_input only)
+}
+
+// LoopHooks defines hooks that execute at different lifecycle points in the agent loop.
+// Each hook list is executed in sequence at its designated trigger point.
+type LoopHooks struct {
+	BeforeLLM     []LoopHook `json:"before_llm,omitempty"`     // Execute before sending messages to LLM (e.g., memory recall)
+	AfterResponse []LoopHook `json:"after_response,omitempty"` // Execute after agent responds (e.g., memory write)
+	OnToolCall    []LoopHook `json:"on_tool_call,omitempty"`   // Execute when a tool is called
+	OnError       []LoopHook `json:"on_error,omitempty"`       // Execute when an error occurs
+	RequestInput  []LoopHook `json:"request_input,omitempty"`  // Execute to request user input (blocks until response or timeout)
+}
+
 type AgentDefaults struct {
-	Workspace           string   `json:"workspace"                       env:"PICOCLAW_AGENTS_DEFAULTS_WORKSPACE"`
-	RestrictToWorkspace bool     `json:"restrict_to_workspace"           env:"PICOCLAW_AGENTS_DEFAULTS_RESTRICT_TO_WORKSPACE"`
-	Provider            string   `json:"provider"                        env:"PICOCLAW_AGENTS_DEFAULTS_PROVIDER"`
-	ModelName           string   `json:"model_name,omitempty"            env:"PICOCLAW_AGENTS_DEFAULTS_MODEL_NAME"`
-	Model               string   `json:"model,omitempty"                 env:"PICOCLAW_AGENTS_DEFAULTS_MODEL"` // Deprecated: use model_name instead
-	ModelFallbacks      []string `json:"model_fallbacks,omitempty"`
-	ImageModel          string   `json:"image_model,omitempty"           env:"PICOCLAW_AGENTS_DEFAULTS_IMAGE_MODEL"`
-	ImageModelFallbacks []string `json:"image_model_fallbacks,omitempty"`
-	MaxTokens           int      `json:"max_tokens"                      env:"PICOCLAW_AGENTS_DEFAULTS_MAX_TOKENS"`
-	Temperature         *float64 `json:"temperature,omitempty"           env:"PICOCLAW_AGENTS_DEFAULTS_TEMPERATURE"`
-	MaxToolIterations   int      `json:"max_tool_iterations"             env:"PICOCLAW_AGENTS_DEFAULTS_MAX_TOOL_ITERATIONS"`
+	Workspace           string               `json:"workspace"                       env:"PICOCLAW_AGENTS_DEFAULTS_WORKSPACE"`
+	RestrictToWorkspace bool                 `json:"restrict_to_workspace"           env:"PICOCLAW_AGENTS_DEFAULTS_RESTRICT_TO_WORKSPACE"`
+	Provider            string               `json:"provider"                        env:"PICOCLAW_AGENTS_DEFAULTS_PROVIDER"`
+	ModelName           string               `json:"model_name,omitempty"            env:"PICOCLAW_AGENTS_DEFAULTS_MODEL_NAME"`
+	Model               string               `json:"model,omitempty"                 env:"PICOCLAW_AGENTS_DEFAULTS_MODEL"` // Deprecated: use model_name instead
+	ModelFallbacks      []string             `json:"model_fallbacks,omitempty"`
+	ImageModel          string               `json:"image_model,omitempty"           env:"PICOCLAW_AGENTS_DEFAULTS_IMAGE_MODEL"`
+	ImageModelFallbacks []string             `json:"image_model_fallbacks,omitempty"`
+	MaxTokens           int                  `json:"max_tokens"                      env:"PICOCLAW_AGENTS_DEFAULTS_MAX_TOKENS"`
+	Temperature         *float64             `json:"temperature,omitempty"           env:"PICOCLAW_AGENTS_DEFAULTS_TEMPERATURE"`
+	MaxToolIterations   int                  `json:"max_tool_iterations"             env:"PICOCLAW_AGENTS_DEFAULTS_MAX_TOOL_ITERATIONS"`
+	UseWorkspaceTools   bool                 `json:"use_workspace_tools,omitempty"   env:"PICOCLAW_AGENTS_DEFAULTS_USE_WORKSPACE_TOOLS"` // Prefer workspace scripts over built-in tools
+	LoopHooks           LoopHooks            `json:"loop_hooks,omitempty"`                                                               // Hooks for automated script execution at lifecycle points (backward compatibility)
+	LoopProfiles        map[string]LoopHooks `json:"loop_profiles,omitempty"`                                                            // Named loop profiles for reusable hook configurations
 }
 
 // GetModelName returns the effective model name for the agent defaults.
@@ -187,6 +216,30 @@ func (d *AgentDefaults) GetModelName() string {
 		return d.ModelName
 	}
 	return d.Model
+}
+
+// ResolveLoopHooks resolves the loop hooks to use based on the requested profile.
+// Resolution order:
+// 1. If profileName is specified and exists in loop_profiles map, use it
+// 2. If "default" profile exists in loop_profiles map, use it
+// 3. Fall back to loop_hooks field (backward compatibility)
+// 4. Return empty LoopHooks if nothing is configured
+func (d *AgentDefaults) ResolveLoopHooks(profileName string) LoopHooks {
+	// If loop_profiles is configured, try to resolve from it
+	if d.LoopProfiles != nil && len(d.LoopProfiles) > 0 {
+		// Try requested profile first
+		if profileName != "" {
+			if hooks, ok := d.LoopProfiles[profileName]; ok {
+				return hooks
+			}
+		}
+		// Try "default" profile
+		if hooks, ok := d.LoopProfiles["default"]; ok {
+			return hooks
+		}
+	}
+	// Fall back to loop_hooks field for backward compatibility
+	return d.LoopHooks
 }
 
 type ChannelsConfig struct {
@@ -335,6 +388,7 @@ type ProvidersConfig struct {
 	Antigravity   ProviderConfig       `json:"antigravity"`
 	Qwen          ProviderConfig       `json:"qwen"`
 	Mistral       ProviderConfig       `json:"mistral"`
+	RLM           RLMConfig            `json:"rlm"`
 }
 
 // IsEmpty checks if all provider configs are empty (no API keys or API bases set)
@@ -357,7 +411,8 @@ func (p ProvidersConfig) IsEmpty() bool {
 		p.GitHubCopilot.APIKey == "" && p.GitHubCopilot.APIBase == "" &&
 		p.Antigravity.APIKey == "" && p.Antigravity.APIBase == "" &&
 		p.Qwen.APIKey == "" && p.Qwen.APIBase == "" &&
-		p.Mistral.APIKey == "" && p.Mistral.APIBase == ""
+		p.Mistral.APIKey == "" && p.Mistral.APIBase == "" &&
+		!p.RLM.Enabled
 }
 
 // MarshalJSON implements custom JSON marshaling for ProvidersConfig
@@ -381,6 +436,23 @@ type ProviderConfig struct {
 type OpenAIProviderConfig struct {
 	ProviderConfig
 	WebSearch bool `json:"web_search" env:"PICOCLAW_PROVIDERS_OPENAI_WEB_SEARCH"`
+}
+
+// RLMConfig represents the configuration for the RLM (Recursive Language Models) provider.
+// RLM enables handling near-infinite contexts by intelligently selecting relevant context
+// through recursive exploration before forwarding requests to an upstream OpenAI-compatible provider.
+type RLMConfig struct {
+	Enabled          bool   `json:"enabled"`                          // Enable/disable RLM provider
+	PythonPath       string `json:"python_path,omitempty"`            // Path to Python executable (default: auto-detect python3)
+	RLMGWPath        string `json:"rlmgw_path,omitempty"`             // Path to rlmgw installation (default: ~/rlmgw)
+	Host             string `json:"host,omitempty"`                   // RLMgw server host (default: 127.0.0.1)
+	Port             int    `json:"port,omitempty"`                   // RLMgw server port (default: 8010)
+	UpstreamBaseURL  string `json:"upstream_base_url"`                // OpenAI-compatible endpoint URL (e.g., http://localhost:1234/v1 for LM Studio)
+	UpstreamModel    string `json:"upstream_model"`                   // Model name for upstream provider
+	WorkspaceRoot    string `json:"workspace_root,omitempty"`         // Workspace to analyze for context (default: agent workspace)
+	UseRLMSelection  bool   `json:"use_rlm_selection"`                // Use intelligent RLM selection (true) or simple context (false)
+	MaxInternalCalls int    `json:"max_internal_calls,omitempty"`     // Max recursive calls for context selection (default: 3)
+	MaxContextChars  int    `json:"max_context_pack_chars,omitempty"` // Max context size in characters (default: 12000)
 }
 
 // ModelConfig represents a model-centric provider configuration.
@@ -522,7 +594,8 @@ func LoadConfig(path string) (*Config, error) {
 	if err := json.Unmarshal(data, &tmp); err != nil {
 		return nil, err
 	}
-	if len(tmp.ModelList) > 0 {
+	userProvidedModelList := len(tmp.ModelList) > 0
+	if userProvidedModelList {
 		cfg.ModelList = nil
 	}
 
@@ -534,8 +607,8 @@ func LoadConfig(path string) (*Config, error) {
 		return nil, err
 	}
 
-	// Auto-migrate: if only legacy providers config exists, convert to model_list
-	if len(cfg.ModelList) == 0 && cfg.HasProvidersConfig() {
+	// Auto-migrate: if user didn't provide model_list but has legacy providers config, convert to model_list
+	if !userProvidedModelList && cfg.HasProvidersConfig() {
 		cfg.ModelList = ConvertProvidersToModelList(cfg)
 	}
 

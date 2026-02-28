@@ -1,0 +1,9 @@
+{
+  "$schema": "../../schemas/architectural-decisions.schema.json",
+  "meta": {
+    "version": "1.0.0",
+    "format": "Architectural Decision Records (ADR)",
+    "updated": "2026-02-25T00:00:00Z"
+  },
+  "decisions": []
+}

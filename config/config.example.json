@@ -6,8 +6,112 @@
       "model_name": "gpt4",
       "max_tokens": 8192,
       "temperature": 0.7,
-      "max_tool_iterations": 20
-    }
+      "max_tool_iterations": 20,
+      "use_workspace_tools": false,
+      "_comment_loop_hooks": "DEPRECATED: Use loop_profiles for better organization. loop_hooks kept for backward compatibility",
+      "loop_hooks": {
+        "before_llm": [],
+        "after_response": [],
+        "on_tool_call": [],
+        "on_error": [],
+        "request_input": []
+      },
+      "_comment_loop_profiles": "Named profiles for reusable hook configurations. Agents can specify which profile to use via 'loop_profile' field",
+      "loop_profiles": {
+        "default": {
+          "before_llm": [],
+          "after_response": [],
+          "on_tool_call": [],
+          "on_error": [],
+          "request_input": []
+        },
+        "memory_enabled": {
+          "before_llm": [
+            {
+              "name": "memory_recall",
+              "command": "./bin/memory_recall --query '{user_message}' --format markdown",
+              "enabled": true,
+              "inject_as": "context",
+              "metadata": {
+                "description": "Recall relevant context from memory"
+              }
+            }
+          ],
+          "after_response": [
+            {
+              "name": "memory_write_user",
+              "command": "./bin/memory_write --role user --content '{user_message}'",
+              "enabled": true,
+              "inject_as": "",
+              "metadata": {
+                "description": "Store user message in memory"
+              }
+            },
+            {
+              "name": "memory_write_assistant",
+              "command": "./bin/memory_write --role assistant --content '{assistant_message}'",
+              "enabled": true,
+              "inject_as": ""
+            }
+          ]
+        },
+        "debug_mode": {
+          "on_tool_call": [
+            {
+              "name": "log_tool_usage",
+              "command": "./bin/log_tool --name '{tool_name}' --args '{tool_args}'",
+              "enabled": true,
+              "inject_as": "",
+              "metadata": {
+                "description": "Log tool usage for analytics"
+              }
+            }
+          ],
+          "on_error": [
+            {
+              "name": "notify_error",
+              "command": "./bin/notify_error --message '{error}' --session '{session_key}'",
+              "enabled": true,
+              "inject_as": "",
+              "metadata": {
+                "description": "Send error notifications"
+              }
+            }
+          ]
+        },
+        "interactive": {
+          "request_input": [
+            {
+              "name": "confirm_action",
+              "command": "echo '🤔 {prompt_text}' && echo '' && echo 'Please respond with your input:'",
+              "enabled": true,
+              "timeout": 120,
+              "return_as": "user_confirmation",
+              "default_value": "no",
+              "metadata": {
+                "description": "Request user confirmation for actions",
+                "example": "Agent calls request_input(prompt='Deploy to production?')"
+              }
+            }
+          ]
+        }
+      }
+    },
+    "_comment_agents_list": "Multiple agents with different loop profiles",
+    "list": [
+      {
+        "id": "production_agent",
+        "name": "Production Agent",
+        "loop_profile": "memory_enabled",
+        "workspace": "~/.picoclaw/workspace-production"
+      },
+      {
+        "id": "debug_agent",
+        "name": "Debug Agent",
+        "loop_profile": "debug_mode",
+        "workspace": "~/.picoclaw/workspace-debug"
+      }
+    ]
   },
   "model_list": [
     {
@@ -200,6 +304,20 @@
     "mistral": {
       "api_key": "",
       "api_base": "https://api.mistral.ai/v1"
+    },
+    "rlm": {
+      "_comment": "RLM (Recursive Language Models) provider for handling large contexts via intelligent selection",
+      "enabled": false,
+      "python_path": "",
+      "rlmgw_path": "",
+      "host": "127.0.0.1",
+      "port": 8010,
+      "upstream_base_url": "http://localhost:1234/v1",
+      "upstream_model": "gpt-oss-20b",
+      "workspace_root": "~/.picoclaw/workspace",
+      "use_rlm_selection": true,
+      "max_internal_calls": 3,
+      "max_context_pack_chars": 12000
     }
   },
   "tools": {

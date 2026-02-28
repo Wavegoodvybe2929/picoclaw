@@ -1,0 +1,32 @@
+# Performance and Quality Metrics
+# Historical tracking of project metrics
+
+meta:
+  version: "1.0.0"
+  updated: "2026-02-25T00:00:00Z"
+
+metrics:
+  performance: []
+    # Format:
+    # - name: "metric-name"
+    #   unit: "ms | req/s | %"
+    #   baseline: 100
+    #   target: 50
+    #   current: 75
+    #   trend: improving | degrading | stable
+    #   last_measured: "2026-02-25"
+  
+  quality: []
+    # Format:
+    # - name: "test-coverage"
+    #   value: 85
+    #   unit: "%"
+    #   target: 90
+    #   last_measured: "2026-02-25"
+  
+  usage: []
+    # Format:
+    # - name: "active-users"
+    #   value: 1000
+    #   period: "daily"
+    #   last_measured: "2026-02-25"

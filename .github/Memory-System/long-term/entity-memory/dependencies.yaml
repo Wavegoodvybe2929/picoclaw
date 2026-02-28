@@ -1,0 +1,22 @@
+# Dependency Relationships
+# Tracks dependencies between components, modules, and services
+
+meta:
+  version: "1.0.0"
+  updated: "2026-02-25T00:00:00Z"
+
+dependencies:
+  external: []
+    # Format:
+    # - name: "package-name"
+    #   version: "1.0.0"
+    #   type: direct | indirect
+    #   used_by: ["component-1", "component-2"]
+    #   purpose: "Why this dependency is needed"
+  
+  internal: []
+    # Format:
+    # - source: "component-1"
+    #   depends_on: ["component-2", "component-3"]
+    #   relationship: required | optional
+    #   notes: "Description of dependency relationship"
