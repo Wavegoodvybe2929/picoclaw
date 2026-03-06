@@ -150,10 +150,11 @@ func CreateProviderFromConfig(cfg *config.ModelConfig) (LLMProvider, string, err
 		}
 		return provider, modelID, nil
 
-	case "rlm":
-		// Note: RLM provider requires full config access via cfg.Providers.RLM
-		// This is normally handled in CreateProvider(), but we support rlm/ prefix for consistency
-		return nil, "", fmt.Errorf("RLM provider requires full configuration. Use provider=\"rlm\" in agents.defaults instead of rlm/ prefix")
+	// DISABLED: RLM provider support (commented out to disable rlmgw features)
+	// case "rlm":
+	// 	// Note: RLM provider requires full config access via cfg.Providers.RLM
+	// 	// This is normally handled in CreateProvider(), but we support rlm/ prefix for consistency
+	// 	return nil, "", fmt.Errorf("RLM provider requires full configuration. Use provider=\"rlm\" in agents.defaults instead of rlm/ prefix")
 
 	default:
 		return nil, "", fmt.Errorf("unknown protocol %q in model %q", protocol, cfg.Model)

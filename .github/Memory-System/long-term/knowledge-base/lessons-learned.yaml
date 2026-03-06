@@ -3,15 +3,20 @@
 
 meta:
   version: "1.0.0"
-  last_updated: "2026-02-25T00:00:00Z"
-  total_lessons: 0
+  last_updated: "2026-02-28T23:00:00Z"
+  total_lessons: 1
 
-lessons: []
-# Lesson entries will be added from post-mortems and retrospectives
-# Format:
-# - id: lesson-001
-#   title: "Brief lesson title"
-#   date: "2026-01-15"
+lessons:
+  - id: lesson-001
+    title: "Protocol prefix in LM Studio model names"
+    date: "2026-02-28"
+    category: configuration
+    situation: "User configured Devstral model in model_list with HuggingFace ID format 'mistralai/devstral-small-2-2512'. When running 'picoclaw agent', got error: 'unknown protocol \"mistralai\" in model \"mistralai/devstral-small-2-2512\"'. Fix was initially applied to repo's config/config.json but error persisted because picoclaw reads from ~/.picoclaw/config.json by default."
+    insight: "When using LM Studio (or any OpenAI-compatible API via api_base), the model field should contain only the model name that the local server recognizes, NOT a protocol prefix. The slash (/) in model names is interpreted by CreateProviderFromConfig() as a protocol separator. Protocol prefixes like 'openai/', 'anthropic/', 'mistral/' are only used when the protocol determines which API endpoint to use, not when api_base is already specified. CRITICAL: Picoclaw reads config from ~/.picoclaw/config.json (not the repo's config/config.json)."
+    action: "For LM Studio configs: use simple model names like 'devstral-small-2-2512' or 'lfm2-24b-a2b'. Only use protocol prefixes when letting picoclaw determine the API endpoint automatically. When api_base is specified, no protocol prefix should be used in the model field. Always edit ~/.picoclaw/config.json for user configuration changes."
+    impact: high
+    tags: ["configuration", "lm-studio", "model-config", "protocol-parsing", "bug-fix", "config-location"]
+
 #   category: architecture | implementation | testing | deployment | process
 #   situation: "What happened or what was the challenge"
 #   insight: "What was learned"

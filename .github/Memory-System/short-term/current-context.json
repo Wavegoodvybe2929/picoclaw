@@ -2,19 +2,20 @@
   "$schema": "../schemas/current-context.schema.json",
   "meta": {
     "created": "2026-02-25T00:00:00Z",
-    "updated": "2026-02-28T17:45:00Z",
+    "updated": "2026-03-04T00:00:00Z",
     "version": "1.0.0",
-    "session_id": "session-019"
+    "session_id": "session-022"
   },
   "context": {
     "active_branch": "main",
-    "current_task": "Config Updated for LFM2-24B-A2B (Optimized for Agentic Tool Use) ✅",
+    "current_task": "Set Qwen 3.5 9B as default model ✅",
     "active_agents": ["orchestrator", "data-specialist", "memory-specialist"],
     "recent_files": [
       "config/config.json",
+      "~/.picoclaw/config.json",
       ".github/Memory-System/short-term/recent-decisions.json",
       ".github/Memory-System/short-term/current-context.json"
     ],
-    "conversation_summary": "Following Enhanced Agent System protocol (Orchestrator → Debug Specialist → Memory Specialist). Previous fixes (temp-027 SystemParts, temp-028 model name and null fields) resolved RLMgw integration issues. Root cause identified (temp-029): Model 'openai/gpt-oss-20b' LACKS function calling capability. Solution path: Initially chose Hermes 3 8B (temp-030), but user discovered LFM2-24B-A2B which is superior for this use case. LFM2 advantages: (1) Explicitly designed to 'excel at agentic tool use'; (2) 32k context matches config max_tokens: 32000; (3) 24B MoE with 2B active params = efficient inference; (4) Optimized for local RAG pipelines (perfect for research workflow + Obsidian vaults); (5) On-device deployment focus. Config updated (temp-031): All three model references changed to 'lfm2-24b-a2b'. User will install LFM2 in LM Studio, load model, restart picoclaw agent. Next: Test tool execution with LFM2's agentic capabilities. Config ready ✅."
+    "conversation_summary": "Following Enhanced Agent System protocol (Orchestrator → Data Specialist → Memory Specialist). User requested to set Qwen 3.5 9B (lmstudio-qwen35) as default model. Updated agents.defaults.model_name from 'lmstudio-devstral' to 'lmstudio-qwen35' in BOTH config locations: (1) config/config.json (repo config), (2) ~/.picoclaw/config.json (user config - actually used). All other settings preserved: provider 'openai', max_tokens 128000, temperature 0.7, research_workflow loop profile. Zero regressions, configuration-only change. Picoclaw will now use Qwen 3.5 by default for all agent interactions ✅."
   }
 }

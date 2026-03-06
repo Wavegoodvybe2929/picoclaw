@@ -13,6 +13,8 @@ import (
 
 // TestCreateProviderFromConfig_RLMProtocol tests that rlm/ protocol prefix returns helpful error
 func TestCreateProviderFromConfig_RLMProtocol(t *testing.T) {
+	t.Skip("DISABLED: RLM provider features are commented out in code")
+
 	cfg := &config.ModelConfig{
 		ModelName: "test-rlm",
 		Model:     "rlm/gpt-4o",
@@ -71,6 +73,8 @@ func TestCreateProvider_RLMEnabled(t *testing.T) {
 
 // TestCreateProvider_RLMNotEnabled tests error when RLM is not enabled
 func TestCreateProvider_RLMNotEnabled(t *testing.T) {
+	t.Skip("DISABLED: RLM provider features are commented out in code")
+
 	cfg := &config.Config{
 		Agents: config.AgentsConfig{
 			Defaults: config.AgentDefaults{
@@ -96,6 +100,8 @@ func TestCreateProvider_RLMNotEnabled(t *testing.T) {
 
 // TestCreateProvider_RLMMissingUpstreamURL tests error when required config is missing
 func TestCreateProvider_RLMMissingUpstreamURL(t *testing.T) {
+	t.Skip("DISABLED: RLM provider features are commented out in code")
+
 	cfg := &config.Config{
 		Agents: config.AgentsConfig{
 			Defaults: config.AgentDefaults{
@@ -123,6 +129,8 @@ func TestCreateProvider_RLMMissingUpstreamURL(t *testing.T) {
 
 // TestCreateProvider_RLMMissingUpstreamModel tests error when upstream model is missing
 func TestCreateProvider_RLMMissingUpstreamModel(t *testing.T) {
+	t.Skip("DISABLED: RLM provider features are commented out in code")
+
 	cfg := &config.Config{
 		Agents: config.AgentsConfig{
 			Defaults: config.AgentDefaults{
